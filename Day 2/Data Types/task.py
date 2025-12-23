@@ -1,0 +1,5 @@
+len("Hello")
+print("Hello"[-5])
+print("123" + "456")
+print(123 + 456)
+print(123_456_789)
