@@ -147,8 +147,196 @@ print("밴드명 : " + country + " " + pet)
 
 간단하게 인사말을 포함해서 2줄로도 가능함
 
+
+
 ```python
 print("밴드 이름을 고민중이신가요?\n제가 도와드릴게요!")
 print("밴드명 : " + input("어디서 태어나셨나요?\n->" + " " + input("pet의 이름은?\n->")))
 
 ```
+
+## 2일차
+
+## 파이썬의 기본 데이터 형식
+
+### String
+
+`print("Hello"[0])` → [index]를 하면 index번째의 단어를 출력해준다.
+
+0부터 시작하며 음수로도 표현이 가능하다(-1이 마지막 즉, -5가 H가 됨) 
+`print("123" + "456")` → 숫자가 아닌 문자열임 ⇒ 123456
+
+### Integer
+
+숫자만 입력하면 됨
+`print(123 + 456)` → 579로 연산을 하게 됨
+
+또한 큰 숫자 123456789를 미국에서는 3자리마다 ,로 구분을하는데 123,456,789
+
+이 구분을 코딩에서는 _ 로 구분할 수 있음 → `print(123_456_789)` → 123456789
+
+### Float
+
+소수점이 존재하는 숫자 → 부동 소수점 데이터 타입(Float)
+
+3.141592
+
+### Boolean
+
+True, False
+
+## 형식 오류와 형식 확인, 그리고 형 변환
+
+### 형식 오류
+
+len() → String Type을 받음, int를 넣게 되면 형식 오류가 발생함
+
+len(123) ⇒ TypeError: object of type 'int' has no len()
+
+### 타입 확인
+
+Python에서 값이나 변수의 데이터 타입을 확인하려면 type() 함수를 사용할 수 있다.
+`print(type("Hello"))` ⇒ <class 'str'>
+`print(type(123))` ⇒ <class 'int'>
+`print(type(123.45))` ⇒ <class 'float'>
+`print(type(True))` ⇒ <class 'bool'>
+
+### 타입 변환
+
+특정 함수를 사용하여 데이터를 다른 데이터 타입으로 변환할 수 있다. 
+
+float(), int(), str()
+`print("123" + "456")`  위에서 이 경우가 123456이 출력되는 것을 보았다, 이것을 형 변환을 통해 int 타입으로 바꿔 연산을 하여 579를 출력하려 한다
+`print(int("123") + int("456"))` ⇒ 579
+`print(int(123.456))` ⇒ 123 이 출력되며 이를 통해 뒤의 소수점이 떨어지고 정수형으로 변한 것을 확인
+
+** int(”abc”) ⇒ 이런건 안된다
+
+문제 : 아래 코드를 오류 없이 실행되도록 수정하세요
+
+print("Number of letters in your name: " + len(input("Enter your name")))
+
+→ 문자열 + 문자열이어야 하는데 갑자기 len() 함수로 정수가 더해져버림 → 문자열 + 정수 ⇒ 오류 발생
+
+따라서 str(len(input(”Enter your name”))) 으로 형변환을 시켜줘야함
+
+## 파이썬의 수학 연산
+
+`print(123 + 456)`  덧셈
+
+`print(7 - 3)`  뺄셈
+
+`print(6 / 3)`  나눗셈 ⇒ 2.0
+
+`print(3 * 2)`  곱셈
+`print(6//3)`  ⇒ 2 , 위의 /의 경우는 Float로, //는 정수로 결과가 출력되는 것을 볼 수 있음
+`print(2**3)` ⇒ 8 , 연산에서 제곱임
+
+곱셈이나 나눗셈이 최우선 연산이 되고 그 다음 덧셈과 나눗셈이 실행됨
+
+() → ** → * → / → + → -  ⇒ 연산 우선 순위
+
+실제로는 곱셈과 나눗셈은 왼쪽에 있는것이 우선순위가 됨
+
+`print(3 * 3 + 3 / 3 - 3)`
+
+⇒ `9 + 1.0 - 3 = 7.0`
+
+`print(3 * 3 + 3 / 3 -3)`
+
+`# 다음의 출력이 3이 되게 하시오`
+
+⇒ `print(3 * (3 + 3) // 3 - 3)` = 3
+
+문제 : **BMI 계산기**
+
+height = 1.65
+weight = 84
+
+bmi = weight / height**2
+
+print(bmi)
+
+⇒ 30.~~~~~
+
+print(int(bmi)) ⇒ 30
+
+## 파이썬의 숫자 처리 및 F-String
+
+### 반올림
+
+round()를 활용하여 소수점을 반올림하여 정수로 표현할 수 있다.
+
+`bmi = 84 / 1.65 ** 2`
+
+`print(bmi)`
+
+`print(round(bmi))`
+
+⇒30.85399449035813, 31
+
+단순히 끝을 잘라내는 int 형 변환보다 수학적인 계산이 가능함
+
+round는 2개의 변수를 받을 수 있다, 올리고자 하는 변수와 자리수를 입력할 수 있음
+`print(round(bmi,2))` ⇒ 30.85
+
+### 할당 연산자
+
+`score = 0`
+
+`#User Score A point`
+
+`score += 1`
+
+`print(score)`
+
+⇒ 1
+
+이런것을 할당 연산자라 하며 +=, -=, *=, /= 가 있다
+
+### F-String
+
+`score = 0`
+
+`print("Your score is " + str(score)) # -> 번거로움`
+
+`print(f"Your score is = {score}") # f가 큰 따옴표나 작음 따옴표 앞에 와야함`
+
+⇒
+
+Your score is 0
+Your score is = 0
+
+항상 형 변환을 하기에는 귀찮음, 따라서 F-String을 통해서 문자열 안에서 중괄호로 변수를 사용할 수 있음
+
+## 팁 계산기 프로젝트
+
+우리는 팁 계산기를 만들어 볼 것입니다.
+
+만약 계산서 금액이 $150.00이고, 5명이 나누며, 팁이 12%인 경우:
+
+각 사람이 지불해야 할 금액은:
+
+(150.00 / 5) * 1.12 = 33.6
+
+결과를 소수점 둘째 자리까지 포맷팅한 후 = 33.60
+
+⇒
+
+`print("Welcome to the tip calculator!")`
+
+`bill = float(input("What was the total bill? $"))`
+
+`tip = int(input("What percentage tip would you like to give? 10 12 15 "))`
+
+`people = int(input("How many people to split the bill? "))`
+
+`print(round(bill * (tip/100) / people, 2))` ⇒ tip.xx
+
+⇒
+
+Welcome to the tip calculator!
+What was the total bill? $2587
+What percentage tip would you like to give? 10 12 15 12
+How many people to split the bill? 7
+44.35
