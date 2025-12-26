@@ -340,3 +340,340 @@ What was the total bill? $2587
 What percentage tip would you like to give? 10 12 15 12
 How many people to split the bill? 7
 44.35
+
+## 3일차
+## 조건문(If Else)
+
+### 조건 확인
+
+Python에서 조건문을 사용하여 조건을 확인하고 각 경우에 컴퓨터가 무엇을 해야 할지 알려주는 방법을 배웁니다.
+
+예:
+
+if <이 조건이 참이라면>:
+
+<이 코드를 실행하세요>
+
+### 조건이 거짓이라면?
+
+else 키워드는 if 문에서 확인한 조건이 거짓일 때 실행될 코드 블록을 정의하는 데 사용됩니다.
+
+if pigs can fly:
+
+<절대 실행되지 않을 코드>
+
+else:
+
+print("이것이 현실입니다")
+
+```python
+print("Welcome to the rollercoaster!")
+height = int(input("What is your height in cm? "))
+if height <= 120:
+   print("Can't ride")
+else:
+    print("Can ride")
+```
+
+### Python 들여쓰기
+
+Python에서 들여쓰기의 중요성을 이해해야 한다. 들여쓰기를 통해 특정 코드 라인을 다른 코드 라인의 하위로 만든다는 것을 표시할 수 있다
+
+예:
+
+if 5 > 2: #이것은 부모 코드 라인입니다
+
+print("yes") #이것은 자식 코드 라인입니다 → 들여쓰기를 해야 오류가 나지 않음, if문 안에 있음을 명시
+
+### 비교 연산자
+
+- > 크다 (greater than)
+- < 작다 (less than)
+- >= 크거나 같다 (greater than or equal to)
+- <= 작거나 같다 (less than or equal to)
+- == 같다 (equal to)
+- != 같지 않다 (not equal to)
+
+## 나머지(Modulo Operator) %
+
+모듈로 연산자는 나누기의 나머지를 제공
+
+ex) 10 % 5 = 0
+
+10 % 3 = 1
+
+### 홀수인지 짝수인지 확인하기
+
+Python에서 모듈로 연산자와 조건 검사를 사용하여 입력된 숫자가 홀수인지 짝수인지 확인하는 코드를 작성하세요.
+
+만약 숫자가 홀수라면 "Odd"를 출력하고, 짝수라면 "Even"을 출력하세요.
+
+```python
+num = int(input("What is thinking of number"))
+
+if num % 2 == 0:
+    print("Even")
+else:
+    print("Odd")
+```
+
+## 중첩 및 Elif
+
+if/else 문을 다른 if/else 문 안에 넣을 수 있습니다. 이를 중첩(nesting)이라고 합니다.
+
+예시:
+
+```python
+if maths_score>=90:
+    if english_score>=90:
+        print("당신은 모든 과목을 잘합니다.")
+    else:
+        print("당신은 수학을 잘합니다.")
+if english_score>=90:
+    print("당신은 영어를 잘합니다.")
+
+```
+
+이 경우, 학생이 수학과 영어 모두 90점을 넘긴 경우에만 "당신은 모든 과목을 잘합니다."라는 메시지를 받을 수 있습니다.
+
+참고: else 문과 짝이 없는 독립적인 if 문도 사용할 수 있습니다.
+
+```python
+print("Welcome to the rollercoaster!")
+height = int(input("What is your height in cm? "))
+
+if height >= 120:
+    print("You can ride the rollercoaster")
+    age = int(input("What is your age?"))
+    if age < 12:
+        print("Please pay $5.")
+    elif age <= 18:
+        print("please pay  $7.")
+    else:
+        print("Please pay $12.")
+else:
+    print("Sorry you have to grow taller before you can ride.")
+```
+
+## 다중 If
+
+다음과 같이 서로 관련이 없는 조건들을 확인하기 위해 필요한 만큼의 if 문을 작성할 수 있습니다.
+
+아래 코드 블록을 비교해 보세요:
+
+```python
+# If/elif/else
+if<조건1이 참일 경우>
+    <A 수행>
+elif<조건2가 참일 경우>
+    <B 수행>
+else
+    <C 수행>
+## A, B, C 중 하나만 수행
+```
+
+```python
+# 중첩된 if 문
+if<조건1이 참일 경우>
+    <A 수행>
+    if<조건2가 참일 경우>
+        <B 수행>
+        if<조건3이 참일 경우>
+            <C 수행>
+            
+## 모두 실행될 수 있지만, 위의 조건이 모두 참이어야 함, 즉, 조건 1이 참일 경우만 조건 2가 확인됨
+```
+
+```python
+# 다수의 if 문
+if<조건1이 참일 경우>
+    <A 수행>
+if<조건2가 참일 경우>
+    <B 수행>
+if<조건3이 참일 경우>
+    <C 수행>
+    
+## A, B, C 모두 수행할 수도 있음, 모두 조건이 확인되면 실행가능, 위에 있는 조건이 참이 아니여도 가능
+```
+
+if/elif/else 블록에서는 A, B, 또는 C 중 하나만 실행될 수 있습니다. 이는 if/elif/else가 서로 배타적이기 때문입니다. 첫 번째 조건이 거짓이어야 elif로 넘어가고, elif(혹은 여러 개의 elif)도 거짓이어야 else로 갑니다. 조건 2는 조건 1이 거짓일 경우에만 확인됩니다.
+
+중첩된 if 문에서는 A, B, C 모두 실행될 수 있지만, 조건 1, 2, 3이 모두 참이어야 합니다. 컴퓨터는 조건 1이 참일 경우에만 조건 2를 확인합니다.
+
+다수의 if 문에서는 A, B, C 모두 실행될 수 있습니다. 하지만 각각은 서로 완전히 독립적입니다. A와 B가 실행되지 않아도 C는 실행될 수 있습니다. 모든 조건은 다른 조건의 결과와 상관없이 모두 확인됩니다
+
+## 파이썬 피자
+
+축하합니다! 당신은 Python 피자에서 일자리를 얻게 되었습니다! 첫 번째 업무는 자동 피자 주문 프로그램을 만드는 것입니다.
+
+사용자의 주문을 기반으로 최종 요금을 계산하세요. input() 함수를 사용하여 사용자의 선호 사항을 입력받고, 주문 총액을 합산한 후 그들에게 지불해야 할 금액을 알려주세요.
+
+작은 피자 (S): $15
+
+중간 피자 (M): $20
+
+큰 피자 (L): $25
+
+작은 피자에 페퍼로니 추가 (Y 또는 N): +$2
+
+중간 또는 큰 피자에 페퍼로니 추가 (Y 또는 N): +$3
+
+어떤 사이즈의 피자든 치즈 추가 (Y 또는 N): +$1
+
+```python
+print("Welcome to Python Pizza Deliveries!")
+size = input("What size pizza do you want? S, M or L: ")
+pepperoni = input("Do you want pepperoni on your pizza? Y or N: ")
+extra_cheese = input("Do you want extra cheese? Y or N: ")
+
+if size == "S":
+    if pepperoni == "Y" and extra_cheese == "Y":
+        print("최종 요금은 $18. 입니다.")
+    elif pepperoni == "N" and extra_cheese == "N":
+        print("최종 요금은 $15. 입니다.")
+    elif pepperoni == "N":
+        print("최종 요금은 $16. 입니다.")
+    else:
+        print("최종 요금은 $17. 입니다.")
+elif size == "M":
+    if pepperoni == "Y" and extra_cheese == "Y":
+        print("최종 요금은 $24. 입니다.")
+    elif pepperoni == "N" and extra_cheese == "N":
+        print("최종 요금은 $20. 입니다.")
+    elif pepperoni == "N":
+        print("최종 요금은 $21. 입니다.")
+    else:
+        print("최종 요금은 $23. 입니다.")
+elif size == "L":
+    if pepperoni == "Y" and extra_cheese == "Y":
+        print("최종 요금은 $29. 입니다.")
+    elif pepperoni == "N" and extra_cheese == "N":
+        print("최종 요금은 $25. 입니다.")
+    elif pepperoni == "N":
+        print("최종 요금은 $26. 입니다.")
+    else:
+        print("최종 요금은 $28. 입니다.")
+
+```
+
+## 논리연산자
+
+다양한 조건들을 논리 연산자를 사용하여 결합할 수 있습니다.
+
+```python
+A and B #두 조건 모두 참이어야 합니다
+C or D #한 개의 조건만 참이어도 됩니다
+not E #조건이 거짓이어야 합니다
+
+```
+
+### PAUSE 1 - 나이 45에서 55 수정
+
+코드를 업데이트하여 나이가 45에서 55 사이(45와 55를 포함)의 사람들이 무료로 탑승할 수 있도록 하십시오.
+
+나이가 45보다 크고 55보다 작은지 확인하려면 논리 연산자를 사용하세요.
+
+주의: 간소화를 위한 경고는 단순히 제안일 뿐입니다. 참고하여 선택할 수도 있고, 무시할 수도 있습니다.
+
+이 강의에서는 and, or, not 논리 연산자를 보여주고 싶었습니다. 따라서 복습을 위해 이 강의로 돌아올 경우를 대비하여 원래 코드를 유지하는 것을 권장합니다.
+
+```python
+print("Welcome to the rollercoaster!")
+height = int(input("What is your height in cm? "))
+bill = 0
+
+if height >= 120:
+    print("You can ride the rollercoaster!")
+    age = int(input("What is your age? "))
+    if age < 12:
+        bill = 5
+        print("Child tickets are $5.")
+    elif age <= 18:
+        bill = 7
+        print("Youth tickets are $7.")
+    else:
+        if age >= 45 & age <= 55: ## 45 <= age <= 55
+            bill = 0
+        else:
+            bill = 12
+            print("Adult tickets are $12.")
+
+    wants_photo = input("Do you want a photo taken? Y or N. ")
+    if wants_photo == "Y":
+        bill += 3
+
+    print(f"Your final bill is ${bill}")
+
+else:
+    print("Sorry, you have to grow taller before you can ride.")
+```
+
+## 보물섬 프로젝트
+
+오늘의 목표는 "나만의 모험을 선택하는 게임"을 만드는 것입니다.
+
+오늘 배운 내용을 사용하여 이 텍스트 기반 게임의 매우 간단한 버전을 만들어볼 것입니다.
+
+게임의 논리를 설계하려면 [여기 링크된](https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Treasure%20Island%20Conditional.drawio#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1oDe4ehjWZipYRsVfeAx2HyB7LCQ8_Fvi%26export%3Ddownload) 구조도를 사용하세요.
+
+프로젝트를 완료한 후에는 게임을 확장하고 더 흥미롭게 만들 수도 있습니다!
+
+```python
+print(r'''
+*******************************************************************************
+          |                   |                  |                     |
+ _________|________________.=""_;=.______________|_____________________|_______
+|                   |  ,-"_,=""     `"=.|                  |
+|___________________|__"=._o`"-._        `"=.______________|___________________
+          |                `"=._o`"=._      _`"=._                     |
+ _________|_____________________:=._o "=._."_.-="'"=.__________________|_______
+|                   |    __.--" , ; `"=._o." ,-"""-._ ".   |
+|___________________|_._"  ,. .` ` `` ,  `"-._"-._   ". '__|___________________
+          |           |o`"=._` , "` `; .". ,  "-._"-._; ;              |
+ _________|___________| ;`-.o`"=._; ." ` '`."\ ` . "-._ /_______________|_______
+|                   | |o ;    `"-.o`"=._``  '` " ,__.--o;   |
+|___________________|_| ;     (#) `-.o `"=.`_.--"_o.-; ;___|___________________
+____/______/______/___|o;._    "      `".o|o_.--"    ;o;____/______/______/____
+/______/______/______/_"=._o--._        ; | ;        ; ;/______/______/______/_
+____/______/______/______/__"=._o--._   ;o|o;     _._;o;____/______/______/____
+/______/______/______/______/____"=._o._; | ;_.--"o.--"_/______/______/______/_
+____/______/______/______/______/_____"=.o|o_.--""___/______/______/______/____
+/______/______/______/______/______/______/______/______/______/______/_____ /
+*******************************************************************************
+''')
+print("Welcome to Treasure Island.")
+print("Your mission is to find the treasure.")
+first = input('\tType "left" or "right\n').lower()
+if first == "left":
+    print("You've come to lake. There is an island in the middle of the lake.")
+    second = input('\t"wait" to wait for a boat. Type "swim" to swim across.\n').lower()
+    if second == "wait":
+        print("You arrive at the island unharmed. There is a house with 3 doors.")
+        last = input("\tOne red, one yellow and one blue. Which colour do you choose?\n").lower()
+        if last == "red":
+            print("It's a room full of fire. Game Over.")
+        elif last == "yellow":
+            print("You found the treasure! You Win!")
+        else:
+            print("You enter a room of beasts. Game Over.")
+    else:
+        print("You get attacked by an angry trout. Game Over.")
+else:
+    print("You fell into a hole. Game Over.")
+```
+
+⇒
+
+Welcome to Treasure Island.
+Your mission is to find the treasure.
+Type "left" or "right
+left
+You've come to lake. There is an island in the middle of the lake.
+"wait" to wait for a boat. Type "swim" to swim across.
+wait
+You arrive at the island unharmed. There is a house with 3 doors.
+One red, one yellow and one blue. Which colour do you choose?
+YELLOW
+You found the treasure! You Win!
+
+추가 사항으로 아예 다른 값을 넣었을 때는 조건이 다시 진행되게 하던가, 아니면 다음으로 못넘어가게 만드는 로직을 추가하는 것도 가능함
