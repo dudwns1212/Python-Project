@@ -677,3 +677,242 @@ YELLOW
 You found the treasure! You Win!
 
 추가 사항으로 아예 다른 값을 넣었을 때는 조건이 다시 진행되게 하던가, 아니면 다음으로 못넘어가게 만드는 로직을 추가하는 것도 가능함
+
+## 4일차
+## Random Module
+
+강의는 좀 내용이 복잡한데, 간단하게 말해서 컴퓨터 과학자들이 발명한 의사난수 생성기 → 랜던 숫자 생성
+
+import random 으로 모듈을 불러와서 사용
+
+```python
+import random # 모듈, .py파일을 생성하여 모듈을 생성, import 키 워드를 사용해 해당 파일의 변수나 함수를 가져올 수 있음
+rand_num = random.randint(1, 10)
+print(rand_num) # 랜덤한 숫자 1~10
+
+rand_num_0_to_1 = random.random()
+print(rand_num_0_to_1) # random() -> 0.0~<1.0
+
+#만약 5.0 전 까지만 뽑고싶다?
+rand_num_0_to_5 = random.random()*5
+print(rand_num_0_to_5)
+
+```
+
+여기서 보면 random(), randint(a,b), choice(list) 등의 함수들이 존재한다
+
+### PAUSE 1 - 앞면 또는 뒷면
+
+Python의 랜덤화에 대해 배운 내용을 사용하여 동전 던지기 프로그램을 만들어 보세요. 이 프로그램은 실행될 때마다 "앞면" 또는 "뒷면"을 랜덤하게 출력해야 합니다.
+
+```python
+rand_num = random.randint(0,1)
+
+if rand_num == 1:
+    print("앞")
+else:
+    print("뒤")
+```
+
+## 리스트
+
+fruits = ["Cherry", "Apple", "Pear"]
+
+### 리스트의 항목 접근하기
+
+리스트 이름을 적고 대괄호 안에 접근하려는 항목의 인덱스를 입력하여 항목에 접근할 수 있다
+
+states_of_america = ["Delaware", …]
+
+states_of_america[0] → "Delaware”
+
+컴퓨터와 관련된 모든 것에서, 숫자를 셀 때 첫 번째 번호는 항상 0부터 시작
+
+### 음수 인덱스
+
+리스트의 끝에서부터 항목을 접근하려면 음수 정수를 사용할 수 있다
+
+```python
+fruits= ["Cherry","Apple","Pear"]
+fruits[-1]# 이것은 "Pear"를 반환합니다
+
+```
+
+### 항목 수정하기
+
+리스트의 항목을 가져오는 동일한 구문을 사용해 항목을 수정할 수 있다
+
+```python
+fruits= ["Cherry","Apple","Pear"]
+fruits[0] ="Orange"
+# fruits는 이제 ["Orange", "Apple", "Pear"]가 됩니다
+
+```
+
+### 항목 추가하기
+
+리스트의 끝에 항목을 추가하려면 append() 함수를 사용할 수 있다
+
+```python
+fruits= ["Cherry","Apple","Pear"]
+fruits.append("Orange")
+# fruits는 이제 ["Cherry", "Apple", "Pear", "Orange"]가 됩니다
+```
+
+```python
+phone = ["Samsung", "Apple", "Shalom", "LG"]
+        #    0         1        2        3
+        #   -4        -3       -2       -1
+print(phone[0])
+print(phone[1])
+print(phone[2])
+print(phone[3])
+print("--------------------------------")
+phone[0] = "ICON"  # 이렇게 다른 값을 넣어 항목을 수정할 수 있음
+print(phone[0]) # ICON
+print(phone[1]) # Apple
+print("--------------------------------")
+# 항목 추가 => append
+phone.append("Samsung")
+print(phone[4]) # 마지막 인덱스에 추가
+```
+
+## 뱅커 룰렛
+
+목록 friends에서 무작위로 이름을 선택하는 방법을 알아보세요.
+friends = ["Alice", "Bob", "Charlie", "David", "Emanuel"]
+
+⇒위에서 말했던 choice 함수를 써도 되고, randint를 써도 무관
+
+```python
+# import random으로 0~4(index)를 랜덤으로 뽑는 변수를 생성
+import random
+rand_num_index = random.randint(0, len(friends)-1)
+
+print(friends[rand_num_index])
+
+#random.py 안에 choice 라는 함수도 존재함, 리스트 내에서 랜덤의 값을 뽑아주는 함수
+print(random.choice(friends)) # 위의 함수와 동일하게 작동함
+```
+
+## IndexError
+
+### 리스트의 길이
+
+len() 함수를 사용하여 리스트의 길이(리스트에 있는 항목의 수)나 문자열의 길이(문자열의 문자 수)를 구할 수 있다.
+
+```python
+states_of_america = ["Delaware", "Pennsylvania", "New Jersey", "Georgia", "Connecticut", "Massachusetts", "Maryland",
+                     "South Carolina", "New Hampshire", "Virginia", "New York", "North Carolina", "Rhode Island",
+                     "Vermont", "Kentucky", "Tennessee", "Ohio", "Louisiana", "Indiana", "Mississippi", "Illinois",
+                     "Alabama", "Maine", "Missouri", "Arkansas", "Michigan", "Florida", "Texas", "Iowa", "Wisconsin",
+                     "California", "Minnesota", "Oregon", "Kansas", "West Virginia", "Nevada", "Nebraska", "Colorado",
+                     "North Dakota", "South Dakota", "Montana", "Washington", "Idaho", "Wyoming", "Utah", "Oklahoma",
+                     "New Mexico", "Arizona", "Alaska", "Hawaii"]
+
+print(states_of_america) # 그냥 리스트를 모두 출력
+print(len(states_of_america)) # 리스트의 길이(개수)
+print(len(states_of_america[0])) # 0번째 index 원소의 길이
+```
+
+리스트 길이 = 50  ⇒ 즉, 0~49의 index를 가지는 리스트, 그러면 만약에 50번째를 부르면?
+
+```python
+# 그럼 index 범위를 벗어난 숫자를 입력하면?
+print(states_of_america[50])  -> IndexError 발생
+```
+
+⇒ File "C:\Users\admin\PycharmProjects\100 Days of Code - The Complete Python Pro Bootcamp\Day 4\IndexError\[task.py](http://task.py/)", line 14
+print(states_of_america[50])  -> IndexError 발생
+^^
+SyntaxError: invalid syntax
+
+### 중첩 리스트
+
+리스트 안에 다른 리스트를 넣을 수 있으며, 이를 "중첩 리스트" 또는 "2차원 리스트"라고 한다.
+
+```python
+fruits= ["Cherry","Apple","Pear"]
+veg= ["Cucumber","Kale","Spinnach"]
+fruits_and_veg= [fruits,veg]
+#리스트는 다음과 같은 모양이 됩니다: [["Cherry", "Apple", "Pear"], ["Cucumber", "Kale", "Spinnach"]]
+```
+
+```python
+# 중첩리스트, 2차원 리스트
+mount_food = ['beef', 'namul']
+sea_food = ['fish', 'solt']
+food = [mount_food, sea_food]
+print(food)
+```
+
+## 가위 바위 보 프로젝트
+
+당신은 가위, 바위, 보 게임을 만들 것입니다. 랜덤화와 리스트에 대해 배운 내용을 사용해야 합니다.
+
+```python
+rock = '''
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+
+paper = '''
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+
+scissors = '''
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+# 리스트를 만들고
+rock_paper_scissors = [rock, paper, scissors]
+# 랜덤 숫자 0~2를 뽑아주는 random 함수를 뽑거나 choice 함수 활용
+import random
+computer_chose = random.randint(0,2)
+player_chose =  int(input('what do you choose? Type 0 for Rock, 1 for Paper or 2 for Scissors.\n'))
+print(rock_paper_scissors[player_chose])
+print('\nComputer chose:\n')
+print(rock_paper_scissors[computer_chose])
+print('\n')
+
+if player_chose == 0:
+    if computer_chose == 1:
+        print('You lose')
+    elif computer_chose == 2:
+        print('You win!')
+    else:
+        print("It's a draw")
+elif player_chose == 1:
+    if computer_chose == 0:
+        print('You win!')
+    elif computer_chose == 2:
+        print('You lose')
+    else:
+        print("It's a draw")
+else:
+    if computer_chose == 0:
+        print('You lose')
+    elif computer_chose == 1:
+        print('You win!')
+    else:
+        print("It's a draw")
+```
+
+⇒ 실제 콘솔 화면
+
+![image.png](attachment:d99d16f0-d91f-4b5c-aaf4-f72bbd989d43:image.png)
+
+![image.png](attachment:40b7e722-6d97-4e09-a205-02d2c3b52b7d:image.png)
