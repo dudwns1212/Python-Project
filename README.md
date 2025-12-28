@@ -916,3 +916,234 @@ else:
 ![image.png](attachment:d99d16f0-d91f-4b5c-aaf4-f72bbd989d43:image.png)
 
 ![image.png](attachment:40b7e722-6d97-4e09-a205-02d2c3b52b7d:image.png)
+
+## 5일차
+## For Loops(반복문)
+
+파이썬에서의 반복문 구조는 다음과 같다
+
+for 변수명 int 리스트:
+
+(들여쓰기필수)할일 1
+
+(들여쓰기필수)할일 2
+
+```python
+fruits = ["Apple", "Peach", "Pear"]
+
+i = 0
+for fruit in fruits:
+    i += 1
+    print(f"{i}. {fruit}")
+```
+
+출력 ⇒
+
+1. Apple
+2. Peach
+3. Pear
+
+### PAUSE 1 - 컴퓨터처럼 생각하기
+
+아래 코드가 출력할 내용을 예측해 보세요: Apple pie → Peach pie → Pear pie
+
+```python
+fruits= ["Apple","Peach","Pear"]
+forfruitinfruits:
+    print(fruit)
+    print(fruit+" pie")
+ 
+```
+
+### 들여쓰기
+
+들여쓰기는 Python 프로그래밍에서 매우 중요합니다. 매번 : 기호가 사용될 때, 그 뒤에 오는 들여쓰기에 주의해야 합니다.
+
+예: 이 코드는 매우 다르게 동작합니다.
+
+```python
+fruits= ["Apple","Peach","Pear"]
+forfruitinfruits:
+    print(fruit)
+    print("Hello")
+```
+
+이 코드와 비교하면:
+
+```python
+fruits= ["Apple","Peach","Pear"]
+forfruitinfruits:
+    print(fruit)
+print("Hello")
+```
+
+첫 번째 반복문의 경우는 print(”Hello”)가 반복문 안에 포함되어 있다
+
+하지만 두 번째 반복문은 print(”Hello”)가 반복문에 포함되어 있지 않아,  전혀 다른 코드라고 볼 수 있다.
+
+## 최고 점수
+
+### 합계
+
+파이썬에는 통계를 위한 다양한 함수가 존재한다
+
+합계의 경우는 sum()
+
+```python
+student_scores = [150, 142, 185, 120, 171, 184, 149, 24, 59, 68, 199, 78, 65, 89, 86, 55, 91, 64, 89]
+student_scores_sum = sum(student_scores)
+print(student_scores_sum)
+```
+
+⇒ 2068
+
+sum 함수는 어떻게 작성되었을까? → 반복문을 활용
+
+```python
+score_sum = 0
+for students_score in student_scores:
+    score_sum += students_score
+print(score_sum)
+```
+
+### PAUSE 1 - 최대값
+
+파이썬에는 max()와 min()이라는 내장 메서드도 있으며, 이를 사용하면 숫자 리스트를 전달하여 가장 큰 숫자나 가장 작은 숫자를 얻을 수 있습니다.
+
+당신의 과제는 Python 프로그래머들이 이 기능을 루프와 조건문을 사용해서 어떻게 구축했을지 알아내는 것입니다.
+
+⇒ 반복문을 활용해, 과거의 수와 현재의 수를 비교해서 더 크거나 작은 값들만 선별하는 방법
+
+```python
+max_score = 0
+for student_score in student_scores:
+    if student_score > max_score:
+        max_score = student_score
+    print(f"현재 가장 큰 점수 : ${max_score}")
+
+min_score = 99999
+for student_score in student_scores:
+    if student_score < min_score:
+        min_score = student_score
+    print(f"현재 가장 작은 점수 : ${min_score}")
+```
+
+## Range와 함께 사용되는 For 루프
+
+range() 함수와 Python For Loop의 조합은 우리가 원하는 횟수만큼 반복문을 실행할 수 있게 해줍니다. 리스트의 각 항목을 순회하는 대신, 숫자 범위를 순회할 수 있습니다.
+
+### range 함수
+
+range(1, 10)
+
+이 코드는 자체적으로 아무 작업도 하지 않습니다. 예를 들어, 이를 출력하려고 하면 개별 숫자를 제공하지 않습니다.
+
+그러나 이는 For Loop와 함께 사용할 수 있습니다. 예:
+
+```python
+fornumberinrange(1,10):
+		print(number)
+
+```
+
+위 코드는 1부터 9까지의 숫자를 하나씩 출력합니다. 따라서 range는 다음과 같이 표현될 수도 있습니다:
+
+a <= range(a, b) < b
+
+여기서 숫자의 범위는 하한값(포함)과 상한값(미포함)에 의해 정의됩니다.
+
+즉 자바의 반복문에서 for(i=1; i < 10; i ++;) { } 라고 생각하면 되는 것 같다.
+
+→반복의 범위는 지정
+
+### 정지 1 - 가우스 도전 과제
+
+1부터 100까지의 숫자의 합을 구하세요. 여기서 1과 100 모두 포함됩니다.
+
+```python
+gaus = 0
+for i in range(1,101):
+		gaus += i
+print(gaus)
+```
+
+## 비밀번호 생성기 프로젝트
+
+프로그램은 다음과 같이 묻습니다:
+
+```
+비밀번호에 몇 글자를 원하시나요?
+몇 개의 기호를 원하시나요?
+몇 개의 숫자를 원하시나요?
+
+```
+
+사용자가 위 질문들에 응답하여 입력한 값을 기반으로 랜덤 비밀번호를 생성하는 것이 목표입니다. Python의 리스트와 반복문에 대한 지식을 활용하여 이 과제를 완성하세요.
+
+### 쉬운 버전
+
+비밀번호를 순차적으로 생성하세요. 먼저 글자, 그다음 기호, 마지막으로 숫자를 추가하십시오. 예를 들어, 사용자가
+
+4개의 글자,
+
+2개의 기호, 그리고
+
+3개의 숫자를 원한다고 하면,
+
+비밀번호는 다음과 같이 보일 수 있습니다:
+
+fgdx$*924
+
+모든 글자가 함께 있고, 모든 기호가 함께 있으며, 모든 숫자가 연달아 나타나는 것을 볼 수 있습니다. 먼저 이 문제를 해결해 보세요.
+
+```python
+letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
+
+print("Welcome to the PyPassword Generator!")
+nr_letters = int(input("How many letters would you like in your password?\n"))
+nr_symbols = int(input(f"How many symbols would you like?\n"))
+nr_numbers = int(input(f"How many numbers would you like?\n"))
+
+#랜덤의 글, 숫자, 기호를 활용해야 하므로 random을 불러온다
+import random
+
+#반복문과 range 함수를 활용해서 사용자가 고른 수만큼 반복하여 랜덤의 문자를 출력
+password = []
+for user_letter in range(nr_letters):
+    rand_letter = random.randint(0, len(letters) - 1)
+    password.append(letters[rand_letter])
+for user_number in range(nr_numbers):
+    rand_number = random.randint(0, len(numbers) - 1)
+    password.append(numbers[rand_number])
+for user_symbol in range(nr_symbols):
+    rand_symbol = random.randint(0, len(symbols) - 1)
+    password.append(symbols[rand_symbol])
+for pw in password:
+    print(pw, end="")
+```
+
+자동으로 줄바꿈이 되는 print에서 줄바꿈을 없애주는게 , end=”” 이다.
+
+여기서는 randint를 활용했지만 choice를 사용하는게 더 깔끔해 보인다.
+
+### 어려운 버전
+
+쉬운 버전을 완성했다면, 이제 어려운 버전에 도전할 준비가 되었습니다. 이 프로젝트의 고급 버전에서는 최종 비밀번호가 특정 패턴을 따르지 않습니다. 그래서 위 예시는 다음과 같이 보일 수도 있습니다:
+
+x$d24g*f9
+
+그리고 비밀번호를 생성할 때마다 기호, 숫자, 글자의 위치가 다르게 나타납니다. 이것은 해커가 비밀번호를 깨기 더 어렵게 만듭니다.
+
+⇒ 위의 리스트를 만들었고 이제 리스트를 복불복으로 출력해주는 함수를 찾으면 된다.
+
+위에서와 같이 직접 함수를 만들어서 적용할 수도 있지만, **random.shuffle() 함수를 활용**
+
+```python
+random.shuffle(password)
+for pw in password:
+    print(pw, end="")
+```
+
+한 줄만 추가한다면 결과는 → $MH04HddD*1Z1l!n!W&6  이렇게 랜덤으로 섞여서 나오는 것을 확인할 수 있다.
