@@ -1147,3 +1147,410 @@ for pw in password:
 ```
 
 한 줄만 추가한다면 결과는 → $MH04HddD*1Z1l!n!W&6  이렇게 랜덤으로 섞여서 나오는 것을 확인할 수 있다.
+
+## 6일차
+# 6일차 프로젝트는 모두 아래의 링크에서 실행됨
+
+https://reeborg.ca/reeborg.html
+
+## 함수
+
+파이썬에서는 함수를 다음과 같이 만들 수 있다.
+
+```python
+def <함수 이름>():
+    print("Hello")
+    # 다른 작업 수행
+    # 다른 작업 계속 ...
+```
+
+함수이름() 을 호출하면 함수 내부의 들여쓰기 한 부분이 실행된다.
+
+```python
+def hello():
+    print("Hello")
+
+hello()
+```
+
+⇒ Hello
+
+파이썬 함수 실습을 위해 Reeborg’s World 라는 웹페이지로 이동
+
+![image.png](attachment:dfe081b3-c28d-4b56-bf5c-7932f9e19a99:image.png)
+
+move()를 호출하면 로봇의 방향으로 한칸 이동하는 것을 볼 수 있다
+
+![image.png](attachment:b0be2473-3775-4787-a9c8-e1f24383234a:image.png)
+
+리보그의 키보드 라는 버튼을 클릭하면 리보그가 움직일 수 있는 함수들을 알려준다
+
+![image.png](attachment:d5f2098a-fa37-4dd8-94f1-1bfe9d02b218:image.png)
+
+### 실습- turn around, turn right를 만들어보기
+
+키보드를 보면 turn_left만 존재해서 다시 돌리려면 turn_left를 여러번 입력해야한다
+
+이를 함수로 쉽게 만들어보자
+
+ 
+
+![image.png](attachment:7c4a5e92-4d68-47de-b5cb-d2ca8422b09f:image.png)
+
+위와 같이 turn_right, turn_around() 함수를 만들어서 동네를 한바퀴 돌아보는 프로그램을 실행
+
+## 과제-여러 장애물을 넘어, 목적지에 도착하
+
+![image.png](attachment:7ed03a17-6a51-4bfb-bf49-f8d52a871374:image.png)
+
+→ move() → turn_left() → move() → turn_right → move() → turn_right() → move()→ turn_left() 
+
+→ move() …
+
+이 반복문을 활용해서 코드를 작성해보자
+
+```python
+def turn_right():
+    turn_left()
+    turn_left()
+    turn_left()
+
+for huddle in range(0,6):
+    move()
+    turn_left()
+    move()
+    turn_right()
+    move()
+    turn_right()
+    move()
+    turn_left()
+```
+
+![image.png](attachment:8a310432-c6f5-43c1-a2e1-9a7271880e8f:image.png)
+
+추가로 반복문 안에 들어가는 저 구문도 함수로 만들어서 넣을 수 있다. (코드가 더 깔끔해보임)
+
+** 코드 한번에 들여쓰기 하는법 Ctrl + ]
+
+## 들여쓰기
+
+![image.png](attachment:6bbb34c4-54ac-4f49-a55f-f1c9c7acb714:image.png)
+
+항상 저 사각형의 구역을 생각하고, 함수 내에 코드가 존재하는지, 어디까지 이 함수의 코드인지 생각해야 함
+
+### Tap VS Space ⇒ 탭이냐 공백이냐
+
+파이썬 공식 문서에는 들여쓰기를 할 때, 공백을 4개 입력하라고 나와있음,
+
+하지만 아래와 같이 한번만 공백을 해도, 코드는 실행됨
+
+![image.png](attachment:bf71a8db-acd4-48ee-8a80-ef1db66525c7:image.png)
+
+취향 차이, 뭘 선택하든 똑같긴함
+
+### While(반복문)
+
+![image.png](attachment:453dae42-d165-47f5-b100-4e3b656ecb7a:image.png)
+
+간단하게 For의 경우는 범위를 정해놓고 시작함, 해당 범위동안 사이클을 돌며 함수를 반복 실행
+
+하지만 While의 경우는 조건이 참일 경우에 반복문이 실행, 조건이 False가 되기 전까지 무한으로 반복함
+
+```python
+def turn_right():
+    turn_left()
+    turn_left()
+    turn_left()
+    
+def jump():
+    move()
+    turn_left()
+    move()
+    turn_right()
+    move()
+    turn_right()
+    move()
+    turn_left()
+
+number_of_huddle = 6
+while number_of_huddle > 0:
+    jump()
+    number_of_huddle -= 1
+    print(number_of_huddle)
+```
+
+![image.png](attachment:51aa85b2-e61f-415d-aa5b-c5b857ff3b73:image.png)
+
+위의 코드를 작성 후 실행시킨 모습, 출력문을 보면 6번을 반복하고, 0이 되었을 때, 반복문이 종료된 것을 볼 수 있다.
+
+### huddle2 → at_goal()이 참일 경우 while 실행
+
+![image.png](attachment:32736ce1-f5bc-4d5f-a1bc-56f39de6ee6d:image.png)
+
+허들의 구조는 huddle1과 동일하지만, 마지막이 골인 지점이 아니다. 
+
+6개의 지점은 at_goal()이 참일수도 거짓일수도 있다.
+
+![image.png](attachment:85ce40e9-9283-4b61-81ee-e9319fce76f5:image.png)
+
+while의 조건에 not at_goal()을 넣으면 될 것 같다
+
+함수는 아래와 같이 작성했다.
+
+```python
+def turn_right():
+    turn_left()
+    turn_left()
+    turn_left()
+    
+def jump():
+    move()
+    turn_left()
+    move()
+    turn_right()
+    move()
+    turn_right()
+    move()
+    turn_left()
+
+while not at_goal():
+    jump()
+```
+
+![image.png](attachment:db3e3975-f948-4266-93aa-a576ef687765:image.png)
+
+실행을 시키면 위와 같이 잘 작동하는 것을 볼 수 있다.
+
+## huddle3-조건을 설정한 반복문
+
+![image.png](attachment:7f75a7d0-2715-49d8-a1f1-cb991ccc3ccc:image.png)
+
+허들3의 경우는 벽이 제 각각 존재한다, 즉 범위만 정해서 일정한 반복문을 실행하는건 맞지 않다.
+
+![image.png](attachment:3bdb309e-118b-4919-8295-d26f67f61a85:image.png)
+
+front_is_clear() : 앞이 비어있는가, wall_in_front() : 앞에 벽이 있는가, at_goal() : 목표 지점인가 를 활용하여 문제를 해결해야 한다.
+
+다음과 같이 생각했다, 반복문은 동일하게 while문을 활용해 not at_goal(),
+
+while문 안에서 조건문을 나눠 front_is_clear() → move() / wall_in_front() → is_wall()
+
+```python
+def turn_right():
+    turn_left()
+    turn_left()
+    turn_left()
+    
+def is_wall():
+    turn_left()
+    move()
+    turn_right()
+    move()
+    turn_right()
+    move()
+    turn_left()
+
+while not at_goal():
+    if front_is_clear():
+        move()
+    elif wall_in_front():
+        is_wall()
+    
+```
+
+위와 같이 코드를 작성했고, 실행하니 잘 되는 것을 확인했다, 다른 모양의 허들에서도 동일하게 잘 작동된다.
+
+![image.png](attachment:f1840bd9-15d3-4bed-9471-e05583498d3e:image.png)
+
+## huddle4-높이가 다른 장애물
+
+![image.png](attachment:538e5128-9f25-4755-907c-3101bc7cf69a:image.png)
+
+마지막 허들이다. 사진과 같이 높이가 다른 장애물을 고려해 로직을 작성해야 한다.
+
+1. while not at_goal():
+2. front_is_clear() → move()
+3. wall_in_front() → [ turn_left() → move() → turn_right() ]
+4. 다시 체크 front_is_clear()
+
+이런 식으로 벽을 한칸 넘고 체크하는 로직을 추가해보자
+
+```python
+def turn_right():
+    turn_left()
+    turn_left()
+    turn_left()
+    
+def is_wall():
+    turn_left()
+    move()
+    turn_right()
+
+walls = 0
+
+def is_clear():
+    move()
+    turn_right()
+    for down in range(walls):
+        move()
+    turn_left()
+    
+while not at_goal():
+    if front_is_clear():
+        move()
+    elif wall_in_front():
+        is_wall()
+        walls += 1
+        if front_is_clear():
+            is_clear()
+    
+```
+
+처음에는 위와 같이 로직을 작성 후 실행 
+
+![image.png](attachment:a34d7530-3440-4840-a6c7-210dee71f807:image.png)
+
+→ 잘 되는가 싶었는데 실패했다, 다시 로직을 살펴보니 walls를 초기화해주는 로직이 없었다.
+
+따라서 조건문 함수 제일 마지막에 walls = 0을  추가 후 재실행했다.
+
+```python
+def turn_right():
+    turn_left()
+    turn_left()
+    turn_left()
+    
+def is_wall():
+    turn_left()
+    move()
+    turn_right()
+
+walls = 0
+
+def is_clear():
+    move()
+    turn_right()
+    for down in range(walls):
+        move()
+    turn_left()
+    
+while not at_goal():
+    if front_is_clear():
+        move()
+    elif wall_in_front():
+        is_wall()
+        walls += 1
+        if front_is_clear():
+            is_clear()
+				    walls = 0
+```
+
+![image.png](attachment:c6973c72-519b-486c-b439-3a8723eb8a3b:image.png)
+
+잘 동작하는 것을 볼 수 있다.
+
+강의에서는 아래와 같은 코드로 작성하여 실행하였다.
+
+![image.png](attachment:5bd8cc88-5eb4-40a1-bd21-5aa20656061c:image.png)
+
+내가 작성한 코드와 다른 점은, 강사님은 하나의 함수로 안에 로직을 작성하였다, 나는 down이라는 함수를 만들고 walls라는 변수를 만들어 벽의 개수만큼 내려오는 반복문을 실행했다면 wall_on_right() 라는 함수를 활용, 나는 이걸 확인 못했는데 라이브러리에 함수가 있었다.
+
+![image.png](attachment:98de8969-2e27-4614-9a58-49f86fa690d4:image.png)
+
+조금 어렵게 푼 감이 없지 않아 있지만 잘 작동하니 해결!
+
+## 6일차 프로젝트 - 미로탈출
+
+[20251229-1152-43.5126257.mp4](attachment:95313d8b-62aa-4e3a-85ca-d5d011878303:20251229-1152-43.5126257.mp4)
+
+위의 동영상과 같이 로봇은 계속 움직인다.
+
+미로는 오른쪽 벽을 따라가게 되면 목적지에 도착한다.
+
+1. 앞에 벽이 있는지, 오른쪽에 벽이 있는지 체킹
+2. 오른쪽에 벽이 있으며, 앞이 비어있다면 move()
+3. 오른쪽에 벽이 있으며, 앞에도 벽이 있다면 turn_right()
+4. 앞에 벽이 있는지 체크 → 있다면 turn_right, 없다면 move()
+
+위의 생각을 정리하고 코드를 작성, 작성하면서 생각이 바뀌어서 위의 생각과 달라진 코드도 있음
+
+```python
+def turn_right():
+    turn_left()
+    turn_left()
+    turn_left()
+    
+while not at_goal():
+    if wall_on_right():
+        if front_is_clear():
+            move()
+        else:
+            turn_left()
+    else:
+        turn_right()
+        move()
+```
+
+1차로 코드를 작성 후 테스트
+
+![image.png](attachment:54304ccf-890a-4fb9-ad6a-ff9b52172407:image.png)
+
+대부분의 상황에서는 잘 작동하는데, 어떤 상황에서는 이렇게 루프를 돌면서 코드가 반복됨
+
+4번 돌면서 오른쪽 벽을 찾지 못하면 미아가 되는 경우가 발생함
+
+go 라는 변수를 추가해서 go가 4를 넘어가면 강제로 move 실행
+
+```python
+def turn_right():
+    turn_left()
+    turn_left()
+    turn_left()
+    
+go = 0
+while not at_goal():
+    if go < 4:
+        if wall_on_right():
+            if front_is_clear():
+                move()
+                go = 0
+            else:
+                turn_left()
+        else:
+            turn_right()
+            move()
+            go += 1
+    else:
+        turn_left()
+        go = 0
+```
+
+이렇게 코드를 작성하고 실행하니 아주 잘됨
+
+![image.png](attachment:55722339-6d31-463b-ae7b-00cfeb5621b5:image.png)
+
+![image.png](attachment:27b92a49-10db-4692-a0eb-d48cb14a5db4:image.png)
+
+강의에서는 위와 같은 코드를 작성함, right_is_clear() 라는 함수가 있었나봄;;
+
+그건 둘째치고, 위의 코드에서도 내가 만났던 반복로직에서 계속 반복되는 문제가 발생함
+
+강의에서는 변수를 만들어서 해결하는게 아니라
+
+![image.png](attachment:bd5b8c0c-6e0e-4349-9381-f034bfdfea40:image.png)
+
+이렇게 사진과 같이 처음부터 오른쪽 벽을 만들어 준 후에 본 while 로직을 실행함
+
+사진이 안나오는 관계로 아래에 설명
+
+```python
+while is_front_clear():
+	move()
+turn_left()
+
+while .. 실행
+```
+
+위 처럼 처음에 while문을 실행하면 앞에 벽이 있는 상태에서 왼쪽으로 돌면 
+
+다음 while문을 실행 시, 오른쪽에 벽이 위치하게
