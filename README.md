@@ -1554,3 +1554,461 @@ while .. 실행
 위 처럼 처음에 while문을 실행하면 앞에 벽이 있는 상태에서 왼쪽으로 돌면 
 
 다음 while문을 실행 시, 오른쪽에 벽이 위치하게
+
+## 7일차
+## Hangman 프로젝트
+
+단계별로 나눠서 총 5단계로 행맨 프로젝트를 진행,
+
+완성 사진은 아래와 같다.
+
+![image.png](attachment:fb0df7c3-fe79-497e-8844-4a5cee891c48:image.png)
+
+### 1단계
+
+### TODO-1
+
+word_list에서 무작위로 단어를 선택하여 chosen_word라는 변수에 할당하십시오. 그런 다음 이를 출력하세요.
+
+```jsx
+# TODO-1 - Randomly choose a word from the word_list and assign it to a variable called chosen_word. Then print it.
+import random
+chosen_word = random.choice(word_list)
+print(chosen_word)
+```
+
+### TODO-2
+
+사용자에게 글자를 추측하게 한 뒤 답변을 guess라는 변수에 할당하세요. guess에 저장된 문자열을 소문자로 변환하세요.
+
+```jsx
+# TODO-2 - Ask the user to guess a letter and assign their answer to a variable called guess. Make guess lowercase.
+guess = input("안에 들어갈 글자는 뭘까용?: ").lower()
+```
+
+### TODO-3
+
+사용자가 추측한 글자 guess가 chosen_word의 글자 중 하나인지 확인하세요. chosen_word의 각 글자를 반복하여 검사하고, 글자가 일치하면 "Right"를, 그렇지 않으면 "Wrong"을 출력하세요.
+
+```jsx
+# TODO-3 - Check if the letter the user guessed (guess) is one of the letters in the chosen_word. Print "Right" if it
+#  is, "Wrong" if it's not.
+index = 0
+for check_word in range(len(chosen_word)):
+    if guess == chosen_word[index]:
+        print("Right")
+    else:
+        print("Wrong")
+```
+
+이 방법도 가능하지만 파이썬 공식문서에서 알아보니 아래의 코드만 작성해도 알아서 문자열을 index순으로 차례차례 넘겨준다. 따라서 index는 필요가 없었던 것.
+
+```jsx
+for char in chosen_word:
+    print(char)
+```
+
+⇒
+
+```jsx
+for char in chosen_word:
+    if guess == char:
+        print("Right")
+    else:
+        print("Wrong")
+```
+
+### 검사
+
+```jsx
+import random
+word_list = ["aardvark", "baboon", "camel"]
+
+chosen_word = random.choice(word_list)
+print(chosen_word)
+
+# TODO-1: Create a "placeholder" with the same number of blanks as the chosen_word
+
+guess = input("Guess a letter: ").lower()
+
+# TODO-2: Create a "display" that puts the guess letter in the right positions and _ in the rest of the string.
+
+for letter in chosen_word:
+    if letter == guess:
+        print("Right")
+    else:
+        print("Wrong")
+
+```
+
+다음 스텝으로 넘어가면 맞았는지 확인이 가능한데, 변수명을 제외하면 동일하다.
+
+### 2단계
+
+### TODO-1
+
+- 비어 있는 문자열 placeholder를 만드세요.
+- chosen_word의 각 글자에 대해 placeholder에 _를 추가하세요.
+- 예를 들어 chosen_word가 "apple"이라면, placeholder는 _ _ _ _ _이 되어야 하며, 이는 추측해야 할 각 글자를 *"_”*로 나타냅니다.
+- hint를 출력하세요.
+
+```jsx
+# TODO-1: Create a "placeholder" with the same number of blanks as the chosen_word
+
+guess = input("Guess a letter: ").lower()
+length = len(chosen_word)
+placeholder = ""
+for under_cover in range(length):
+    placeholder += "_"
+print(placeholder)
+```
+
+### TODO-2
+
+- 비어 있는 문자열 display를 만드세요.
+- chosen_word의 각 글자를 반복문으로 순회하세요.
+- 해당 위치의 글자가 guess와 일치하면, 그 글자를 display에서 해당 위치에 표시하세요.
+- 예: 사용자가 "p"를 추측했고 선택된 단어가 "apple"이라면, display는 _ p p _ _가 되어야 합니다.
+- display를 출력하면, 맞춘 글자가 올바른 위치에 보이는 것을 확인할 수 있습니다.
+- 그러나 일치하지 않는 모든 글자는 "_"로 표시됩니다.
+
+```jsx
+# TODO-2: Create a "display" that puts the guess letter in the right positions and _ in the rest of the string.
+
+display = ""
+
+for letter in chosen_word:
+    if letter == guess:
+        print("Right")
+        display += guess
+    else:
+        print("Wrong")
+        display += "_"
+
+print(display)
+```
+
+### 3단계
+
+### TODO-1
+
+- while 루프를 사용하여 사용자가 다시 추측할 수 있도록 하세요.
+- 루프는 사용자가 chosen_word의 모든 글자를 맞힐 때까지 멈추지 않아야 합니다.
+- 그 시점에서 display에는 더 이상 빈칸("_")이 없습니다. 그런 다음 사용자가 이겼음을 알릴 수 있습니다.
+
+### TODO-2
+
+- for 루프를 업데이트하여 이전 추측들이 display 문자열에 추가되도록 하세요.
+- 현재는 사용자가 새로 추측할 때 이전 추측이 "_"로 대체되고 있습니다. 이를 for 루프를 업데이트하여 수정해야 합니다.
+
+→ 둘을 동시에 진행할 것이다. 
+
+→ numerate를 사용할거다, for문에서 사용하는 함수로 index와 값을 둘다 사용할 수 있다.
+
+→ 새로운 값을 적용해야 해서 new_display를 while문 안에 지역변수로 생성한다.
+
+```jsx
+import random
+word_list = ["aardvark", "baboon", "camel"]
+
+chosen_word = random.choice(word_list)
+print(chosen_word)
+
+placeholder = ""
+word_length = len(chosen_word)
+for position in range(word_length):
+    placeholder += "_"
+print(placeholder)
+
+# TODO-1: - Use a while loop to let the user guess again.
+
+guess = input("Guess a letter: ").lower()
+
+display = ""
+
+# TODO-2: Change the for loop so that you keep the previous correct letters in display.
+
+for letter in chosen_word:
+    if letter == guess:
+        display += letter
+    else:
+        display += "_"
+
+print(display)
+
+is_win = False
+while not is_win:
+    guess = input("Guess a letter: ").lower()
+    new_display = ""
+    for index,letter in enumerate(chosen_word):
+        if letter == guess:
+            new_display += letter
+        else:
+            new_display += display[index]
+    display = new_display
+
+    if "_" not in display:
+        is_win = True
+    print(display)
+
+print("축하합니다 이겼어요!")
+```
+
+1. 처음 for문으로 display 문자열을 정의 및 is_win을 False로 설정
+2. while 반복문을 설정해 성공해야 종료
+3. guess를 다시 물어보고, new_display라는 전역변수 생성
+4. for문을 enumerate함수를 활용해서 만듦
+5. 추측한게 값에 들어왔다면 new_display에 letter 값을 추가하고 아니라면 “_” 추가
+6. display에 new_display 대입 → 지역변수는 밖에서 사용할 수 없기 때문에
+7. 마지막 if를 통해 not in display → display에 “_” 가 없다면 → is_win을 True로 설정하며 while문 빠져나오기
+
+enumerate가 필요한 이유 → 없으면 반복문이 실행되면서 계속 이전에 맞췄던 글이 사라지게 됨, 
+
+즉, 처음에는 a_ _ _ _ 였고 다음 반복문에서 _b _ _ _ 가 다시 대입되니까 이전의 a가 사라짐,
+
+따라서 enumerate로 index를 추가해줘야됨,
+
+당연히 enumerate를 안써도 그냥 index를 전역변수로 선언해서 추가해줘도 됨
+
+강의에서는 correct_letters = [] 로 리스트를 생성 후, append로 추가해줌
+
+```python
+for letter in chosen_word:
+    if letter == guess:
+        display += letter
+        correct_letters.append(guess)
+    elif letter in correct_letters:
+        display += letter
+    else:
+        display += "_"
+```
+
+이렇게 되면 추측이 맞을 시, display에 letter을 추가 + 리스트에 guess를 추가
+
+다음 조건으로 letter가 correct_letters에 존재할 때(기억), display에 다시 letter을 추가 → 즉, 이전의 정답이 사라지지 않기 위한 기억장치라고 생각하면 된다.
+
+### 4단계
+
+### TODO-1:
+
+- lives라는 변수를 만들어 남은 목숨 수를 추적하세요.
+- lives를 6으로 설정하세요.
+
+```python
+# TODO-1: - Create a variable called 'lives' to keep track of the number of lives left.
+#  Set 'lives' to equal 6.
+
+chosen_word = random.choice(word_list)
+print(chosen_word)
+
+placeholder = ""
+word_length = len(chosen_word)
+for position in range(word_length):
+    placeholder += "_"
+print(placeholder)
+
+game_over = False
+correct_letters = []
+
+lives = 6
+
+while not game_over:
+    guess = input("Guess a letter: ").lower()
+
+    display = ""
+
+    for letter in chosen_word:
+        if letter == guess:
+            display += letter
+            correct_letters.append(guess)
+        elif letter in correct_letters:
+            display += letter
+        else:
+            display += "_"
+
+    print(display)
+```
+
+### TODO-2:
+
+- guess가 chosen_word에 포함되지 않은 문자라면, lives를 1 줄이세요.
+- lives가 0으로 내려가면 게임이 끝나야 하며, "You lose."라는 메시지를 출력해야 합니다.
+
+### TODO-3:
+
+- 사용자가 현재 남은 lives 수에 해당하는 stages 리스트의 ASCII 아트를 출력하세요.
+
+```python
+# TODO-2: - If guess is not a letter in the chosen_word, Then reduce 'lives' by 1.
+    #  If lives goes down to 0 then the game should stop and it should print "You lose."
+    if guess not in chosen_word:
+        lives -= 1
+        print(stages[lives+1])
+        print(f"***************{lives}/6 LIVES LEFT*****************")
+        if lives == 0:
+            game_over = True
+            print("You lose")
+
+    if "_" not in display:
+        game_over = True
+        print("You win.")
+
+    # TODO-3: - print the ASCII art from 'stages'
+    #  that corresponds to the current number of 'lives' the user has remaining.
+```
+
+![image.png](attachment:3369c6c7-59b4-4a75-bc3f-c5282d17ddcc:image.png)
+
+demo 버전과 동일하게 만들어 놓음
+
+### 5단계
+
+### TODO-1:
+
+- hangman_words.py에서 word_list를 사용하도록 단어 목록을 업데이트하세요.
+
+```python
+import hangman_words
+```
+
+### TODO-2:
+
+- hangman_art.py 파일에서 stages를 사용하도록 코드를 업데이트하세요.
+
+```python
+import hangman_art
+
+# TODO-2: - Update the code below to use the stages List from the file hangman_art.py
+    print(hangman_art.stages[lives])
+```
+
+### TODO-3:
+
+- hangman_art.py에서 logo를 가져와 게임 시작 시 출력하세요.
+
+```python
+# TODO-3: - Import the logo from hangman_art.py and print it at the start of the game.
+import hangman_art
+print(hangman_art.logo)
+```
+
+### TODO-4:
+
+- 사용자가 이미 추측한 문자를 입력한 경우, 해당 문자를 출력하고 이미 추측했음을 알리세요.
+- 이 상황에서는 목숨을 차감하지 않아야 합니다.
+- 예: 이미 a를 추측하셨습니다.
+
+```python
+for letter in chosen_word:
+    if letter == guess:
+        display += letter
+        correct_letters.append(guess)
+    elif letter in correct_letters:
+        display += letter
+        print(f"Already guessed : {letter}")
+    else:
+        display += "_"
+```
+
+### TODO-5:
+
+- 만약 그 문자가 chosen_word에 포함되지 않은 경우, 해당 문자를 출력하고 단어에 없음을 알리세요.
+- 예: d를 추측했지만, 단어에 없습니다. 목숨을 잃습니다.
+
+```python
+    if guess not in chosen_word:
+        print(f"{guess} : not in the word, lost life")
+        lives -= 1
+```
+
+### TODO-6:
+
+- 아래 코드를 업데이트하여 사용자에게 남은 목숨 수를 알려주세요. print("****************************<???>/6 LIVES LEFT****************************")
+
+```python
+# TODO-6: - Update the code below to tell the user how many lives they have left.
+    print(f"****************************{lives}/6 LIVES LEFT****************************")
+    guess = input("Guess a letter: ").lower()
+```
+
+### TODO-7:
+
+- 출력 문장을 업데이트하여 사용자가 맞추려던 정답 단어를 알려주세요.
+- 예: 정답은 <Correct Word>였습니다! 패배하셨습니다.
+
+```python
+# TODO 7: - Update the print statement below to give the user the correct word they were trying to guess.
+            print(f"***********************YOU LOSE**********************")
+            print(f"GAME OVER : 정답은 {chosen_word}였습니다")
+```
+
+⇒ 
+
+```python
+import random
+
+# TODO-1: - Update the word list to use the 'word_list' from hangman_words.py
+import hangman_words
+import hangman_art
+
+lives = 6
+
+# TODO-3: - Import the logo from hangman_art.py and print it at the start of the game.
+print(hangman_art.logo)
+
+chosen_word = random.choice(hangman_words.word_list)
+print(chosen_word)
+
+placeholder = ""
+word_length = len(chosen_word)
+for position in range(word_length):
+    placeholder += "_"
+print("Word to guess: " + placeholder)
+
+game_over = False
+correct_letters = []
+
+while not game_over:
+
+    # TODO-6: - Update the code below to tell the user how many lives they have left.
+    print(f"****************************{lives}/6 LIVES LEFT****************************")
+    guess = input("Guess a letter: ").lower()
+
+    # TODO-4: - If the user has entered a letter they've already guessed, print the letter and let them know.
+
+    display = ""
+
+    for letter in chosen_word:
+        if letter == guess:
+            display += letter
+            correct_letters.append(guess)
+        elif letter in correct_letters:
+            display += letter
+            print(f"Already guessed : {letter}")
+        else:
+            display += "_"
+
+    print("Word to guess: " + display)
+
+    # TODO-5: - If the letter is not in the chosen_word, print out the letter and let them know it's not in the word.
+    #  e.g. You guessed d, that's not in the word. You lose a life.
+
+    if guess not in chosen_word:
+        print(f"{guess} : not in the word, lost life")
+        lives -= 1
+
+        if lives == 0:
+            game_over = True
+
+            # TODO 7: - Update the print statement below to give the user the correct word they were trying to guess.
+            print(f"***********************YOU LOSE**********************")
+            print(f"GAME OVER : 정답은 {chosen_word}였습니다")
+
+    if "_" not in display:
+        game_over = True
+        print("****************************YOU WIN****************************")
+
+    # TODO-2: - Update the code below to use the stages List from the file hangman_art.py
+    print(hangman_art.stages[lives])
+
+```
