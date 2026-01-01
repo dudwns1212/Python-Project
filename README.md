@@ -2012,3 +2012,450 @@ while not game_over:
     print(hangman_art.stages[lives])
 
 ```
+
+## 8일차
+## 입력이 있는 함수
+
+이전에 우리는 함수가 코드를 이름이 지정된 블록으로 묶어 나중에 반복적으로 사용할 수 있도록 해준다는 것을 보았습니다.
+
+### PAUSE 1 - 검토
+
+- greet()라는 이름의 함수를 생성하세요.
+- 함수 내부에 3개의 print 문을 작성하세요.
+- greet() 함수를 호출하고 코드를 실행하세요.
+
+### 입력
+
+새로운 함수를 만들 때 (정의할 때) 괄호 안에 변수 이름을 추가하면, 함수를 호출할 때 해당 입력값을 받을 수 있습니다.
+
+즉, 다른 입력값을 전달함으로써 함수의 동작을 호출할 때마다 다르게 변경할 수 있다는 뜻입니다.
+
+```python
+def myfunction(parameter):
+    print(f"안녕! {parameter}")
+
+myfunction("영준")
+```
+
+### 입력은 변수
+
+입력을 받는 함수를 생성할 때는 전달된 데이터를 받을 변수 이름을 정의합니다.
+
+입력 변수 이름, 예를 들어 이 코드에서 def greet(name):의 name은 매개변수(parameter)라고 부릅니다.
+
+입력 변수의 값, 예를 들어 이전 greet 함수를 호출할 때의 greet("Angela")에서의 값 Angela는 인자(argument)라고 부릅니다.
+
+## 위치 인자 VS 키워드 인자
+
+### 여러 개의 입력값
+
+함수에 여러 개의 입력값을 사용할 수 있습니다. 필요한 것은 각 입력값을 쉼표 ,로 구분하는 것뿐입니다.
+
+함수를 수정하여 예상 값을 출력하도록 만드세요.
+
+```python
+defgreet_with(name,location)
+    Hello name
+    Whatisit likeinlocation
+```
+
+⇒
+
+```python
+# Functions with input
+
+def greet_with_name(name):
+    print(f"Hello {name}")
+    print(f"How do you do {name}?")
+
+greet_with_name("Jack Bauer")
+
+def greet_with(name, location):
+    print(f"Hello {name}\nWhat is it like in {location}")
+
+greet_with("영준", "광주")
+```
+
+### 위치 기반 인수
+
+기본적으로 Python에서 함수를 생성하면 함수 정의에서 인수들의 순서를 유지합니다.
+
+예: 아래의 함수에서 첫 번째로 전달받은 인수는 항상 두 번째 인수보다 먼저 출력됩니다. a = 2, b = 1
+
+```python
+defmy_function(a,b)
+  print(a)
+  print(b)
+
+my_function(2,1)
+#출력 결과는:
+# 2
+# 1
+
+```
+
+### 키워드 인수
+
+함수를 호출할 때 인수를 제공할 때 키워드를 사용할 수 있으며, 이를 통해 어떤 값이 어떤 입력 매개변수에 할당되는지에 대한 혼동을 줄일 수 있습니다.
+
+greet_with() 함수를 키워드 인수를 사용하여 호출하세요.
+
+```python
+def greet_with(name, location):
+    print(f"Hello {name}\nWhat is it like in {location}")
+
+greet_with(location="광주", name="영준")
+```
+
+→ 
+
+Hello 영준
+What is it like in 광주
+
+## Caesar Cipher 1
+
+### TODO-1:
+
+encrypt()라는 이름의 함수를 생성하세요. 이 함수는 original_text와 shift_amount라는 2개의 입력값을 받습니다.
+
+### TODO-2:
+
+encrypt 함수 내부에서, original_text의 각 문자를 shift_amount만큼 알파벳에서 앞으로 이동시키고, 암호화된 텍스트를 출력하세요.
+
+Python의 내장 함수 index()를 사용하여 리스트에서 항목의 위치를 찾을 수 있습니다. 예:
+
+```
+fruits= ["Apple","Pear","Orange"]
+fruits.index("Pear")#1
+
+```
+
+예를 들어 다음과 같은 값이 주어졌다면:
+
+```
+plain_text="hello"
+shift_amount=1
+
+```
+
+최종 암호화된 출력값은 아래와 같이 나와야 합니다:
+
+여기 암호화된 결과가 있습니다: ifmmp
+
+'hello'의 각 문자가 1만큼 위로 이동했습니다.
+
+```python
+# TODO-1: Create a function called 'encrypt()' that takes 'original_text' and 'shift_amount' as 2 inputs.
+# TODO-2: Inside the 'encrypt()' function, shift each letter of the 'original_text' forwards in the alphabet
+#  by the shift amount and print the encrypted text.
+display = ""
+def encrypt(original_text, shift_amount):
+    global display
+    for char in original_text:
+            index = alphabet.index(char) + shift_amount
+            display = display + alphabet[index]
+    print(display)
+```
+
+### TODO-3:
+
+문자 'z'를 9만큼 앞으로 이동시키려고 하면 어떻게 될까요? 코드를 수정할 수 있나요?
+
+```python
+display = ""
+list_length = len(alphabet)
+def encrypt(original_text, shift_amount):
+    global display
+    for char in original_text:
+        index = alphabet.index(char) + shift_amount
+        if list_length - 1 < index:
+            extends = index - list_length
+            display = display + alphabet[extends]
+        else:
+            display = display + alphabet[index]
+    print(display)
+```
+
+### TODO-4:
+
+encrypt() 함수를 호출하고 사용자 입력값을 전달하세요. 코드를 테스트하고 메시지를 암호화할 수 있어야 합니다.
+
+```python
+text = input("Type your message:\n").lower()
+shift = int(input("Type the shift number:\n"))
+
+encrypt(text, shift)
+```
+
+⇒
+
+Type your message:
+abcdefgzzz
+Type the shift number:
+3
+defghijccc
+
+```python
+def encrypt(original_text, shift_amount):
+    cipher_text = ""
+    for letter in original_text:
+        shifted_position = alphabet.index(letter) + shift_amount
+        shifted_position %= len(alphabet)
+        cipher_text += alphabet[shifted_position]
+    print(f"Here is the encoded result: {cipher_text}")
+```
+
+강의에서는 위의 코드를 활용했다. %= 을 활용해서 나누고 남은 수, 즉 리스트 길이가 7, 암호화된 index 값이 9라고 하면 %=을 통해 shifted_position=2가 된다.
+
+따라서 결국 내가 복잡하게 짠 코드를 한줄로 간단하게 활용이 가능하다.
+
+또한 전역으로 변수를 정의하지 않아도 함수 내에서 만들면 되는 것을 알았다, 어차피 밖에서 안쓰니까
+
+## Caesar Cipher 2
+
+### TODO-1:
+
+decrypt()라는 이름의 함수를 생성하고, 이 함수는 original_text와 shift_amount를 두 가지 입력으로 받습니다.
+
+### TODO-2:
+
+decrypt() 함수 내에서 original_text의 각 문자를 알파벳에서 *뒤로* shift_amount만큼 이동시키고, 복호화된 텍스트를 출력하세요.
+
+```python
+def decrypt(original_text, shift_amount):
+    cipher_text = ""
+    for letter in original_text:
+        shifted_position = alphabet.index(letter) - shift_amount
+        cipher_text += alphabet[shifted_position]
+    print(f"Here is the decoded result: {cipher_text}")
+
+decrypt(original_text=text, shift_amount=shift)
+```
+
+여기서는 어차피 a = 0이고 뒤로가도 -1이므로 z가 나옴, 따라서 코드 수정은 필요 없다 
+
+### TODO-3:
+
+- encrypt()와 decrypt() 함수를 결합하여 caesar()라는 단일 함수로 만드세요.
+- 사용자가 선택한 direction 변수 값을 사용해 어떤 기능을 실행할지 결정하세요.
+- encrypt/decrypt 대신 caesar 함수를 호출하고 세 가지 변수인 direction/text/shift를 전달하세요.
+
+```python
+def caesar(direct, original_text, shift_amount):
+    if direct == "encode":
+        encrypt(original_text=original_text, shift_amount=shift)
+    elif direct == "decode":
+        decrypt(original_text=original_text, shift_amount=shift)
+    else:
+        print("Wrong Type, Restart Please")
+
+caesar(direct=direction, original_text=text, shift_amount=shift)
+```
+
+⇒
+
+Type 'encode' to encrypt, type 'decode' to decrypt:
+encode
+Type your message:
+aaa
+Type the shift number:
+1
+
+Here is the encoded result: bbb
+
+⇒
+
+Type 'encode' to encrypt, type 'decode' to decrypt:
+decode
+Type your message:
+aaaa
+Type the shift number:
+1
+Here is the decoded result: zzzz
+
+⇒ 
+
+Type 'encode' to encrypt, type 'decode' to decrypt:
+dddd
+Type your message:
+1
+Type the shift number:
+1
+Wrong Type, Restart Please
+
+합치라는게 저게 아니였음, 
+
+```python
+def caesar(original_text, shift_amount, encode_or_decode):
+    output_text = ""
+
+    for letter in original_text:
+        if encode_or_decode == "decode":
+            shift_amount *= -1
+
+        shifted_position = alphabet.index(letter) + shift_amount
+        shifted_position %= len(alphabet)
+        output_text += alphabet[shifted_position]
+    print(f"Here is the {encode_or_decode}d result: {output_text}")
+```
+
+하나의 함수로 그냥 만들라는거였음, encode일 때는 그대로, decode일 땐 -1을 곱해줌
+
+그래야 빼지니까, 어차피 %=을 해도 decode는 -를 더하므로 그냥 shifted_position에는 영향이 없음
+
+## Caesar Cipher 3
+
+### TODO-1:
+
+프로그램이 실행될 때, art.py에서 로고를 가져와 출력하세요.
+
+```python
+# TODO-1: Import and print the logo from art.py when the program starts.
+import art
+print(art.logo)
+```
+
+### TODO-2:
+
+사용자가 List alphabet에 없는 숫자/기호/공백을 입력하면 어떻게 될까요?
+
+코드를 수정하여 텍스트가 인코딩/디코딩될 때 숫자/기호/공백을 유지할 수 있도록 만들어보세요.
+
+예:
+
+```python
+original_text="meet me at 3!"
+cipher_text="XXXX XX XX 3!"
+
+```
+
+```python
+# TODO-2: What happens if the user enters a number/symbol/space?
+
+def caesar(original_text, shift_amount, encode_or_decode):
+    output_text = ""
+
+    for letter in original_text:
+        if encode_or_decode == "decode":
+            shift_amount *= -1
+        if letter not in alphabet:
+            output_text += letter
+        else:
+            shifted_position = alphabet.index(letter) + shift_amount
+            shifted_position %= len(alphabet)
+            output_text += alphabet[shifted_position]
+    print(f"Here is the {encode_or_decode}d result: {output_text}")
+```
+
+### TODO-3:
+
+암호 프로그램을 다시 시작할 방법을 생각해볼 수 있나요?
+
+예:
+
+다시 실행하려면 'yes'를 입력하세요. 그렇지 않으면 'no'를 입력하세요.
+
+사용자가 'yes'를 입력하면 방향/텍스트/시프트를 다시 묻고 caesar() 함수를 다시 호출하세요.
+
+```python
+# TODO-3: Can you figure out a way to restart the cipher program?
+game_loop = True
+while game_loop:
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
+
+    caesar(original_text=text, shift_amount=shift, encode_or_decode=direction)
+
+    is_loop = input("restart? yes :\n")
+    if is_loop != "yes":
+        game_loop = False
+        print("종료합니다.")
+```
+
+⇒
+
+,adPPYba, ,adPPYYba,  ,adPPYba, ,adPPYba, ,adPPYYba, 8b,dPPYba,
+
+a8"     "" ""     `Y8 a8P_____88 I8[    "" ""`     Y8 88P'   "Y8
+
+8b         ,adPPPPP88 8PP"  `"Y8ba,  ,adPPPPP88 88           "8a,   ,aa 88,    ,88 "8b,   ,aa aa    ]8I 88,    ,88 88`            "Ybbd8"' `"8bbdP"Y8`  "Ybbd8"' `"YbbdP"'` "8bbdP"Y8 88
+
+88             88
+
+""             88
+
+88
+
+,adPPYba, 88 8b,dPPYba,  88,dPPYba,   ,adPPYba, 8b,dPPYba,
+
+a8"     "" 88 88P'    "8a 88P'    "8a a8P_____88 88P'   "Y8
+
+8b         88 88       d8 88       88 8PP" 88
+
+"8a,   ,aa 88 88b,   ,a8" 88       88 "8b,   ,aa 88
+
+`"Ybbd8"' 88 88`YbbdP"'  88       88  `"Ybbd8"' 88
+
+88
+
+88
+
+Type 'encode' to encrypt, type 'decode' to decrypt:
+encode
+Type your message:
+aaaa
+Type the shift number:
+1
+Here is the encoded result: bbbb
+restart? : yesyes
+Type 'encode' to encrypt, type 'decode' to decrypt:
+decode
+Type your message:
+aaaa
+Type the shift number:
+1
+Here is the decoded result: zzzz
+restart? : yesno
+
+완성본 ⇒
+
+```python
+# TODO-1: Import and print the logo from art.py when the program starts.
+import art
+print(art.logo)
+
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+# TODO-2: What happens if the user enters a number/symbol/space?
+
+def caesar(original_text, shift_amount, encode_or_decode):
+    output_text = ""
+
+    for letter in original_text:
+        if letter not in alphabet:
+            output_text += letter
+        if encode_or_decode == "decode":
+            shifted_position = alphabet.index(letter) - shift_amount
+            shifted_position %= len(alphabet)
+            output_text += alphabet[shifted_position]
+        else:
+            shifted_position = alphabet.index(letter) + shift_amount
+            shifted_position %= len(alphabet)
+            output_text += alphabet[shifted_position]
+    print(f"Here is the {encode_or_decode}d result: {output_text}")
+
+# TODO-3: Can you figure out a way to restart the cipher program?
+game_loop = True
+while game_loop:
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
+
+    caesar(original_text=text, shift_amount=shift, encode_or_decode=direction)
+
+    is_loop = input("restart? yes :\n")
+    if is_loop != "yes":
+        game_loop = False
+        print("종료합니다.")
+```
