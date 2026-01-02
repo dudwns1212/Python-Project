@@ -2459,3 +2459,233 @@ while game_loop:
         game_loop = False
         print("종료합니다.")
 ```
+
+## 9일차
+## 딕셔너리
+
+파이썬에서 딕셔너리는 실제 상황의 사전과 유사하게 작동한다.
+
+이름 : 정의… 이런식으로 키와 값을 연결하여 두 데이터를 연결
+
+```python
+programming_dictionary = {
+    "Bug": "An error in a program that prevents the program from running as expected.",
+    "Function": "A piece of code that you can easily call over and over again."
+}
+
+print(programming_dictionary["Bug"])
+print(programming_dictionary["Function"])
+```
+
+다음은 딕셔너리를 생성하고, 값을 집어넣고 수정하는 코드이다.
+
+{}를 활용해서 빈 딕셔너리를 생성
+
+minsu : friends 라는 값을 집어 넣는다
+
+minsu : not friends 라는 값으로 재할당
+
+```python
+my_empty_dictionary = {}
+
+my_empty_dictionary["minsu"] = "friends"
+print(my_empty_dictionary["minsu"])
+
+my_empty_dictionary["minsu"] = "not friends"
+print(my_empty_dictionary["minsu"])
+```
+
+다음은 반복문을 활용해 사전에 있는 키와 값을 출력하는 방법이다
+
+```python
+fruit = {"apple": "red", "banana": "yello", "oi": "green"}
+
+for key in fruit:
+    print(f"{key} : {fruit[key]}") 
+```
+
+반복문에 key값으로 들어가는건 키(사과, 바나나 등) 이고 값을 꺼내기 위해서는 코드처럼 fruit[”apple”]를 활용해아 한다.
+
+## 중첩 리스트와 딕셔너리
+
+딕셔너리는 키 → 값 의 형태로 키에 할당된 값을 가지는 구조인데, 여기서 값에 리스트가 들어갈 수 있다.
+
+```python
+list1 = [1, 2, 3, 4]
+my_dictionary = {
+    "key" : list1,
+    "key2" : 5
+}
+print(my_dictionary)
+```
+
+⇒ {'key': [1, 2, 3, 4], 'key2': 5}
+
+### 중간문제
+
+중첩된 리스트 travel_log에서 "Lille"을 출력하는 방법을 찾아보세요.
+
+```python
+travel_log= {
+    "France": ["Paris","Lille","Dijon"],
+    "Germany": ["Stuttgart","Berlin"],
+}
+```
+
+⇒ `print(travel_log["France"][1])`
+
+앞의 딕셔너리에서 도출된 값이 list이므로 [index로 값을 꺼내줄 수 있다]
+
+```python
+nested_list= ["A","B", ["C","D"]]
+```
+
+### 중간문제 2
+
+깊이 중첩된 리스트 항목을 얻는 방법을 기억하시나요? 리스트 nested_list에서 "D"를 출력해보세요.
+`print(nested_list[2][1])`
+
+### 딕셔너리 안에 딕셔너리 중첩하기
+
+딕셔너리 안에 딕셔너리를 중첩할 수도 있습니다:
+
+```python
+my_dictionary= {
+    key1:Value,
+    key2: {Key:Value,Key:Value},
+}
+```
+
+### 중간문제 3
+
+다음 리스트에서 "Stuttgart"를 출력하는 방법을 찾아보세요:
+
+```python
+travel_log= {
+  "France": {
+    "cities_visited": ["Paris","Lille","Dijon"],
+    "total_visits":12
+   },
+  "Germany": {
+    "cities_visited": ["Berlin","Hamburg","Stuttgart"],
+    "total_visits":5
+   },
+}
+```
+
+⇒ `print(travel_log["Germany"]["cities_visited"][2])`
+
+딕셔너리 ⇒ 딕셔너리 ⇒ 리스트
+
+## 블라인드 경매 프로젝트
+
+![image.png](attachment:fa704f8a-17a8-4859-95b7-0ff84246b983:image.png)
+
+블라인드 경매 프로그램으로 player1이 입력하면 콘솔에 전에 입력된 내용이 사라지고 다음 player2의 입력 창이 나옴, 마지막으로 player중에서 가장 높은 금액을 선정한 사람이 경매에 당첨됨
+
+### 기능
+
+- 각 사람은 자신의 이름과 경매 금액을 입력합니다.
+- 프로그램은 다른 사람이 경매에 참여할 필요가 있는지 묻습니다. 만약 그렇다면, 컴퓨터는 출력을 지우고(여러 개의 빈 줄을 출력) 다시 이름과 경매 금액을 묻는 루프로 돌아갑니다.
+- 각 사람의 이름과 경매 금액은 딕셔너리에 저장됩니다.
+- 모든 참가자가 경매를 완료하면, 프로그램은 최고 입찰자를 찾아서 출력합니다.
+
+```python
+# TODO-1: Ask the user for input
+# TODO-2: Save data into dictionary {name: price}
+# TODO-3: Whether if new bids need to be added
+# TODO-4: Compare bids in dictionary
+import art
+print(art.logo)
+
+bgp = {}
+type_no = True
+
+name_list = []
+bid_list = []
+
+while type_no:
+    name = input("What is your name?:\t")
+    bid = int(input("What is your bid?:\t$"))
+    types = input("Are there any other bidders? Type 'yes' or 'no'.")
+
+    name_list.append(name)
+    bid_list.append(bid)
+
+    if types != 'yes':
+        type_no = False
+    else:
+        print("\n" * 20)
+
+bgp = {
+    "name" : name_list,
+    "bid" : bid_list
+}
+
+print(bgp) ## name과 bid를 가지는 리스트 형태의 dictionary 생성
+maxi = 0
+name = ''
+
+for index,big in enumerate(bgp["bid"]):
+    if big > maxi:
+        maxi = big
+        name = bgp["name"][index]
+    bgp["winner"] = [name, maxi]
+
+print(f"The winner is {bgp["winner"][0]} with a bid of ${bgp['winner'][1]}")
+```
+
+기능은 위의 코드로 구현했다, 딕셔너리 구조에 플레이어를 리스트 형태로 이름과 가격을 넣었다, 
+
+반복문이 끝나면 가장 큰 수와 이름을 빈 변수로 생성 후 for문을 통해 maxi와 name에 값을 집어넣고 bgp에 넣은 후 print해주었다.
+
+강의에서는 어떻게 했는지 살펴보자
+
+```python
+ bids = {}
+continue_bidding = True
+while continue_bidding:
+    name = input("What is your name?: ")
+    price = int(input("What is your bid?: $"))
+    bids[name] = price
+    should_continue = input("Are there any other bidders? Type 'yes or 'no'.\n")
+    if should_continue == "no":
+        continue_bidding = False
+        find_highest_bidder(bids)
+    elif should_continue == "yes":
+        print("\n" * 20)
+```
+
+우선 while구문이다.
+
+나와 같이 dictionary, True값을 지정해주었고 반복문을 실행했다. 
+
+dictionary 자체를 name : price로 만들었고, no를 입력하면 dictionary를 argument로 전송하며 find_highest_bidder 함수를 실행하였다.
+
+ex) jun : 12, go : 15, min : 20, ho : 8 이런식으로 dictionary에 저장됨
+
+```python
+def find_highest_bidder(bidding_record):
+    highest_bid = 0
+    winner = ""
+    for bidder in bidding_record:
+        bid_amount = bidding_record[bidder]
+        if bid_amount > highest_bid:
+            highest_bid = bid_amount
+            winner = bidder
+    print(f"The winner is {winner} with a bid of ${highest_bid}")
+```
+
+이 함수는 가장 큰 수를 낸 winner를 찾 함수이다.
+
+→ highest_bid = 0, winner = “” 으로 결과값들을 변수로 선언
+
+→ for문을 통해 bids를 하나씩 꺼냄(1. jun, 2. min)
+
+→ bid_amount에 bidding_record[bidder] → bids[key] → bid 대입
+
+→ big_amount가 highest_bid보다 크다면 highest_bid를 계속 큰 값으로 갱신, winner값도 그에 맞게 갱신
+
+나랑 구조가 같음, 다만 나는 name = list, bid = list 형태로 진행했고, 강사님은 key : value로 진행함,
+
+key에 이름, value에 가격을 넣어서 해결
