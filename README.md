@@ -2689,3 +2689,246 @@ def find_highest_bidder(bidding_record):
 나랑 구조가 같음, 다만 나는 name = list, bid = list 형태로 진행했고, 강사님은 key : value로 진행함,
 
 key에 이름, value에 가격을 넣어서 해결
+
+
+## 10일차
+## 출력이 있는 함수
+
+지금까지는 실행 본문만 있는 함수, 함수 본문의 실행에 변화를 줄 수 있는 입력을 가진 함수를 공부하였다.
+
+오늘은 함수의 마지막 형태로 출력을 가질 수 있는 함수를 살펴본다.
+
+### 중간문제1
+
+format_name() 이라는 함수를 생성하세요. 이 함수는 두 개의 입력값인 f_name과 l_name을 받습니다.
+
+```python
+def format_name(f_name, l_name):
+    print("중간1")
+```
+
+### 중간문제2
+
+title() 함수를 사용하여 f_name과 l_name 매개변수를 Title Case로 수정하세요.
+
+```python
+def format_name(f_name, l_name):
+    print(f_name.title())
+    print(l_name.title())
+
+format_name("GoYOUng", "JuN")
+```
+
+### 문법
+
+다음과 같은 방식으로 실행 본문, 입력, 출력을 가진 함수를 생성할 수 있습니다:
+
+```python
+def format_name(f_name, l_name):
+    formated_f_name = f_name.title()
+    formated_l_name = l_name.title()
+    return f"{formated_f_name} {formated_l_name}"
+
+print(format_name("GOyOUng", "JuN"))
+```
+
+### Print와 Output
+
+Return vs. 출력: return 문은 함수로부터 값을 반환하여 나중에 사용할 수 있게 해주는 반면, print는 프로그래머가 확인할 수 있도록 값만 콘솔에 출력합니다.
+
+## 다중 반환 값
+
+함수는 return 키워드에서 종료됩니다. return 문 아래에 코드를 작성하면 해당 코드는 실행되지 않습니다.
+
+하지만, 하나의 함수에 여러 개의 return 문을 가질 수 있습니다. 그렇다면 이것이 어떻게 작동할까요?
+
+### 조건부 반환
+
+조건부 흐름 제어(코드가 특정 조건 검사에 따라 다르게 동작하여 다른 실행 경로를 따르는 경우)가 있을 때, 여러 가지 종료점(return)이 생길 수 있습니다.
+
+예:
+
+```python
+defcanBuyAlcohol(age):
+    ifage>=18:
+        return True
+    else:
+        return False
+
+```
+
+### 빈 반환
+
+return 뒤에 아무 것도 작성하지 않고 반환할 수도 있습니다. 이것은 단순히 함수에게 종료하라고 지시합니다.
+
+예:
+
+```python
+defcanBuyAlcohol(age):
+    # age 입력의 데이터 타입이 int가 아니면 종료합니다.
+    iftype(age) !=int:
+        return
+
+    ifage>=18:
+        return True
+    else:
+        return False
+```
+
+## Dcostrings
+
+“””…”””
+
+코드의 문서를 작성하기 위해 여러 줄 주석을 작성할 때 docstring을 사용할 수 있습니다.
+
+### 문법
+
+텍스트를 세 개의 큰따옴표로 감싸서 작성하면 됩니다.
+
+예:
+
+```python
+"""
+나의
+여러 줄
+주석
+"""
+```
+
+### 함수 문서화하기
+
+docstring의 유용한 기능 중 하나는 함수 정의 바로 아래에 작성할 수 있으며, 그렇게 작성된 텍스트는 함수 호출 위에 마우스를 올릴 때 표시됩니다. 이는 자신이 만든 함수가 무엇을 하는지 기억하기에 좋은 방법입니다.
+
+예:
+
+```python
+defmy_function(num):
+    """숫자를 제곱합니다."""
+    return num*num
+```
+
+## 계산기 프로젝트
+
+![image.png](attachment:a2accf66-cf38-46ec-a75d-74b9d2d0f5e9:image.png)
+
+### 함수를 변수 값으로 저장하기
+
+함수를 참조하여 변수 값으로 저장할 수 있습니다.
+
+예:
+
+```python
+def add(n1,n2):
+    returnn1+n2
+
+my_favourite_calculation=add
+my_favourite_calculation(3,5)# 8을 반환합니다
+
+```
+
+시작 파일에서, 계산기가 수행할 수 있는 각 수학 계산을 참조하는 사전을 확인할 수 있습니다. 이를 시도해보고 덧셈, 뺄셈, 곱셈, 나눗셈을 수행할 수 있는지 확인하세요.
+
+### PAUSE 1
+
+TODO: 나머지 3개의 함수 작성하기 - subtract(뺄셈), multiply(곱셈), divide(나눗셈).
+
+```python
+def add(n1, n2):
+    return n1 + n2
+
+def subtract(n1, n2):
+    return n1 - n2
+
+def multiply(n1, n2):
+    return n1 * n2
+
+def divide(n1, n2):
+    return n1 / n2
+```
+
+### PAUSE 2
+
+TODO: 이 4개의 함수를 사전에 값으로 추가하세요. 키 = "+", "-", "*", "/"
+
+```python
+calculate = {
+    "+" : add,
+    "-" : subtract,
+    "*" : multiply,
+    "/" : divide
+}
+
+```
+
+### PAUSE 3
+
+TODO: 사전의 연산을 사용하여 계산을 수행하세요. 사전을 사용하여 4 * 8을 곱하세요.
+
+```python
+calculate = {
+    "+" : add,
+    "-" : subtract,
+    "*" : multiply,
+    "/" : divide
+}
+
+result = calculate["*"](4,2)
+print(result)
+```
+
+### 기능
+
+- 프로그램이 사용자가 첫 번째 숫자를 입력하도록 요청합니다.
+- 프로그램이 사용자가 수학 연산자를 입력하도록 요청합니다 ("+", "-", "*", "/" 중 선택).
+- 프로그램이 사용자가 두 번째 숫자를 입력하도록 요청합니다.
+- 프로그램이 선택된 수학 연산자를 기준으로 결과를 계산합니다.
+- 프로그램이 사용자가 이전 결과로 계속 작업할지 여부를 묻습니다.
+- 사용자가 "예"를 선택하면, 프로그램은 이전 결과를 첫 번째 숫자로 사용하여 계산 과정을 반복합니다.
+- 사용자가 "아니오"를 선택하면, 프로그램이 사용자에게 첫 번째 숫자를 다시 입력하도록 요청하고 이전 계산의 모든 메모리를 초기화합니다.
+- art.py에서 로고를 추가하세요.
+
+```python
+def add(n1, n2):
+    return n1 + n2
+
+def subtract(n1, n2):
+    return n1 - n2
+
+def multiply(n1, n2):
+    return n1 * n2
+
+def divide(n1, n2):
+    return n1 / n2
+
+calculate = {
+    "+" : add,
+    "-" : subtract,
+    "*" : multiply,
+    "/" : divide
+}
+
+import art
+print(art.logo)
+
+is_continue = "Continue"
+while True:
+    if is_continue == "Continue":
+        num1 = int(input("Enter first number: "))
+
+    operation = input("Enter operation\n+\n-\n*\n/: ")
+    num2 = int(input("Enter second number: "))
+
+    result = calculate[operation](num1, num2)
+    print(result)
+
+    continue_key = input("Press any key to continue...y/n : ")
+    if continue_key == "y":
+        num1 = result
+        is_continue = "Pass"
+    else:
+        is_continue = "Continue"
+```
+
+오늘은 출력(return)이 있는 함수를 만들고, 그걸 활용해서 계산기를 만들어보는 시간을 가졌다.
+
+또한 Dcostrings를 활용해 다른 개발자가 내 코드를 볼 때, 조금 더 손쉽게 내 코드를 살펴볼 수 있게 가독성 있는 코드를 짤 수 있다는 것도 알았다.
