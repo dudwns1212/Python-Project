@@ -2932,3 +2932,297 @@ while True:
 오늘은 출력(return)이 있는 함수를 만들고, 그걸 활용해서 계산기를 만들어보는 시간을 가졌다.
 
 또한 Dcostrings를 활용해 다른 개발자가 내 코드를 볼 때, 조금 더 손쉽게 내 코드를 살펴볼 수 있게 가독성 있는 코드를 짤 수 있다는 것도 알았다.
+
+## 11일차
+## 블랙잭 프로젝트
+
+### 난이도를 선택하세요
+
+- **보통** 😎: 아래의 모든 힌트를 사용하여 프로젝트를 완성하세요.
+- **어려움** 🤔: 힌트 1, 2, 3만 사용하여 프로젝트를 완성하세요.
+- **매우 어려움** 😭: 힌트 1, 2만 사용하여 프로젝트를 완성하세요.
+- **전문가** 🤯: 힌트 1만 사용하여 프로젝트를 완성하세요.
+
+### 블랙잭 게임 하우스 규칙
+
+- 카드 덱의 크기는 무제한입니다.
+- 조커 카드는 사용하지 않습니다.
+- Jack/Queen/King은 모두 10으로 계산됩니다.
+- Ace는 11 또는 1로 계산될 수 있습니다.
+- 다음 리스트를 카드 덱으로 사용하세요:
+
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+- 리스트의 카드들은 동일한 확률로 선택됩니다.
+- 뽑힌 카드는 덱에서 제거되지 않습니다.
+- 컴퓨터가 딜러 역할을 합니다.
+
+1. 딜러(컴퓨터)는 번갈아가며 플레이어와 자신에게 카드를 나눠준다.
+2. 플레이어는 받은 카드를 확인하고 카드를 더 받던지 멈출 수 있다.
+3. 21이 넘어가면 자동으로 패배이며, 딜러의 카드 합 보다, 플레이어의 카드 합이 더 커야 이기는 게임이다.
+
+힌트는 안봄, 첫번째 코드 풀이로 아래와 같이 풀었음
+
+```python
+# 카드 덱의 크기는 무제한입니다.
+# 조커 카드는 사용하지 않습니다.
+# Jack/Queen/King은 모두 10으로 계산됩니다.
+# Ace는 11 또는 1로 계산될 수 있습니다.
+# 다음 리스트를 카드 덱으로 사용하세요:
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+# 리스트의 카드들은 동일한 확률로 선택됩니다.
+# 뽑힌 카드는 덱에서 제거되지 않습니다.
+# 컴퓨터가 딜러 역할을 합니다.
+
+"""
+1. 딜러(컴퓨터)는 번갈아가며 플레이어와 자신에게 카드를 나눠준다.
+2. 플레이어는 받은 카드를 확인하고 카드를 더 받던지 멈출 수 있다.
+3. 21이 넘어가면 자동으로 패배이며, 딜러의 카드 합 보다, 플레이어의 카드 합이 더 커야 이기는 게임이다.
+"""
+
+import random
+import art
+print(art.logo)
+
+player_cards = []
+computer_cards = []
+
+first_second = input("먼저 받으시겠습니까?(y/n) : ")
+for card in range(2):
+    if first_second == "y":
+        player_cards.append(random.choice(cards))
+        computer_cards.append(random.choice(cards))
+    else:
+        computer_cards.append(random.choice(cards))
+        player_cards.append(random.choice(cards))
+
+is_continue = True
+sum_card_computer = 0
+for c_card in computer_cards:
+    sum_card_computer += c_card
+    if 11 in computer_cards and sum_card_computer > 21:
+        sum_card_computer -= 10
+
+while is_continue:
+    sum_card_player = 0
+    now_status = ""
+    for p_card in player_cards:
+        sum_card_player += p_card
+        if sum_card_player > 21:
+            if 11 in player_cards:
+                sum_card_player -= 10
+            else:
+                print(f"BOOM!! {sum_card_player}, 21이 넘었어요, 패배!")
+                now_status = 'boom'
+    if now_status == 'boom':
+        break
+
+    print(f"당신의 카드 합은 {sum_card_player} 입니다!")
+    more = input("카드를 더 받으시겠습니까?(y/n) : ")
+    if more != "y":
+        is_continue = False
+        if sum_card_player > sum_card_computer:
+            print(f"딜러 카드 합->{sum_card_computer}, 승리!")
+        elif sum_card_player < sum_card_computer:
+            print(f"딜러 카드 합->{sum_card_computer}, 패배..")
+        else:
+            print("같은 합 입니다. 비겼습니다")
+    else:
+        player_cards.append(random.choice(cards))
+```
+
+![image.png](attachment:959e8386-a38d-4696-845c-4f281fb6a534:image.png)
+
+위의 결과 외에도, 승리, 무승부, 패배 등의 경우도 모두 검증함
+
+여기서 추가하고 싶은 사항은 원래 딜러의 패가 17 미만이면 딜러도 카드를 더 받아야됨
+
+그 로직을 추가
+
+1. 딜러도 초반에 카드를 2장 받음, 합이 21이 넘는데 11이 안에 있다면 -10
+2. 근데 이게 아니다.. 11은 1 또는 11
+
+```python
+# 카드 덱의 크기는 무제한입니다.
+# 조커 카드는 사용하지 않습니다.
+# Jack/Queen/King은 모두 10으로 계산됩니다.
+# Ace는 11 또는 1로 계산될 수 있습니다.
+# 다음 리스트를 카드 덱으로 사용하세요:
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+# 리스트의 카드들은 동일한 확률로 선택됩니다.
+# 뽑힌 카드는 덱에서 제거되지 않습니다.
+# 컴퓨터가 딜러 역할을 합니다.
+
+"""
+1. 딜러(컴퓨터)는 번갈아가며 플레이어와 자신에게 카드를 나눠준다.
+2. 플레이어는 받은 카드를 확인하고 카드를 더 받던지 멈출 수 있다.
+3. 21이 넘어가면 자동으로 패배이며, 딜러의 카드 합 보다, 플레이어의 카드 합이 더 커야 이기는 게임이다.
+"""
+
+import random
+import art
+print(art.logo)
+
+player_cards = []
+computer_cards = []
+
+is_continue_player = True
+is_continue_computer = True
+sum_card_computer = 0
+
+first_second = input("먼저 받으시겠습니까?(y/n) : ")
+for card in range(2):
+    if first_second == "y":
+        player_cards.append(random.choice(cards))
+        computer_cards.append(random.choice(cards))
+    else:
+        computer_cards.append(random.choice(cards))
+        player_cards.append(random.choice(cards))
+""" 마지막 딜러가 카드를 뽑는 함수, 17보다 커지면 return """
+def computer_last(sums):
+    global is_continue_computer
+    while is_continue_computer:
+        for c_card in computer_cards:
+            if 11 in computer_cards:
+                if sums + c_card > 21:
+                    c_card = 1
+                    computer_cards[computer_cards.index(11)] = 1
+            sums += c_card
+            if sums < 17:
+                print(f"딜러 카드의 합->{sums}, 카드를 뽑습니다.")
+                computer_cards.append(random.choice(cards))
+            else:
+                is_continue_computer = False
+                break
+    return sums
+
+while is_continue_player:
+    sum_card_player = 0
+    now_status = ""
+    for p_card in player_cards:
+        if 11 in player_cards:
+            if sum_card_player + p_card > 21:
+                p_card = 1
+                player_cards[player_cards.index(11)] = 1
+        sum_card_player += p_card
+
+        if sum_card_player > 21:
+            print(f"BOOM!! {sum_card_player}, 21이 넘었어요, 패배!")
+            now_status = 'boom'
+    if now_status == 'boom':
+        break
+
+    print(f"당신의 카드 합은 {sum_card_player} 입니다!")
+    more = input("카드를 더 받으시겠습니까?(y/n) : ")
+    if more != "y":
+        print("-----------------------------")
+        is_continue_player = False
+        sum_card_computer = computer_last(sum_card_computer)
+        if sum_card_computer > 21:
+            print(f"{sum_card_computer}, 딜러의 카드가 21을 넘겼습니다, 승리!!")
+        elif sum_card_player > sum_card_computer:
+            print(f"딜러 카드 합->{sum_card_computer}, 승리!")
+        elif sum_card_player < sum_card_computer:
+            print(f"딜러 카드 합->{sum_card_computer}, 패배..")
+        else:
+            print(f"딜러 카드 합 -> {sum_card_computer}, 같은 합 입니다. 비겼습니다")
+    else:
+        player_cards.append(random.choice(cards))
+```
+
+이렇게 복잡한 코드가 완성됐다.
+
+코드 설명
+
+1. import문을 선언 후 처음 로고를 print
+2. 프로젝트에 사용될 변수를 선언
+    1. player_cards = [] ⇒ 플레이어가 뽑은 카드를 모아둔 리스트
+    2. computer_cards = [] ⇒ 컴퓨터가 뽑은 카드를 모아둔 리스트
+    3. is_continue_player = True ⇒ 플레이어가 카드를 더 뽑을지 while문의 조건
+    4. is_continue_computer = True ⇒ 플레이어가 카드를 다 뽑고 이제 딜러가 카드를 뽑는 while문의 조건
+    5. sum_card_computer = 0 ⇒ 컴퓨터가 뽑은 카드의 합
+
+1. 코드 1
+    
+    ```python
+    first_second = input("먼저 받으시겠습니까?(y/n) : ")
+    for card in range(2):
+        if first_second == "y":
+            player_cards.append(random.choice(cards))
+            computer_cards.append(random.choice(cards))
+        else:
+            computer_cards.append(random.choice(cards))
+            player_cards.append(random.choice(cards))
+    ```
+    
+    처음 카드를 2장씩 나눠가지는 코드, first_second로 먼저 받을지 나중에 받을지 선택 후 2장을 받음
+    
+2. 코드 2
+    
+    ```python
+    def computer_last(sums):
+        global is_continue_computer
+        while is_continue_computer:
+            for c_card in computer_cards:
+                if 11 in computer_cards:
+                    if sums + c_card > 21:
+                        c_card = 1
+                        computer_cards[computer_cards.index(11)] = 1
+                sums += c_card
+                if sums < 17:
+                    print(f"딜러 카드의 합->{sums}, 카드를 뽑습니다.")
+                    computer_cards.append(random.choice(cards))
+                else:
+                    is_continue_computer = False
+                    break
+        return sums
+    ```
+    
+    플레이어가 카드를 더이상 받지 않음을 선택했을 때, 이제 딜러가 카드를 뽑아야 되므로 실행 될 반복문을 함수 형태로 만들어서, 코드를 간결화하고자 함
+    
+    안에서의 로직은 컴퓨터 카드 리스트 안에 11이 있고, 합이 21이 넘는다면? (11 또는 1) → 1로 변경 후 
+    
+    sums에 더해줌
+    
+    만약 합이 17보다 작다면 카드를 계속 뽑고, 아니라면 sums를 리턴
+    
+3. 코드 3
+    
+    ```python
+    while is_continue_player:
+        sum_card_player = 0
+        now_status = ""
+        for p_card in player_cards:
+            if 11 in player_cards:
+                if sum_card_player + p_card > 21:
+                    p_card = 1
+                    player_cards[player_cards.index(11)] = 1
+            sum_card_player += p_card
+    
+            if sum_card_player > 21:
+                print(f"BOOM!! {sum_card_player}, 21이 넘었어요, 패배!")
+                now_status = 'boom'
+        if now_status == 'boom':
+            break
+    
+        print(f"당신의 카드 합은 {sum_card_player} 입니다!")
+        more = input("카드를 더 받으시겠습니까?(y/n) : ")
+        if more != "y":
+            print("-----------------------------")
+            is_continue_player = False
+            sum_card_computer = computer_last(sum_card_computer)
+            if sum_card_computer > 21:
+                print(f"{sum_card_computer}, 딜러의 카드가 21을 넘겼습니다, 승리!!")
+            elif sum_card_player > sum_card_computer:
+                print(f"딜러 카드 합->{sum_card_computer}, 승리!")
+            elif sum_card_player < sum_card_computer:
+                print(f"딜러 카드 합->{sum_card_computer}, 패배..")
+            else:
+                print(f"딜러 카드 합 -> {sum_card_computer}, 같은 합 입니다. 비겼습니다")
+        else:
+            player_cards.append(random.choice(cards))
+    ```
+    
+    코드 2와 매우 동일한 형태로 위는 작성되었고, 위의 코드가 플레이어가 카드를 받을지 말지 선택하는 로직, 플레이어가 카드를 다 뽑았다면 위에서 말한대로 computer_last()를 실행하며, sum_card_computer를 추출하였다면 player의 sum과 비교해 print
