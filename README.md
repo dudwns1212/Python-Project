@@ -3332,3 +3332,214 @@ while is_continue_player:
 	
 	확실히 함수로 나눠놓으니까, 이게 어떤 함수인지 파악이 쉽고, 코드가 훨씬 간결해졌다.
    
+## 12 일차
+## 네임스페이스와 범위
+
+이건 변수를 선언한 위치와 그에 따른 범위를 알려주는 내용
+
+### 지역 범위
+
+함수 안에서 선언된 변수(또는 함수)는 지역 범위(함수 범위라고도 함)를 가집니다. 이러한 변수는 동일한 코드 블록 내의 다른 코드에서만 볼 수 있습니다.
+
+예:
+
+```python
+def my_function():
+    my_local_var=2
+
+# 이것은 NameError를 발생시킵니다.
+print(my_local_var)
+```
+
+### 전역 범위
+
+코드 파일의 최상위 수준(들여쓰기 없음)에 선언된 변수 또는 함수는 전역 범위를 가집니다. 이는 코드 파일 어디에서나 접근할 수 있습니다.
+
+예:
+
+```python
+my_global_var=3
+
+def my_function():
+    # 이는 아무 문제 없이 작동합니다.
+    print(my_global_var)
+```
+
+아래의 코드를 작성하여 설명
+
+```python
+enemies = 1
+
+def increase_enemies():
+    enemies = 2
+    print(f"enemies inside function: {enemies}")
+
+increase_enemies()
+print(f"enemies outside function: {enemies}")
+```
+
+본래 변수는 마지막에 선언된 값이 출력되기 마련인데, 위의 코드에서는 전역 , 지역 범위가 나눠져서 선언됨
+
+첫 번째 enemies=1 → 전역 범위
+
+두 번째 enemies=2 → 지역 범위
+
+따라서 함수 내에서 사용된 enemies는 2가 출력이 되며
+
+밖에서 출력 된 enemies는 함수 내의 enemies를 사용할 수 없으므로 1이 출력됨
+
+⇒ 결과 출력
+
+enemies inside function: 2
+enemies outside function: 1
+
+## 블록 범위
+
+파이썬은 블록 범위를 가지지 않는다는 점에서 다른 프로그래밍 언어와 조금 다르다.
+
+이 말은 for 루프, if 문, while 루프 등과 같은 다른 코드 블록 내부에서 생성된 변수는 로컬 범위를 갖지 않는다는 말이다.
+
+```python
+my_global_var = 1
+
+def my_function():
+    my_local_var = 2
+    
+for _ in range(1):
+    my_block_var = 3
+    
+print("전역 변수를 출력 : ", my_global_var)
+print("지역 변수는 출력이 안돼요")
+print("블록 범위 안의 변수는? : ", my_block_var)
+```
+
+1 → 전역 / 2 → 지역(함수) / 3 → 블록(for문)
+
+3가지의 각각 다른 위치의 변수를 선언 후 print문을 출력(지역변수는 오류가 발생하므로 뺌)
+
+⇒ 결과
+
+전역 변수를 출력 :  1
+지역 변수는 출력이 안돼요
+블록 범위 안의 변수는? :  3
+
+결과와 같이 블록 범위(for, if, while) 안에 있는 my_block_var이 출력되는 것을 볼 수 있다.
+
+## 글로벌 변수
+
+```python
+a=1
+def my_function():
+    a+=1
+    print(a)
+```
+
+위의 함수는 오류가 발생한다, 왜일까?
+
+언뜻보면 문제없는 코드 같지만 a += 1 → a = a+1, 즉 a를 지역변수로 새로 만들어버리는거, 
+
+위의 a =1인 전역 변수는 참조하지 않고 새로 지역변수를 만들어 a = a+1을 실행하는데 a를 함수 내부에서   선언한 적이 없음
+
+즉, 함수 안에서 한번이라도 대입을 하면 지역변수로 간주됨
+
+```python
+a = 1
+def my_function():
+    global a
+    a += 1
+    print(a)
+```
+
+위의 코드로 해결 할 수 있다. 
+
+global a 의 뜻은 전역변수 a를 사용/수정하겠다 라는 의미
+
+## 글로벌 상수
+
+코드 파일에 전역 상수를 정의하여 쉽게 접근할 수 있다. 전역 상수는 값을 한 번 설정하면 수정할 필요 없이 사용할 수 있도록 설계되었다.
+
+### 명명 규칙
+
+전역 상수는 일반적으로 모든 문자를 대문자로 선언하며, 단어 사이에는 언더스코어 사용
+
+예시:
+
+```python
+PI=3.14159
+GOOGLE_URL="https://www.google.com"
+```
+
+글로벌 변수나 상수나 똑같은거 아닌가?
+
+→ 문법적으로 동일함, 다만 사용용도와 개념이 다름
+
+→ 파이썬에서는 const, final 같은 상수의 개념이 없음, 따라서 PI같은 값도 수정이 됨
+
+→ 그럼 왜 글로벌 상수가 존재하는가, 그냥 저런 변수명이 나오면 수정하지 않고 상수처럼 사용할거야
+
+| **구분** | **전역 변수** | **전역 상수(관례)** |
+| --- | --- | --- |
+| 문법적 차이 | 없음 (둘 다 그냥 변수)  | 없음 (동일)  |
+| 이름 규칙 | 소문자 또는 카멜/스네이크  | 대문자 + 언더스코어(ALL_CAPS)  |
+| 값 변경 | 자유롭게 변경해도 됨  | “변경하지 말자”는 약속일 뿐, 변경 가능 |
+
+## 숫자 맞추기 프로젝트
+
+숫자 맞추기 게임을 만들어 보자
+
+![image.png](attachment:896f9ec9-2462-479d-abe8-0ec6627fa5b7:image.png)
+
+1. print(logo)
+2. input(”~~~”) → game start, easy는 life가 10, hard는 life가 5
+3. 목숨이 남아있다면 user가 숫자를 입력하고 Too low, Too high를 출력
+
+이 간단한 프로젝트를 오늘 배운 변수의 범위, 글로벌 상수, 변수 등을 활용해서 코드를 작성해보자
+
+우선 게임이 시작되면 1~100 사이의 숫자를 글로벌 상수로 설정
+
+User가 뽑는 수는 global 변수로 설정해 값이 바뀌게끔 설정함
+
+```python
+import art
+import random
+
+# 정답을 전역 상수로 설정
+ANSWER = random.randint(0,100)
+life = 0
+
+def guess():
+    global life
+    game_over = False
+    if input("choose a difficulty. Type 'easy' or 'hard' : ") == 'easy':
+        life = 10
+    else:
+        life = 5
+
+    while not game_over:
+        if life < 1:
+            game_over = True
+            print("You've run out of guess. Refresh the page to run again")
+        else:
+            print(f"You have {life} attempts remaining to guess the number.")
+            guess_number = int(input("Make a guess :"))
+            if guess_number < ANSWER:
+                life -= 1
+                if life > 0:
+                    print("Too low\nGuess again")
+
+            elif guess_number > ANSWER:
+                life -= 1
+                if life > 0:
+                    print("Too high\nGuess again")
+
+            else:
+                game_over = True
+                print(f"You got it! The answer was {ANSWER}")
+
+print(art.logo)
+guess()
+```
+
+굳이 User가 뽑은 수를 글로벌 변수로 설정하지 않아도 될 것 같아서 안했고,
+
+간단하게 해결 가능한 프로젝트였음	
