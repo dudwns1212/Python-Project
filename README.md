@@ -3543,3 +3543,252 @@ guess()
 굳이 User가 뽑은 수를 글로벌 변수로 설정하지 않아도 될 것 같아서 안했고,
 
 간단하게 해결 가능한 프로젝트였음	
+
+## 13일차
+## 문제를 설명하세요
+
+문제를 해결하는 첫 번째 단계는 문제를 설명할 수 있는 능력입니다.
+
+### PAUSE 1
+
+task.py에 있는 코드를 보고 다음 질문에 답하세요:
+
+```java
+def my_function():
+    for i in range(1, 20):
+        if i == 20:
+            print("You got it")
+
+my_function()
+```
+
+1. for 루프는 무엇을 하고 있나요?
+    
+    → i를 1부터 19까지 반복하며, if문에서 i가 20일 때, print문을 통해 출력
+    
+2. 함수가 "You got it"을 출력하는 시점은 언제인가요?
+    
+    → 없어요
+    
+3. i 값에 대한 당신의 가정은 무엇인가요?
+    
+    → 안나와여
+    
+
+### PAUSE 2
+
+코드가 print 문을 실행하도록 수정하세요.
+
+```java
+def my_function():
+    for i in range(1, 20):
+        if i == 19:
+            print("You got it")
+
+my_function()
+```
+
+## 버그 재현 하기
+
+어떤 버그는 특정 조건에서만 발생하기 때문에 찾기 어렵습니다. 이러한 버그를 디버깅하려면, 버그를 신뢰할 수 있게 재현하고 문제를 진단하여 어떤 조건이 버그를 유발하는지 파악해야 합니다.
+
+```java
+from random import randint
+dice_images = ["❶", "❷", "❸", "❹", "❺", "❻"]
+dice_num = randint(1, 6)
+print(dice_images[dice_num])
+
+```
+
+### PAUSE 1
+
+코드를 변경하여 간헐적으로 발생하는 오류가 항상 발생하도록 만드세요.
+
+→ index가 5까지인데 1~6을 출력함
+
+```java
+from random import randint
+dice_images = ["❶", "❷", "❸", "❹", "❺", "❻"]
+dice_num = randint(1, 6)
+print(dice_images[6])
+
+```
+
+### PAUSE 2
+
+코드를 수정하여 버그를 제거하세요.
+
+```java
+from random import randint
+dice_images = ["❶", "❷", "❸", "❹", "❺", "❻"]
+dice_num = randint(0,5)
+print(dice_images[dice_num])
+```
+
+## 컴퓨터를 실행해보기
+
+컴퓨터처럼 코드 실행하기는 디버깅에 중요한 기술입니다. 컴퓨터처럼 코드 한 줄 한 줄을 따라가면서 무엇이 잘못되었는지 파악하는 데 도움을 줄 수 있어야 합니다.
+
+### PAUSE 1
+
+컴퓨터처럼 코드 한 줄 한 줄을 따라가서 1994가 예상대로 작동하지 않는 이유를 찾아보세요. 그런 다음 코드를 수정하세요.
+
+```java
+year = int(input("What's your year of birth?"))
+
+if year > 1980 and year < 1994:
+    print("You are a millennial.")
+elif year > 1994:
+    print("You are a Gen Z.")
+
+```
+
+→ 1994년도는 어디에도 해당되지 않음, 오류는 아니지만 원하는 출력이 나오지 않음
+
+```java
+year = int(input("What's your year of birth?"))
+
+if year > 1980 and year < 1994:
+    print("You are a millennial.")
+elif year >= 1994:
+    print("You are a Gen Z.")
+
+```
+
+## 오류 수정하기
+
+편집기에서 코드를 실행하기 전에 표시되는 오류(빨간색 밑줄)를 수정하십시오. 경고(노란색)는 선택적으로 수정할 수 있으며, 때로는 문제를 일으킬 수도 있지만, 다른 경우에는 괜찮고 편집기가 여러분의 의도를 이해하지 못하는 경우도 있습니다.
+
+### 예외 처리하기
+
+Python에서는 try/except 블록을 사용하여 발생할 수 있는 예외를 처리할 수 있습니다. 예를 들어 사용자의 실수가 있을 가능성이 있다고 상상해 보십시오. 이를 예측함으로써 코드가 충돌하지 않도록 방지할 수 있습니다. 위험한 코드를 try 블록 안에 넣고 except 블록을 사용하여 잠재적인 오류를 잡습니다. 그런 다음 오류가 발생했을 때 실행되어야 할 동작을 정의함으로써 단순히 충돌하거나 코드 실행이 멈추는 것을 방지할 수 있습니다.
+
+예:
+
+```python
+try:
+    print(6>"five")
+exceptTypeError:
+    print("정수와 문자열을 비교할 수 없습니다")
+
+```
+
+### 일시 정지 1
+
+버그를 수정하여 출력 영역에 나이의 올바른 값이 표시되도록 하십시오.
+
+```python
+age = int(input("How old are you?"))
+if age > 18:
+print("You can drive at age {age}.")
+```
+
+→ 들여쓰기가 안되어있음. 
+
+```python
+age = int(input("How old are you?"))
+if age > 18:
+    print("You can drive at age {age}.")
+```
+
+## Print() 사용하기
+
+print()은 여러분의 친구입니다. 이는 코드 실행 중 숨겨진 값을 드러내는 데 도움을 줄 수 있습니다. for 루프에서는 일정한 규칙을 따라 반복 블록 코드를 수행합니다. 하지만 루프 도중, 중간 값을 확인하기는 어렵습니다. 이런 경우가 바로 중간 값을 드러내고 디버깅에 도움을 줄 수 있는 print를 사용할 완벽한 예시입니다.
+
+### PAUSE 1
+
+코드는 페이지 수와 페이지당 단어 수를 기준으로 총 단어 수를 계산해야 합니다. 하지만 현재는 아무 출력도 하지 않습니다.
+
+print() 문을 사용하여 문제를 진단하세요.
+
+```python
+word_per_page = 0
+pages = int(input("Number of pages: "))
+word_per_page == int(input("Number of words per page: "))
+total_words = pages * word_per_page
+print(total_words)
+```
+
+→word_per_page를 출력해보면 숫자를 입력해도 0으로 뜨는것을 확인, 따라서 0에 뭘 곱하든 0임 
+
+```python
+word_per_page = 0
+pages = int(input("Number of pages: "))
+word_per_page == int(input("Number of words per page: "))
+print(word_per_page)
+total_words = pages * word_per_page
+print(total_words)
+```
+
+### PAUSE 2
+
+코드를 수정하세요.
+
+→ word_per_page == 이거는 boolean 타입으로 맞냐 아니냐를 물어보는 것, 따라서 = 으로 수정
+
+```python
+word_per_page = 0
+pages = int(input("Number of pages: "))
+word_per_page = int(input("Number of words per page: "))
+total_words = pages * word_per_page
+print(total_words)
+```
+
+## 디버거 사용하기
+
+대부분의 IDE(통합 개발 환경)인 PyCharm과 같은 도구에는 디버깅을 위한 내장 도구가 포함되어 있습니다. 일반적으로 디버거라고 알려져 있습니다. 여러 면에서, 이것들은 일종의 강화된 print 문이라고 할 수 있습니다.
+
+디버거는 코드 실행 중 내부 메커니즘을 살펴보고, 선택한 지점에서 프로그램을 일시 정지하여 어떤 문제점이 있는지 파악할 수 있도록 도와줍니다.
+
+대부분의 IDE에서 공통적으로 사용되는 몇 가지 기능이 있으니 이에 익숙해져야 합니다:
+
+1. **중단점(Breakpoint)** - 코드의 행 번호가 있는 왼쪽 여백을 클릭하여 중단점을 설정할 수 있습니다. 이 부분은 디버그 실행 중 프로그램이 멈추는 위치를 나타냅니다.
+2. **단계 건너뛰기(Step Over)** - 이 버튼을 사용하여 코드를 한 줄씩 실행하며 변수의 중간 값을 확인할 수 있습니다.
+3. **단계 들어가기(Step Into)** - 코드에서 참조된 다른 모듈 내부로 들어갑니다. 예를 들어, random 모듈의 함수를 사용하는 경우 해당 함수의 원래 코드로 이동하여 기능을 더 잘 이해하고 문제와 어떻게 관련이 있는지 파악할 수 있습니다.
+4. **내 코드로 들어가기(Step Into My Code)** - Step Into와 동일한 작업을 수행하지만 범위를 자신의 프로젝트 코드로만 제한하여 random과 같은 라이브러리 코드는 무시합니다.
+
+### PAUSE 1
+
+PyCharm 디버거를 사용하여 시작 코드에서 문제가 무엇인지 파악하고 이를 수정하세요.
+
+```python
+import random
+import maths
+
+def mutate(a_list):
+    b_list = []
+    new_item = 0
+    for item in a_list:
+        new_item = item * 2
+        new_item += random.randint(1, 3)
+        new_item = maths.add(new_item, item)
+    b_list.append(new_item)
+    print(b_list)
+
+mutate([1, 2, 3, 5, 8, 13])
+```
+
+![image.png](attachment:16e88273-10d3-40e0-8e6a-3a983e35058e:image.png)
+
+→ b_list의 값이 빈 값으로 계속 진행되는 문제를 확인 후 오류 수정하고 다시 디버그
+
+![image.png](attachment:e0acbe70-7258-40bd-b8c4-893e6073416a:image.png)
+
+```python
+import random
+import maths
+
+def mutate(a_list):
+    b_list = []
+    new_item = 0
+    for item in a_list:
+        new_item = item * 2
+        new_item += random.randint(1, 3)
+        new_item = maths.add(new_item, item)
+        b_list.append(new_item)
+    print(b_list)
+
+mutate([1, 2, 3, 5, 8, 13])
+```
+
+간단하게 오류 해결!
