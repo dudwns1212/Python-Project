@@ -3792,3 +3792,185 @@ mutate([1, 2, 3, 5, 8, 13])
 ```
 
 간단하게 오류 해결!
+
+## 14 일차
+## Higher or lower
+
+사용자가 Instagram에서 누가 더 많은 팔로워를 가지고 있는지 추측하도록 하는 게임을 만드는 것이 목표입니다.
+
+1. 초기 화면
+    
+    ![image.png](attachment:5b20c6b7-743a-40b0-b1ae-1b6f89f0c758:image.png)
+    
+2. 실패
+    
+    ![image.png](attachment:f64e3f57-7c6a-4d85-bc3f-b4432fcf25f6:image.png)
+    
+3. 성공
+    
+    ![image.png](attachment:a7e813b4-e61e-40e6-a055-5c31220311af:image.png)
+    
+
+성공하면 점수가 계속 올라감(누적)
+
+실패하면 해당 점수를 반환하며 종료
+
+성공하면 다음 단계에서 Against B가 Compare A가 됨 
+
+random.randint(len(game_data.data)) → 0~data의 길이 전까지의 랜덤 값을 뽑아줌
+
+1. A,B의 랜덤 숫자가 겹치면 안됨
+    
+    ```python
+    data_len = len(game_data.data)
+    a = random.randint(0, data_len-1)
+    def choice_b(choice_a):
+        bb = random.randint(0, data_len-1)
+        while bb == choice_a:
+            bb = random.randint(0, data_len-1)
+        return bb
+    b = choice_b(a)
+    ```
+    
+2.  각 팔로워 수를 비교하며 조건문에 따라 나눠야됨
+    
+    ```python
+    def compare_follower(input_answer, compare_a, against_b):
+        global a
+        if input_answer == 'A':
+            if compare_a > against_b:
+                a = b
+                return True
+            return False
+        elif input_answer == 'B':
+            if compare_a < against_b:
+                a = b
+                return True
+            return False
+        return False
+    
+    ```
+    
+3. while문을 통해 성공 시 계속 진행하며 실패하면 break를 통해 중지
+    
+    ```python
+    total_score = 0
+    
+    while True:
+        print(art.logo)
+        if total_score > 0:
+            b = choice_b(a)
+            print(f"You're right! Current score: {total_score}.")
+        print(f'Compare A: {game_data.data[a]['name']}, a {game_data.data[a]['description']}, from {game_data.data[a]['country']}')
+        print(art.vs)
+        print(f'Against B: {game_data.data[b]['name']}, a {game_data.data[b]['description']}, from {game_data.data[b]['country']}')
+    
+        answer = input("Who has more followers? Type 'A' or 'B': ")
+        correct = compare_follower(answer, game_data.data[a]['follower_count'], game_data.data[b]['follower_count'])
+        if correct:
+            total_score += 1
+            print('\n' * 20)
+        else:
+            print('\n' * 20)
+            print(art.logo,f"\nSorry, that's wrong. Final score: {total_score}")
+            break
+    
+    ```
+    
+
+### 초기 화면
+
+![image.png](attachment:f9497370-11b4-40a2-9a8f-52139d47328b:image.png)
+
+### 실패 화면
+
+![image.png](attachment:98e3a09a-361f-4bdb-9ec2-60608fc93228:image.png)
+
+### 성공 화면
+
+![image.png](attachment:077012cd-27f3-4226-9196-7c633d8d70ad:image.png)
+
+이상 14일차 프로젝트 완료!
+
+아래는 강의에서 제공된 솔루션, 내 풀이와 어떤 차이가 있는지 분석
+
+```python
+# Display art
+from art import logo, vs
+from game_data import data
+import random
+
+def format_data(account):
+    """Takes the account data and returns the printable format."""
+    account_name = account["name"]
+    account_descr = account["description"]
+    account_country = account["country"]
+    return f"{account_name}, a {account_descr}, from {account_country}"
+
+def check_answer(user_guess, a_followers, b_followers):
+    """Take a user's guess and the follower counts and returns if they got it right."""
+    if a_followers > b_followers:
+        return user_guess == "a"
+    else:
+        return user_guess == "b"
+
+print(logo)
+score = 0
+game_should_continue = True
+# Generate a random account from the game data
+account_b = random.choice(data)
+
+# Make the game repeatable.
+while game_should_continue:
+
+    # Making account at position B become the next account at position A.
+    account_a = account_b
+    account_b = random.choice(data)
+
+    if account_a == account_b:
+        account_b = random.choice(data)
+
+    print(f"Compare A: {format_data(account_a)}.")
+    print(vs)
+    print(f"Against B: {format_data(account_b)}.")
+
+    # Ask user for a guess.
+    guess = input("Who has more followers? Type 'A' or 'B': ").lower()
+
+    # Clear the screen
+    print("\n" * 20)
+    print(logo)
+
+    # - Get follower count of each account
+    a_follower_count = account_a["follower_count"]
+    b_follower_count = account_b["follower_count"]
+
+    # Check if user is correct.
+    is_correct = check_answer(guess, a_follower_count, b_follower_count)
+
+    # Give user feedback on their guess.
+    # score keeping.
+    if is_correct:
+        score += 1
+        print(f"You're right! Current score {score}")
+    else:
+        print(f"Sorry, that's wrong. Final score: {score}.")
+        game_should_continue = False
+```
+
+1. from ~ import를 활용해서 불필요한 코드를 줄임
+2. format_data라는 함수를 생성해 각 딕셔너리의 값들을 함수에서 출력하여 불필요한 코드를 줄임
+3. 솔루션에서도 a와 b의 값이 같을 때를 조건문을 통해서 방지하는 코드가 있음
+    
+    ```python
+    account_a = account_b
+        account_b = random.choice(data)
+    
+        if account_a == account_b:
+            account_b = random.choice(data)
+    ```
+    
+    다만 랜덤한 값이기 때문에 2번 연속 같은 숫자가 안 나온다는 보장이 없음, 따라서 내 코드가 더 안전
+    
+
+비슷비슷한 풀이지만 디테일적인 부분에서 보완할 부분이 있다고 느꼈음, 너무 길어지는 코드는 가독성을 해치므로, 강의 솔루션 처럼 함수로 빼거나 다른 방법을 생각해봐야 할듯.
