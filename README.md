@@ -3974,3 +3974,248 @@ while game_should_continue:
     
 
 비슷비슷한 풀이지만 디테일적인 부분에서 보완할 부분이 있다고 느꼈음, 너무 길어지는 코드는 가독성을 해치므로, 강의 솔루션 처럼 함수로 빼거나 다른 방법을 생각해봐야 할듯.
+
+## 15일차
+## 커피머신 프로젝트
+
+### 커피 머신 프로그램 요구사항
+
+### 1. 사용자 프롬프트
+
+"무엇을 드시겠습니까? (espresso/latte/cappuccino):" 메시지로 사용자에게 묻습니다.
+
+- 사용자의 입력을 확인하여 다음 작업을 결정합니다
+- 음료가 제공된 후 등 작업이 완료될 때마다 프롬프트가 다시 표시되어 다음 고객을 응대합니다
+
+### 2. 커피 머신 끄기
+
+프롬프트에 "off"를 입력하면 머신이 꺼집니다.
+
+- 커피 머신 관리자는 "off"를 비밀 단어로 사용하여 머신을 끌 수 있으며, 이때 코드 실행이 종료됩니다
+
+### 3. 리포트 출력
+
+프롬프트에 "report"를 입력하면 현재 자원 상태를 보여주는 리포트가 생성됩니다.
+
+- 예시: Water: 100ml, Milk: 50ml, Coffee: 76g, Money: $2.5
+
+### 4. 자원 충분 여부 확인
+
+사용자가 음료를 선택하면 프로그램은 해당 음료를 만들기에 충분한 자원이 있는지 확인합니다.
+
+- 예를 들어 라떼에 200ml의 물이 필요한데 머신에 100ml만 남아있다면, 음료 제조를 계속하지 않고 "Sorry there is not enough water."를 출력합니다
+- 우유나 커피 등 다른 자원이 부족할 때도 동일하게 처리됩니다
+
+### 5. 동전 처리
+
+선택한 음료를 만들 충분한 자원이 있으면 프로그램은 사용자에게 동전 투입을 요청합니다.
+
+- 동전 가치: quarters(쿼터) = $0.25, dimes(다임) = $0.10, nickles(니켈) = $0.05, pennies(페니) = $0.01
+- 투입된 동전의 금액을 계산합니다. 예: 쿼터 1개, 다임 2개, 니켈 1개, 페니 2개 = 0.25 + 0.1 x 2 + 0.05 + 0.01 x 2 = $0.52
+
+### 6. 거래 성공 여부 확인
+
+사용자가 선택한 음료를 구매하기에 충분한 금액을 투입했는지 확인합니다.
+
+- 라떼 가격이 $2.50인데 $0.52만 투입했다면 동전을 계산한 후 "Sorry that's not enough money. Money refunded."를 출력합니다
+- 충분한 금액을 투입했다면 음료 가격이 머신의 수익으로 추가되며, 다음번 "report" 실행 시 반영됩니다
+- 너무 많은 금액을 투입했다면 거스름돈을 제공합니다. 예: "Here is $2.45 dollars in change." (거스름돈은 소수점 둘째 자리로 반올림)
+
+### 7. 커피 제조
+
+거래가 성공하고 사용자가 선택한 음료를 만들 충분한 자원이 있으면, 음료를 만드는 데 필요한 재료가 커피 머신 자원에서 차감됩니다.
+
+- 라떼 구매 전 리포트 예시: Water: 300ml, Milk: 200ml, Coffee: 100g, Money: $0
+- 라떼 구매 후 리포트 예시: Water: 100ml, Milk: 50ml, Coffee: 76g, Money: $2.5
+- 모든 자원이 차감되면 사용자에게 "Here is your latte. Enjoy!"를 출력합니다 (라떼를 선택한 경우)
+
+### 풀이
+
+```python
+MENU = {
+    "espresso": {
+        "ingredients": {
+            "water": 50,
+            "coffee": 18,
+        },
+        "cost": 1.5,
+    },
+    "latte": {
+        "ingredients": {
+            "water": 200,
+            "milk": 150,
+            "coffee": 24,
+        },
+        "cost": 2.5,
+    },
+    "cappuccino": {
+        "ingredients": {
+            "water": 250,
+            "milk": 100,
+            "coffee": 24,
+        },
+        "cost": 3.0,
+    }
+}
+
+resources = {
+    "water": 300,
+    "milk": 200,
+    "coffee": 100,
+}
+## 현재 자원을 output 해주는 함수
+def resource_report():
+    return print(f"Water: {resources["water"]}, Milk: {resources["milk"]}, "
+            f"Coffee: {resources["coffee"]}, Money:{resources["money"]}")
+## 고른 음료에 대해서 현재 남은 자원이 충분한지 판단해주는 함수
+def resource_enough(drink):
+    water = MENU[drink]["ingredients"]["water"]
+    coffee = MENU[drink]["ingredients"]["coffee"]
+    if drink != 'espresso':
+        milk = MENU[drink]["ingredients"]["milk"]
+
+    if resources['water'] < water:
+        return f"Sorry there is not enough water"
+    elif coffee > resources['coffee']:
+        return f"Sorry there is not enough coffee"
+    elif drink != 'espresso':
+        if milk > resources['milk']:
+            return f"Sorry there is not enough milk"
+
+    return 'enough'
+
+def cost_enough(q, d, n, p, drink):
+    global cost
+    global customer_money
+    customer_money = q * 0.25 + d * 0.10 + n * 0.05 + p * 0.01
+    cost = MENU[drink]['cost']
+    if cost > customer_money:
+        return False
+    else:
+        return True
+
+def add_resource(income, drink):
+    resources["money"] += income
+    water = MENU[drink]["ingredients"]["water"]
+    coffee = MENU[drink]["ingredients"]["coffee"]
+    if drink != 'espresso':
+        milk = MENU[drink]["ingredients"]["milk"]
+
+    resources["water"] -= water
+    resources["coffee"] -= coffee
+    if drink != "espresso":
+        resources["milk"] -= milk
+
+customer_money = 0
+cost = 0
+while True:
+    if "money" not in resources:
+        resources["money"] = 0
+
+    selected_drink = input("무엇을 드시겠습니까? (espresso/latte/cappuccino): ")
+    if selected_drink == 'off':
+        break
+    elif selected_drink == 'report':
+        resource_report()
+        continue
+
+    enough = resource_enough(selected_drink)
+    if enough != 'enough':
+        print(enough)
+        break
+
+    quarters = float(input("how many quarters?: "))
+    dimes = float(input("how many dimes?: "))
+    nickles = float(input("how many nickles?: "))
+    pennies = float(input("how many pennies?: "))
+
+    enough_cost = cost_enough(quarters, dimes, nickles, pennies, selected_drink)
+    if enough_cost:
+        print(f"Here is ${customer_money - cost} in change.\n"
+              f"Here is your {selected_drink} ☕️. Enjoy!")
+        add_resource(cost, selected_drink)
+    else:
+        print("Sorry that's not enough money. Money refunded.")
+
+```
+
+우선 함수들 먼저 보면
+
+def resource_report() → 프롬프트에서 report를 입력할 때, 남은 자원 및 금액을 출력해주는 함수
+
+def resource_enough(drink) → 고른 음료에 대해서 현재 남은 자원이 충분한지 알려주는 함수, 여기서 중요한 점은 espresso는 milk가 없기 때문에 걸러주지 않는다면 오류가 발생함
+
+def cost_enough(q, d, n, p, drink) → 고객이 건네준 돈이 충분한지 알려주는 함수로, 각 q/d/n/p는 동전을 의미하며 각각 다른 값어치를 가짐, drink는 고른 음료임, 이 함수에서 True/False를 반환해주고, 실제 메인 실행에서 조건문을 통해 실행을 달리함.
+
+def add_resource(income, drink) → 위의 함수에서 True를 반환할 때, 실행됨. 쓴 자원과 벌어들인 돈을 dictionary에 추가 및 빼주는 함수
+
+- 보기 싫은 부분은 아래의 코드임, 이 코드는 2 함수에 중복으로 들어가 있음
+    
+    ```python
+    water = MENU[drink]["ingredients"]["water"]
+        coffee = MENU[drink]["ingredients"]["coffee"]
+        if drink != 'espresso':
+            milk = MENU[drink]["ingredients"]["milk"]
+    ```
+    
+    그래서 별로 효율적이지 않아보여서, 차라리 while 구문 안에 저 변수들을 미리 선언하고 함수를 부를 때, 넣어주는게 더 효율적이지 않을까 생각함.
+    
+
+### 강의 솔루션
+
+```python
+def is_resource_sufficient(order_ingredients):
+    """Returns True when order can be made, False if ingredients are insufficient."""
+    for item in order_ingredients:
+        if order_ingredients[item] > resources[item]:
+            print(f"Sorry there is not enough {item}.")
+            return False
+    return True
+
+def process_coins():
+    """Returns the total calculated from coins inserted."""
+    print("Please insert coins.")
+    total = int(input("how many quarters?: ")) * 0.25
+    total += int(input("how many dimes?: ")) * 0.1
+    total += int(input("how many nickles?: ")) * 0.05
+    total += int(input("how many pennies?: ")) * 0.01
+    return total
+
+def is_transaction_successful(money_received, drink_cost):
+    """Return True when the payment is accepted, or False if money is insufficient."""
+    if money_received >= drink_cost:
+        change = round(money_received - drink_cost, 2)
+        print(f"Here is ${change} in change.")
+        global profit
+        profit += drink_cost
+        return True
+    else:
+        print("Sorry that's not enough money. Money refunded.")
+        return False
+
+def make_coffee(drink_name, order_ingredients):
+    """Deduct the required ingredients from the resources."""
+    for item in order_ingredients:
+        resources[item] -= order_ingredients[item]
+    print(f"Here is your {drink_name} ☕️. Enjoy!")
+
+is_on = True
+
+while is_on:
+    choice = input("What would you like? (espresso/latte/cappuccino): ")
+    if choice == "off":
+        is_on = False
+    elif choice == "report":
+        print(f"Water: {resources['water']}ml")
+        print(f"Milk: {resources['milk']}ml")
+        print(f"Coffee: {resources['coffee']}g")
+        print(f"Money: ${profit}")
+    else:
+        drink = MENU[choice]
+        if is_resource_sufficient(drink["ingredients"]):
+            payment = process_coins()
+            if is_transaction_successful(payment, drink["cost"]):
+                make_coffee(choice, drink["ingredients"])
+```
+
+나중에 분석해봄
