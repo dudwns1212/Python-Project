@@ -4219,3 +4219,353 @@ while is_on:
 ```
 
 나중에 분석해봄
+
+## 16일차
+## 객체지향 프로그래밍
+
+```python
+from turtle import Turtle, Screen
+# 다른 파일의 클래스를 import하여 내 클래스에서 객체를 생성할 수 있음
+timy = Turtle()
+print(timy)
+timy.shape("turtle")
+timy.color("red")
+timy.forward(100)
+
+my_screen = Screen()
+print(my_screen.canvwidth)
+
+# 생성한 객체를 활용해 메소드를 실행할 수 있음
+my_screen.exitonclick()
+
+# 라이브러리에 있는 다양한 메서드를 활용할 수 있음
+```
+
+클래스를 생성하고, 그 클래스를 활용해, 다른 파일에서 객체를 만들면, 위의 코드와 같이 해당 클래스 안에 있는 변수, 메서드, 객체, 클래스 등을 활용할 수 있음
+
+## 객체지향 프로그래밍으로 커피머신 프로젝트 진행
+
+파일이 하나 주어짐
+
+![image.png](attachment:e4cbc19d-5f72-4302-96f2-ee68f87622ee:image.png)
+
+```python
+class CoffeeMaker:
+    """Models the machine that makes the coffee"""
+    def __init__(self):
+        self.resources = {
+            "water": 300,
+            "milk": 200,
+            "coffee": 100,
+        }
+
+    def report(self):
+        """Prints a report of all resources."""
+        print(f"Water: {self.resources['water']}ml")
+        print(f"Milk: {self.resources['milk']}ml")
+        print(f"Coffee: {self.resources['coffee']}g")
+
+    def is_resource_sufficient(self, drink):
+        """Returns True when order can be made, False if ingredients are insufficient."""
+        can_make = True
+        for item in drink.ingredients:
+            if drink.ingredients[item] > self.resources[item]:
+                print(f"Sorry there is not enough {item}.")
+                can_make = False
+        return can_make
+
+    def make_coffee(self, order):
+        """Deducts the required ingredients from the resources."""
+        for item in order.ingredients:
+            self.resources[item] -= order.ingredients[item]
+        print(f"Here is your {order.name} ☕️. Enjoy!")
+
+```
+
+클래스 coffeeMaker - 커피를 만들어주는 클래스스
+
+```python
+class MenuItem:
+    """Models each Menu Item."""
+    def __init__(self, name, water, milk, coffee, cost):
+        self.name = name
+        self.cost = cost
+        self.ingredients = {
+            "water": water,
+            "milk": milk,
+            "coffee": coffee
+        }
+
+class Menu:
+    """Models the Menu with drinks."""
+    def __init__(self):
+        self.menu = [
+            MenuItem(name="latte", water=200, milk=150, coffee=24, cost=2.5),
+            MenuItem(name="espresso", water=50, milk=0, coffee=18, cost=1.5),
+            MenuItem(name="cappuccino", water=250, milk=50, coffee=24, cost=3),
+        ]
+
+    def get_items(self):
+        """Returns all the names of the available menu items"""
+        options = ""
+        for item in self.menu:
+            options += f"{item.name}/"
+        return options
+
+    def find_drink(self, order_name):
+        """Searches the menu for a particular drink by name. Returns that item if it exists, otherwise returns None"""
+        for item in self.menu:
+            if item.name == order_name:
+                return item
+        print("Sorry that item is not available.")
+
+```
+
+class MenuItem - 카페의 메뉴를 알려주는 클래스
+
+```python
+class MoneyMachine:
+
+    CURRENCY = "$"
+
+    COIN_VALUES = {
+        "quarters": 0.25,
+        "dimes": 0.10,
+        "nickles": 0.05,
+        "pennies": 0.01
+    }
+
+    def __init__(self):
+        self.profit = 0
+        self.money_received = 0
+
+    def report(self):
+        """Prints the current profit"""
+        print(f"Money: {self.CURRENCY}{self.profit}")
+
+    def process_coins(self):
+        """Returns the total calculated from coins inserted."""
+        print("Please insert coins.")
+        for coin in self.COIN_VALUES:
+            self.money_received += int(input(f"How many {coin}?: ")) * self.COIN_VALUES[coin]
+        return self.money_received
+
+    def make_payment(self, cost):
+        """Returns True when payment is accepted, or False if insufficient."""
+        self.process_coins()
+        if self.money_received >= cost:
+            change = round(self.money_received - cost, 2)
+            print(f"Here is {self.CURRENCY}{change} in change.")
+            self.profit += cost
+            self.money_received = 0
+            return True
+        else:
+            print("Sorry that's not enough money. Money refunded.")
+            self.money_received = 0
+            return False
+
+```
+
+클래스 MoneyMachine - 돈 계산을 해주는 역할을 맡음
+
+이 파일의 클래스를 활용해서(해당 파일들은 수정 불가) 프로젝트를 완수해야함
+
+### 분석 및 풀이
+
+MenuItem - 음료의 이름(name), 가격(cost), 소모되는 자원(ingredients)을 알려줌
+
+Menu - get_items() 모든 메뉴를 알려줌, find_drink(name) 메뉴가 있는지 없는지
+
+CoffeeMaker - report() 현재 자원의 상태, is_resource_sufficient(drink) 만들 수 있는지 없는지
+
+make_coffee(order) 만들어주고 자원에서 깜
+
+MoneyMachine - report() 현재 돈 얼마 번지, make_payment(cost) 소수타입, True면 적립, Fasle면 돈이 부족하니까 적립 안됨    
+
+1. Prompt user by asking “What would you like? (espresso/latte/cappuccino/):”
+a. Check the user’s input to decide what to do next.
+b. The prompt should show every time action has completed, e.g. once the drink is
+dispensed. The prompt should show again to serve the next customer.
+
+해석하면 input값을 통해 user가 정해야된다. 
+
+한 손님의 주문이 끝나면 다음 주문이 반복되어야 한다.
+
+```python
+while True:     
+    coffee = input("What would you like? (espresso/latte/cappuccino/): ")
+
+```
+
+1. Turn off the Coffee Machine by entering “off” to the prompt.
+a. For maintainers of the coffee machine, they can use “off” as the secret word to turn off the
+machine. Your code should end execution when this happens
+
+off를 입력하면 종료한데요.
+
+```python
+while True:
+    coffee = input("What would you like? (espresso/latte/cappuccino/): ")
+    if coffee == 'off':
+        break
+```
+
+1. Print report()
+    
+    a. When the user enters “report” to the prompt, a report should be generated that shows the
+    current resource values. e.g.
+    Water: 100ml
+    Milk: 50ml
+    Coffee: 76g
+    Money: $2.5
+    
+    ```python
+    while True:
+        coffee = input("What would you like? (espresso/latte/cappuccino/): ")
+        if coffee == 'off':
+            break
+        elif coffee == 'report':
+            CoffeeMaker.report(CoffeeMaker())
+            MoneyMachine.report(MoneyMachine())
+    ```
+    
+    ![image.png](attachment:4f41427c-4870-4570-b9f6-27c94179ed72:image.png)
+    
+2. Check resources sufficient?
+    
+    a. When the user chooses a drink, the program should check if there are enough resources
+    to make that drink.
+    b. E.g. if Latte requires 200ml water but there is only 100ml left in the machine. It should not
+    continue to make the drink but print: “Sorry there is not enough water.”
+    c. The same should happen if another resource is depleted, e.g. milk or coffee.
+    
+
+사용자가 음료를 골랐어요, 그럼 프로그램은 **자원이 충분한지 채킹**, 만약에 부족하면, 어떤 자원이 부족한지 알려줘야됨(“Sorry there is not enough water.”)
+
+```python
+money_machine = MoneyMachine()
+menu = Menu()
+coffe_maker = CoffeeMaker()
+
+while True:
+    options = menu.get_items()
+    coffee = input(f"What would you like? {options}: ")
+    if coffee == 'off':
+        break
+    elif coffee == 'report':
+        coffe_maker.report()
+        money_machine.report()
+    else:
+        drink = menu.find_drink(coffee)
+        coffe_maker.is_resource_sufficient(drink)
+```
+
+![image.png](attachment:4ba68f3a-7d69-4554-8da4-4a1387620480:image.png)
+
+1. Process coins.
+    
+    a. If there are sufficient resources to make the drink selected, then the program should
+    prompt the user to insert coins.
+    b. Remember that quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01
+    c. Calculate the monetary value of the coins inserted. E.g. 1 quarter, 2 dimes, 1 nickel, 2
+    pennies = 0.25 + 0.1 x 2 + 0.05 + 0.01 x 2 = $0.52
+    
+
+음료를 만들기 충분하다면, 코드을 넣어야돼, 
+
+```python
+money_machine = MoneyMachine()
+menu = Menu()
+coffe_maker = CoffeeMaker()
+
+while True:
+    options = menu.get_items()
+    coffee = input(f"What would you like? {options}: ")
+    if coffee == 'off':
+        break
+    elif coffee == 'report':
+        coffe_maker.report()
+        money_machine.report()
+        continue
+    else:
+        drink = menu.find_drink(coffee)
+        print(drink.cost)
+        is_sufficient = coffe_maker.is_resource_sufficient(drink)
+
+        if is_sufficient:
+            money_machine.make_payment(drink.cost)
+        else:
+            continue
+```
+
+1. Check transaction successful?
+a. Check that the user has inserted enough money to purchase the drink they selected. E.g
+Latte cost $2.50, but they only inserted $0.52 then after counting the coins the program
+should say “Sorry that's not enough money. Money refunded.”.
+b. But if the user has inserted enough money, then the cost of the drink gets added to the
+machine as the profit and this will be reflected the next time “report” is triggered. E.g.
+Water: 100ml
+Milk: 50ml
+Coffee: 76g
+Money: $2.5
+c. If the user has inserted too much money, the machine should offer change.
+E.g. “Here is $2.45 dollars in change.” The change should be rounded to 2 decimal
+places
+2. Make Coffee.
+a. If the transaction is successful and there are enough resources to make the drink the user
+selected, then the ingredients to make the drink should be deducted from the coffee
+machine resources.
+E.g. report before purchasing latte:
+Water: 300ml
+Milk: 200ml
+Coffee: 100g
+Money: $0
+Report after purchasing latte:
+Water: 100ml
+Milk: 50ml
+Coffee: 76g
+Money: $2.5
+b. Once all resources have been deducted, tell the user “Here is your latte. Enjoy!”. If latte
+was their choice of drink.
+
+```python
+from menu import Menu, MenuItem
+from coffee_maker import CoffeeMaker
+from money_machine import MoneyMachine
+
+money_machine = MoneyMachine()
+menu = Menu()
+coffe_maker = CoffeeMaker()
+
+while True:
+    options = menu.get_items()
+    coffee = input(f"What would you like? {options}: ")
+    if coffee == 'off':
+        break
+    elif coffee == 'report':
+        coffe_maker.report()
+        money_machine.report()
+        continue
+    else:
+        drink = menu.find_drink(coffee)
+        print(drink.cost)
+        is_sufficient = coffe_maker.is_resource_sufficient(drink)
+
+        if is_sufficient:
+            if money_machine.make_payment(drink.cost):
+                coffe_maker.make_coffee(drink)
+            else:
+                continue
+        else:
+            continue
+```
+
+![image.png](attachment:df434017-8ca5-4177-bdbb-32d99136ef9c:image.png)
+
+### 중요한점
+
+클래스-객체, 메서드를 활용해서 drink = menu.find_drink(coffee)로 drink라는 객체를 생성하고,
+
+객체를 생성하면 그 객체 안에 있는 name, cost, ingredients를 활용할 수 있다.
+
+해당 패키지를 꼼꼼하게 체크해서 어떤 메서드가 들었는지, 해당 메서드는 어떤 값을 리턴하고 어떤 역할을 수행하는지 알아보는게 중요한 것 같다.
