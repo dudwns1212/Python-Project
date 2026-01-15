@@ -4569,3 +4569,469 @@ while True:
 객체를 생성하면 그 객체 안에 있는 name, cost, ingredients를 활용할 수 있다.
 
 해당 패키지를 꼼꼼하게 체크해서 어떤 메서드가 들었는지, 해당 메서드는 어떤 값을 리턴하고 어떤 역할을 수행하는지 알아보는게 중요한 것 같다.
+
+## 17일차
+## 클래스를 만들어보기
+
+```python
+class User:
+	pass
+
+user_1 = User()
+```
+
+function과 마찬가지로 :(콜론)을 이용해서 클래스를 만들 수 있다.
+
+원래 파이썬은 클래스나, 함수를 만들고 안에 아무것도 없으면 오류가 발생함(pass로 해결됨)
+
+클래스를 만들고 그 클래스를 활용해서 객체를 생성(어제 배웠던 내용)
+
+### 파이썬 표기법
+
+PascalCase - 첫 단어의 앞글자가 대문자고 다음에 나오는 단어의 앞글자도 모두 대문자
+
+camelCase - 첫 단어는 소문자이고 다음 단어의 앞글자들은 모두 대문자
+
+snake_case - 모두 소문자이며 단어 사이사이에 _ 가 표기됨
+
+파이썬은 클래스의 경우는 PascalCase를 활용하며, 다른 대부분의 속성이나 함수명은 snake_case가 활용됨
+
+** 자바에서는 camelCase를 자주 활용했는데 이런 표기법에서의 차이가 있음
+
+## 클래스에서 속성 만들어보기
+
+```python
+class User:
+    # 파이썬은 클래스나 function을 생성 후 안에 아무것도 없으면 오류를 발생시킴, pass를 활용하면 아무것도 없는 껍데기 클래스를 만들 수 있음
+    pass
+
+# 클래스를 활용해 객체를 만듦
+user_1 = User()
+
+#PascalCase / camelCase / snake_case
+# 클래스 이름에는 파스칼, 다른 모든 변수들은 대부분 스네이크 케이스
+
+user_1.id = "001"
+user_1.username = "angela"
+
+print(user_1.username)
+
+user_2 = User()
+user_2.id = "002"
+user_2.username = "jack"
+
+print(user_2.username)
+```
+
+이렇게 클래스로 객체를 만들고 객체를 활용해 속성을 부여할 수 있다.
+
+하지만 사용자가 100명 1000명이라면? 하나하나 코드를 쳐서 속성을 부여할건가?
+
+### 생성자
+
+객체가 생성될 때, 무슨 일이 일어나는지 명시해 놓은 함수
+
+파이썬에서 생성자를 만들려면 init이라는 특별한 함수를 활용
+
+```python
+class User:
+    def __init__(self):
+        print("new user being created")
+
+# 클래스를 활용해 객체를 만듦
+user_1 = User()
+
+user_2 = User()
+```
+
+![image.png](attachment:546eb4f4-91da-4b04-8589-31c898ab8e5a:image.png)
+
+user_1과 user_2라는 객체가 생성되며 생성될 때, print문이 작동하는 것을 볼 수 있음
+
+### 속성 부여
+
+객체를 생성할 때, 괄호 안에 속성 값을 부여하면 객체가 생성됨과 동시에 속성 값을 정할 수 있음
+
+ex) my_car = Car(5)
+
+→ def —init—(self, seat):
+
+self.seats = seats
+
+⇒ my_car.seats = 5
+
+```python
+class User:
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+        print(f"user_id : {id}, user_name : {name}")
+
+# 클래스를 활용해 객체를 만듦
+user_1 = User("001", "angela" )
+
+user_2 = User("002", "jack")
+```
+
+![image.png](attachment:ec5c4e8e-e33a-49a5-95f4-9e365a133d6e:image.png)
+
+이제 User라는 클래스에서 객체를 생성하려면 id와 name값을 넣어서 만들어야됨,
+
+만약에 그냥 만들려고 한다면 오류가 발생함.
+
+반대로 생성자에서 기본값을 설정할수도 있음
+
+```python
+class User:
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+        self.followers = 0
+        print(f"user_id : {id}, user_name : {name}, user_followers : {self.followers}")
+```
+
+이렇게 되면 객체가 생성될 때, 자동으로 팔로워가 0으로 값이 설정돼서 들어감
+
+![image.png](attachment:725db6b3-6c64-4093-9be7-7bc01a502b31:image.png)
+
+## 클래스에 메소드 추가하기
+
+속성 - 객체가 가지는 것 ex) Car - seats
+
+메소드 - 객체가 하는 것 ex) Car - drive()
+
+코드에서는 객체.메소드() 이렇게 사용할 수 있음
+
+그냥 기존의 def함수들과는 다르게 Class안의 메소드(def)는 항상 (self)를 가지고 시작함.
+
+그래야 어떤 객체가 나를 불렀는지 컴퓨터가 확인할 수 있음
+
+```python
+class User:
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+        self.followers = 0
+        self.following = 0
+        print(f"user_id : {id}, user_name : {name}, user_followers : {self.followers}, user_following : {self.following}")
+
+    def follow(self, user):
+        user.followers += 1
+        self.following += 1
+```
+
+방금 계정을 생성한 user_1과 user_2가 있음,
+
+user_1이 user_2를 팔로우 하기 위해 함수를 실행
+
+user_1.follow(user_2) → user_2의 팔로워가 +1, user_1의 팔로윙도 + 1
+
+```python
+class User:
+    def __init__(self, id, name):
+        self.id = id
+        self.name = name
+        self.followers = 0
+        self.following = 0
+        print(f"user_id : {id}, user_name : {name}, user_followers : {self.followers}, user_following : {self.following}")
+
+    def follow(self, user):
+        user.followers += 1
+        self.following += 1
+
+# 클래스를 활용해 객체를 만듦
+user_1 = User("001", "angela" )
+
+user_2 = User("002", "jack")
+
+user_1.follow(user_2)
+print(f"user_1의 followers : {user_1.followers}, user_2의 followers : {user_2.followers}\n"
+      f"user_1의 following : {user_1.following}, user_2의 following : {user_2.following}")
+```
+
+![image.png](attachment:aadc0436-9f45-4bf0-9d19-052f518b81d8:image.png)
+
+## 퀴즈 프로젝트
+
+### 1부 : 질문 클래스 만들기
+
+퀴즈 질문에 대한 모델을 만들어야됨.
+
+속성 - text, answer ⇒ 새로운 질문 객체가 생성될 때, 생성자로 값이 항상 생겨야함
+
+Question class 생성
+
+```python
+class Question:
+    def __init__(self, text, answer):
+        self.text = text
+        self.answer = answer
+        print(f"text: {self.text}, answer: {self.answer}")
+```
+
+### 2부 : 데이터로부터 질문 객체 리스트 만들기
+
+우리는 1부에서 question_model.py에서 클래스를 생성했고, data.py에는 미리 만들어둔 questiondata가 dictionary 형태로 존재한다.
+
+![image.png](attachment:a311b10d-09af-4972-bc80-5908406fc5f5:image.png)
+
+이 2 파일을 활용해서 main.py에 question_bank = [ Question(q1, a1), Question …. ] 형태의 리스트를 생성해야 한다.
+
+하나하나 객체를 생성해서 만들면? 시간이 오래걸림, question = Question(question_data[0][”text], question_data[0][”answer”]) → 이렇게하면 객체가 하나 생성됨.
+
+이거를 어떻게 효과적으로 줄일 수 있을까 → 반복문
+
+사전에는 0~11 총 12번 반복을 하면 됨(모른다면 len(question_data))
+
+```python
+from data import question_data
+from question_model import Question
+
+for question in question_data:
+    question_bank = [
+        Question(question["text"], question["answer"])
+    ]
+
+for question in question_bank:
+    print(question_bank[2].text)
+```
+
+![image.png](attachment:3c6b98b7-40c9-4c81-b05b-5edcd66e0a3c:image.png)
+
+생성자가 잘 작동해서 된 줄 알았는데 결국 리스트에는 하나의 값만 들어있음, 생성자마다 이름을 붙여서 다른 객체라는 것을 인지시켜야 될듯
+
+```python
+from data import question_data
+from question_model import Question
+
+question_bank = []
+
+for question in question_data:
+    qt = Question(question["text"], question["answer"])
+    question_bank.append(qt)
+
+print(question_bank[0].text)
+print(question_bank[1].text)
+print(question_bank[2].text)
+```
+
+![image.png](attachment:4b7da0ce-e563-4cc3-99cc-682bc81a3b6a:image.png)
+
+반복문은 생성자만 만들고 미리 만들어둔 빈 리스트에 append하여 다른 index로 추가함.
+
+### 3부 : 퀴즈브레인과 next_question() 메소드
+
+위에 2부에서 question_bank를 만들었다, 이제 질문 중 하나를 제시하고, 사용자에게 그 질문에 대답하도록 요구하는 기능을 만들어야 한다.
+
+quiz_brain.py 파일에서, 우리는 질문, 확인, 응답을 해줘야한다.
+
+attributes - question_number = 0, question_list
+
+methods - next_question()
+
+Q.1: A sulg’s bllood is green. (True/False)?: 
+
+```python
+class QuizBrain:
+    def __init__(self, question_list):
+        self.question_number = 0
+        self.question_list = question_list
+```
+
+QuizBrain 생성자 - 게임 스타트와 같음, question_list를 넣고(question_bank),
+
+시작값을 0으로 생성
+
+다음으로 next_question() 생성 → question_list의 text를 가져오고 사용자에게 답을 요구
+
+```python
+    def next_question(self):
+        question_list = self.question_list
+        question_number = self.question_number
+        question = self.question_list[question_number]
+        answer = input(f"Q.{question_number+1}: {question_list["text"]} (True/False)?: ")
+```
+
+이렇게 만들어서 main.py에서 import 후 실행
+
+```python
+from data import question_data
+from question_model import Question
+from quiz_brain import QuizBrain
+
+question_bank = []
+
+for question in question_data:
+    qt = Question(question["text"], question["answer"])
+    question_bank.append(qt)
+
+quiz_brain = QuizBrain(question_bank)
+
+quiz_brain.next_question()
+```
+
+![image.png](attachment:14fb05f6-9421-4e24-a5ad-ea85f065cc49:image.png)
+
+### 4부 : 질문을 계속 보여주기
+
+그냥 while문 추가하면 되는거 아닌가?
+
+```python
+class QuizBrain:
+    def __init__(self, question_list):
+        self.question_number = 0
+        self.question_list = question_list
+
+    def next_question(self):
+        while True:
+            question = self.question_list[self.question_number]
+            answer = input(f"Q.{self.question_number+1}: {question.text} (True/False/Off)?: ")
+            if answer == question.answer:
+                self.question_number += 1
+            elif answer == "Off":
+                break
+            else:
+                print(f"Wrong answer. Try again.")
+                break
+```
+
+이렇게 만들고 main에서는 그대로 실행하면 
+
+![image.png](attachment:41b967c7-c70a-4d32-9b11-fd29e91d1b73:image.png)
+
+출력값을 보면 틀리거나 Off를 입력하면 멈추지만, 맞추면 계속 진행됨
+
+근데 강의에서는 다른 방법을 씀 - 우선 quiz_brain 파일에서 still_has_questions 메소드를 만들어서 남은 퀴즈가 있는지 없는지 확인
+
+```python
+    def still_has_questions(self):
+        if self.question_number < len(self.question_list):
+            # 0~11 까지만
+            return True
+        else:
+            return False
+```
+
+⇒ 이거를 간단하게 입력할 수있음
+
+```python
+    def still_has_questions(self):
+        return self.question_number < len(self.question_list)
+```
+
+어차피 ture false기 때문에 그냥 return 해주면 됨.
+
+### 5부 : 답변을 확인하고 점수 유지하기
+
+```python
+class QuizBrain:
+    def __init__(self, question_list):
+        self.question_number = 0
+        self.question_list = question_list
+        self.score = 0
+
+    def still_has_questions(self):
+        return self.question_number < len(self.question_list)
+
+    def next_question(self):
+        question = self.question_list[self.question_number]
+        answer = input(f"Q.{self.question_number+1}: {question.text} (True/False)?: ")
+        self.question_number += 1
+        self.check_answer(answer, question.answer)
+
+    def check_answer(self, answer, correct_answer):
+        if answer.lower() == correct_answer.lower():
+            print("You got it right")
+            self.score += 1
+        else:
+            print("That's wrong")
+
+        print(f"The answer was {correct_answer}.")
+        print(f"Your current score is: {self.score}/{self.question_number}")
+```
+
+quiz_brain 객체에 score라는 속성을 추가하고 check_answer라는 정답 확인을 해주는 메소드를 추가함
+
+next_question에서는 question_number를 추가하고 check_answer메소드를 실행시키며 사용자의 답과 실제 사전에 있는 정답을 파라미터로 보내줌
+
+check_answer에서는 answer와 correct_answer를 비교하고 정답일 때는 score를 1 증가 및 다른 구문을 print함, 마지막으로 현재 진행도와 맞춘 개수를 확인
+
+```python
+from data import question_data
+from question_model import Question
+from quiz_brain import QuizBrain
+
+question_bank = []
+
+for question in question_data:
+    qt = Question(question["text"], question["answer"])
+    question_bank.append(qt)
+
+quiz_brain = QuizBrain(question_bank)
+
+while quiz_brain.still_has_questions():
+    quiz_brain.next_question()
+```
+
+메인의 while 구문은 한줄로 끝남
+
+![image.png](attachment:64d6be85-ebd8-465f-a795-e389887842f6:image.png)
+
+### Open Trivia DB 활용
+
+https://opentdb.com/api_config.php
+
+해당 url로 이동 (회원가입 해야됨) → API 클릭
+
+![image.png](attachment:18c4a4b3-a283-4c18-8a9e-f4d0722e02ac:image.png)
+
+작성 후 URL 얻기 버튼을 누르면 상단에 URL 링크가 뜨고 해당 주소로 들어가면
+
+```
+{"response_code":0,"results":[{"type":"boolean","difficulty":"easy","category":"Science
+: Computers","question":"&quot;HTML&quot; stands for Hypertext Markup Language.","correct
+_answer":"True","incorrect_answers":["False"]},{"type":"boolean","difficulty":"easy","cat
+egory":"Science: Computers","question":"The programming language &quot;Python&quot; is ba
+sed off a modified version of &quot;JavaScript&quot;.","correct_answer":"False","incorre
+ct_answers":["True"]},{"type":"boolean","difficulty":"easy","category":"Science: Compute
+rs","question":"Linux was first created as an alternative to Windows XP.","correct_answ
+er":"False","incorrect_answers":["True"]},{"type":"boolean","difficulty":"easy","categor
+y":"Science: Computers","question":"RAM stands for Random Access Memory.","correct_answe
+r":"True","incorrect_answers":["False"]},{"type":"boolean","difficulty":"easy","category":"
+Science: Computers","question":"The Python programming language gets its name from the Bri
+tish comedy group &quot;Monty Python.&quot;","correct_answer":"True","incorrect_answers":["F
+alse"]},{"type":"boolean","difficulty":"easy","category":"Science: Computers","question":"A Ma
+c is not a PC","correct_answer":"False","incorrect_answers":["True"]},{"type":"boolean","dif
+ficulty":"easy","category":"Science: Computers","question":"In most programming languages, t
+he operator ++ is equivalent to the statement &quot;+= 1&quot;.","correct_answer":"True","in
+correct_answers":["False"]},{"type":"boolean","difficulty":"easy","category":"Science: Computers"
+,"question":"Time on Computers is measured via the EPOX System.","correct_answer":"False",
+"incorrect_answers":["True"]},{"type":"boolean","difficulty":"easy","category":"Science: Computers"
+,"question":"Ada Lovelace is often considered the first computer programmer.","correct_answer":"True",
+"incorrect_answers":["False"]},{"type":"boolean","difficulty":"easy","category":"Science: Computers","
+question":"Linus Torvalds created Linux and Git.","correct_answer":"True","incorrect_answers":["False"]}]}
+```
+
+이런 JSON 형태의 코드를 받을 수 있음
+
+![image.png](attachment:5235b979-ae58-494c-ba16-e260f6e7b6ea:image.png)
+
+data.py에 복사해서 형태를 보면, question과 correct_answer 로 이루어진 것을 볼 수 있음,
+
+다른 Key값들도 있지만 우리는 필요없음
+
+```python
+for question in question_data:
+    qt = Question(question["question"], question["correct_answer"])
+    question_bank.append(qt)
+```
+
+메인으로 돌아와서 for문에서 아까는 text와 answer였으므로 수정
+
+![image.png](attachment:02517555-7462-4316-837f-7b9ba998623e:image.png)
+
+실행하면 정상적으로 코드가 돌아가는걸 확인할 수 있음
+
+객체지향으로 프로그래밍을 작성했기 때문에 이렇게 data.py의 값만 바꾸고도 다른 퀴즈 풀이를 진행할 수 있음.
+
+끝!
