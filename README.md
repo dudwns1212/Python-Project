@@ -5035,3 +5035,351 @@ for question in question_data:
 객체지향으로 프로그래밍을 작성했기 때문에 이렇게 data.py의 값만 바꾸고도 다른 퀴즈 풀이를 진행할 수 있음.
 
 끝!
+
+## 18일차
+## 파이썬 Turtle 라이브러리를 활용하여 과제
+
+### 정사각형 그리기
+
+```python
+from turtle import Turtle, Screen
+
+turtle_study = Turtle()
+screen_study = Screen()
+# 1. 정사각형 만들기
+turtle_study.forward(100)
+turtle_study.right(90)
+turtle_study.forward(100)
+turtle_study.right(90)
+turtle_study.forward(100)
+turtle_study.right(90)
+turtle_study.forward(100)
+
+screen_study.exitonclick()
+```
+
+![image.png](attachment:c9662828-3c50-4705-bdd2-4c59ef778280:image.png)
+
+### 모듈 임포트
+
+```python
+# 모듈 임포트
+from turtle import *
+```
+
+turtle 패키지에 있는 모든 모듈을 임포트 → *
+
+하지만 이렇게 되면 내가 사용한 메서드가 어디서 온건지 확인이 잘 안됨, 따라서 가독성이 떨어지기 때문에 좋은 방법이 아니다
+
+### 알리아싱 모듈
+
+```python
+# 모듈 임포트
+import turtle as t
+tim = t.Turtle()
+```
+
+임포트한 패키지에 이름을 붙여서 활용할 수 있음
+
+### 설치 모듈
+
+![image.png](attachment:caf9ed76-d36e-4c85-9b6a-7476011c051c:image.png)
+
+heros 모듈을 import하려고 했지만 파이썬 라이브러리에 없어서 import가 안됨
+
+그때 저 패키지 설치를 눌러서 파이썬 라이브러리에 heros 모듈을 설치할 수 있음
+
+![image.png](attachment:d0d6cace-d8fa-41c0-8fba-9605c1df8a14:image.png)
+
+![image.png](attachment:8f463279-20f1-4215-b45f-d2e940fcdab1:image.png)
+
+설치가 완료되면 사진처럼 heroes 패키지를 사용할 수 있음
+
+### 점선 그리기
+
+turtle패키지를 활용해 점선 사각형을 그리기
+
+![image.png](attachment:4a13db89-4926-41c1-a193-63d86076d858:image.png)
+
+pendown, penup 메소드를 활용할 수 있음
+
+```python
+# 2. 점선 그리기
+def draw():
+    turtle_study.forward(10)
+    turtle_study.pendown()
+    turtle_study.forward(10)
+    turtle_study.penup()
+    turtle_study.forward(10)
+    turtle_study.pendown()
+    turtle_study.forward(10)
+    turtle_study.penup()
+    turtle_study.forward(10)
+    turtle_study.right(90)
+for _ in range(4):
+    draw()
+
+screen_study.exitonclick()
+```
+
+![image.png](attachment:4955f16e-8019-437b-877d-e0d938370bc0:image.png)
+
+### 다양한 도형 그리기
+
+```python
+# 다양한 도형 그리기
+import random as rd
+count = 3
+color_list = ["red", "yellow", "blue"
+              ]
+for i in range(3):
+    count += 1
+    for j in range(count):
+        turtle_study.forward(100)
+        turtle_study.right(360/count)
+    turtle_study.color(rd.choice(color_list))
+```
+
+사각형 = 4, 오각형 = 5를 이용해 360/count로 도형을 구현
+
+### 무작위 행보 구현하기
+
+```python
+# 무작위 행보 구현하기
+direction = [0, 90, 180, 270]
+turtle_study.pensize(15)
+turtle_study.speed("fastest")
+
+for _ in range(200):
+    turtle_study.forward(100)
+    turtle_study.setheading(rd.choice(direction))
+    turtle_study.color(rd.choice(color_list))
+```
+
+## 파이썬 튜플
+
+![image.png](attachment:aea29379-97ce-49de-8be5-abc61cd470b7:image.png)
+
+파이썬 튜플은 () → 소괄호로 이루어진 리스트이며
+
+위에 사진과 같이 값을 바꿀 수 없음(재할당 x)
+
+### 터틀에 임의의 RGB 색상 생성하기
+
+```python
+import turtle as t
+import random
+
+tim = t.Turtle()
+t.colormode(255)
+
+def random_color():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    random_color = (r, g, b)
+    return random_color
+
+directions = [0,90,180,270]
+tim.pensize(10)
+tim.speed("fastest")
+
+for _ in range(100):
+    tim.color(random_color())
+    tim.forward(10)
+    tim.right(random.choice(directions))
+```
+
+![image.png](attachment:0ac875ca-4477-46e6-ae46-dd76e654aa33:image.png)
+
+### 스피로 그래프 그리기
+
+1. 원 생성
+
+```python
+import turtle as t
+import random
+
+tim = t.Turtle()
+t.colormode(255)
+
+def random_color():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    random_color = (r, g, b)
+    return random_color
+
+tim.speed("fastest")
+tim.color(random_color())
+tim.circle(100)
+
+screen = t.Screen()
+screen.exitonclick()
+```
+
+![image.png](attachment:8bd11788-5a7b-44b4-907d-d344100b4ed5:image.png)
+
+1. 방향 바꾸기
+
+```python
+current_heading = tim.heading()
+tim.setheading(current_heading + 10)
+tim.color(random_color())
+tim.circle(100)
+```
+
+![image.png](attachment:70dacff1-e25c-4097-9fae-cd9d09e86d77:image.png)
+
+1. 반복문 생성
+
+```python
+import turtle as t
+import random
+
+tim = t.Turtle()
+t.colormode(255)
+
+def random_color():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    random_color = (r, g, b)
+    return random_color
+
+tim.speed("fastest")
+
+for _ in range(100):
+    tim.color(random_color())
+    tim.circle(100)
+    current_heading = tim.heading()
+    tim.setheading(current_heading + 10)
+
+screen = t.Screen()
+screen.exitonclick()
+```
+
+![image.png](attachment:854dc665-c74a-44f8-a987-c60724503429:image.png)
+
+## 프로젝트 1. 이미지에서 rgb값 추출
+
+이미지에서 rgb값 추출하기
+
+img.jpg는 구글에 있는 paiting 사진을 하나 다운
+
+colorgram이라는 패키지를 활용해서 extract 메소드를 활용
+
+→ 
+
+![image.png](attachment:1d24231a-9c3e-4125-a379-ebacd7bc08c0:image.png)
+
+처음에는 이러한 값들을 얻게 됨
+
+여기서 우리는 Rgb값을 사용하므로 반복문을 통해 
+
+colors.rgb를 활용
+
+```python
+import colorgram
+colors = colorgram.extract('img.jpg', 25)
+
+rgb_colors = []
+
+for c in colors:
+    rgb_colors.append(c.rgb)
+
+print(rgb_colors)
+```
+
+→ 
+
+![image.png](attachment:ee2a1064-e80b-4ba3-a9e4-ff3d44976993:image.png)
+
+이제 마지막으로 튜플 형태의 rgb 값들을 가져와야 하기 때문에 아래의 코드를 적용해 값을 얻음
+
+```python
+import colorgram
+colors = colorgram.extract('img.jpg', 25)
+rgb_colors = []
+
+for c in colors:
+    r = c.rgb.r
+    g = c.rgb.g
+    b = c.rgb.b
+    col = (r, g, b)
+    rgb_colors.append(col)
+
+print(rgb_colors)
+```
+
+→ 
+
+![image.png](attachment:203bb319-200e-44e6-aa7d-46135ecae7eb:image.png)
+
+마지막으로 main.py에 해당 리스트를 등록
+
+```python
+colors = [(229, 228, 226), (225, 223, 224), (199, 175, 118), (125, 36, 24), (187, 158, 50), (170, 105, 56), (5, 57, 83), (222, 223, 226), (200, 216, 205), (108, 67, 85), (39, 36, 35), (86, 142, 58), (20, 123, 176), (110, 161, 175), (75, 39, 47), (9, 67, 47), (64, 153, 137), (133, 41, 43), (184, 98, 80), (179, 201, 186), (210, 200, 113), (179, 175, 177), (151, 176, 164), (93, 142, 156), (28, 80, 59)]
+
+```
+
+## 프로젝트2 점 그리기
+
+10x10 크기의 점이 있는 그림을 그려야 함
+
+1. 준비 
+
+```python
+# 점 그리기
+from turtle import Turtle, Screen
+import random
+
+screen = Screen()
+tim = Turtle()
+tim.speed("fastest")
+screen.colormode(255)
+```
+
+1. 점 그리기 함수 
+
+```python
+def draw_dot():
+    for _ in range(10):
+        choice_color = random.choice(colors)
+        tim.dot(10, choice_color)
+        tim.penup()
+        tim.fd(25)
+```
+
+랜덤 컬러 생성 후 dot 메소드로 점 생성 및 앞으로 이동하는데 penup 메소드로 선이 안보이게 설정
+
+1. 방향 바꾸기
+
+```python
+def draw_dot():
+    for _ in range(10):
+        choice_color = random.choice(colors)
+        tim.dot(10, choice_color)
+        tim.penup()
+        tim.fd(25)
+    tim.left(90)
+    tim.fd(25)
+    tim.right(90)
+    tim.setx(0)
+```
+
+추가로 반복문이 끝나고 방향을 바꾼 후 위로는 25만큼 이동 후 x좌표는 0으로 설정
+
+1. 위로 10개 추가 반복문
+
+```python
+for _ in range(10):
+    draw_dot()
+
+tim.home()
+screen.exitonclick()
+```
+
+함수를 10번 실행해 10x10 형태로 만들어줌
+
+![image.png](attachment:fc4b0017-0282-438d-a625-af06ea458d81:image.png)
