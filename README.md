@@ -5383,3 +5383,341 @@ screen.exitonclick()
 함수를 10번 실행해 10x10 형태로 만들어줌
 
 ![image.png](attachment:fc4b0017-0282-438d-a625-af06ea458d81:image.png)
+
+## 19일차
+## 파이썬 고차함수 및 이벤트리스너
+
+### 터틀 이벤트리스너
+
+![image.png](attachment:82cf090c-4abc-463c-8e6a-e65634ab41de:image.png)
+
+```python
+from turtle import Turtle, Screen
+
+tim = Turtle()
+screen = Screen()
+
+def move_forwards():
+    tim.forward(10)
+
+screen.listen()
+screen.onkey(key="space", fun=move_forwards)
+
+screen.exitonclick()
+```
+
+listen() 함수로 screen에 대한 이벤트를 들을 준비
+
+onkey()를 활용 → key와 fun을 인자로 받음
+
+key → 값을 누르면 → fun → 함수를 실행, 즉 이벤트(스페이스바를 누름)가 발생하면 함수를 실행
+
+현재 함수는 앞으로 10 이동
+
+![image.png](attachment:d79d181d-6885-4db2-aa9d-dbd1a1f175e6:image.png)
+
+누를 때마다 10 이동하는 것을 볼 수 있음
+
+### 함수를 다른 함수에 전달하는 형태(고차함수)
+
+```python
+def add(n1, n2):
+    return n1+n2
+
+def calculator(n1,n2,func):
+    return func(n1,n2)
+
+result = calculator(1, 2, add)
+print(result)
+```
+
+→ 3이 출력되는 것을 알 수 있음
+
+이러한 형태의 calculator함수들을 고차함수라고 부르며 이벤트 함수들 또한 고차함수임
+
+## 에치어스케치 앱 만들기
+
+터틀 스크린에서 다음의 기능을 만들어야 함
+
+w - forwards
+
+s - backwards
+
+a - counter-clockwise(반시계 방향 회전)
+
+d - clockwise
+
+c - clear-drawing
+
+![image.png](attachment:1f19e3fb-60f6-43fe-b34b-4dee235a0c4d:image.png)
+
+![image.png](attachment:a337bce5-1f41-4f56-b6fc-f05b05f52e62:image.png)
+
+다음의 함수들을 활용해서 과제를 진행
+
+```python
+from turtle import Turtle, Screen
+
+tim = Turtle()
+screen = Screen()
+
+# 에치어스케치 앱 만들기
+def w_forwards():
+    tim.forward(1)
+
+def s_forwards():
+    tim.backward(1)
+
+def a_counter_clockwise():
+    tim.left(1)
+
+def d_clockwise():
+    tim.right(1)
+
+def c_clear_drawing():
+    tim.clear()
+    tim.penup()
+    tim.home()
+    tim.pendown()
+
+screen.listen()
+screen.onkeyrelease(w_forwards, "w")
+screen.onkeypress(s_forwards, "s")
+screen.onkeyrelease(a_counter_clockwise, "a")
+screen.onkeypress(d_clockwise, "d")
+screen.onkey(c_clear_drawing, "c")
+
+screen.exitonclick()
+```
+
+![image.png](attachment:51e064b9-1301-46cb-9761-aa5945a86242:image.png)
+
+## 객체의 상태 및 인스턴스
+
+우리는 여러 turtle 객체를 생성할 수 있다.
+
+tim = Turtle()
+
+tom = Turtle()
+
+tim.color(”blue”)
+
+tom.color(”red”) 
+
+이런식으로 turtle 객체를 여러 개 만들고 다른 동작을 수행하게 할 수 있다.
+
+## 터틀 좌표계 이해하기
+
+```python
+# 터틀 레이싱 게임 프로젝트
+screen.setup(width=500, height=400) # screen의 크기를 지정
+user_bet = screen.textinput(title="Make you bet", prompt="Witch turtle will win the race? Enter a color: ")
+print(user_bet)
+
+screen.exitonclick()
+```
+
+먼저 스크린의 크기를 지정해주며, textinput 함수를 사용해 팝업창을 띄워서 사용자에게 배팅을 고를 수 있게 해준다.
+
+![image.png](attachment:8bbcaa8d-764d-47d8-a1d2-c9aa70d27504:image.png)
+
+![image.png](attachment:76f1b20a-cda1-4ca0-b559-699043f3346e:image.png)
+
+이렇게 팝업 텍스트 창이 뜨면서 red를 입력하면 user_bet에 red가 저장되는 것을 볼 수 있다
+
+이제 turtle의 좌표를 지정해야 한다.
+
+turtle 패키지에서는 화면의 정 가운데가 0,0의 좌표이므로 x축의 첫 출발선을 지정하기 위해
+
+우리가 screen의 크기를 지정했던 500에서 절반, 즉 x좌표는 -250이 된다
+
+```python
+ # 터틀 레이싱 게임 프로젝트
+screen.setup(width=500, height=400) # screen의 크기를 지정
+user_bet = screen.textinput(title="Make you bet", prompt="Witch turtle will win the race? Enter a color: ")
+print(user_bet)
+
+tim.setx(-240)
+
+screen.exitonclick()
+```
+
+250을 지정했는데 화면에 객체가 안보여서 240으로 조정했다.
+
+![image.png](attachment:71da0219-d63d-48a0-8703-f5f116991945:image.png)
+
+이렇게 penup과 goto 함수를 활용하면 선을 그리지 않고 x와 y좌표를 선택하여 이동할 수 있다
+
+```python
+# 터틀 레이싱 게임 프로젝트
+screen.setup(width=500, height=400) # screen의 크기를 지정
+user_bet = screen.textinput(title="Make you bet", prompt="Witch turtle will win the race? Enter a color: ")
+print(user_bet)
+tim.penup()
+tim.goto(x=-240,y=-100)
+
+screen.exitonclick()
+```
+
+![image.png](attachment:d52134be-89ea-4b84-9f0c-35a6694d933c:image.png)
+
+이제 여러 개의 turtle 객체를 생성해주며 색상 리스트도 만들어준다
+
+```python
+red = Turtle(shape="turtle")
+blue = Turtle(shape="turtle")
+orange = Turtle(shape="turtle")
+yellow = Turtle(shape="turtle")
+green = Turtle(shape="turtle")
+purple = Turtle(shape="turtle")
+
+colors = ["red","orange","yellow","green","blue","purple"]
+```
+
+각각 다른 좌표를 지정하며 다른 색상으로 시작점으로 보낸다
+
+```python
+# 터틀 레이싱 게임 프로젝트
+screen.setup(width=500, height=400) # screen의 크기를 지정
+user_bet = screen.textinput(title="Make you bet", prompt="Witch turtle will win the race? Enter a color: ")
+print(user_bet)
+red.penup()
+red.color("red")
+red.goto(x=-240,y=-100)
+blue.penup()
+blue.color("blue")
+blue.goto(x=-240,y=-60)
+orange.penup()
+orange.color("orange")
+orange.goto(x=-240,y=-20)
+yellow.penup()
+yellow.color("yellow")
+yellow.goto(x=-240,y=20)
+green.penup()
+green.color("green")
+green.goto(x=-240,y=60)
+purple.penup()
+purple.color("purple")
+purple.goto(x=-240,y=100)
+```
+
+![image.png](attachment:105d23f5-2e61-4dd6-baee-1f43f81bd3e7:image.png)
+
+반복문을 활용하면 코드를 하나하나 작성하지 않아도 여러 개의 객체를 생성할 수 있다.
+
+```python
+# 터틀 레이싱 게임 프로젝트
+colors = ["red","orange","yellow","green","blue","purple"]
+
+screen = Screen()
+screen.setup(width=500, height=400) # screen의 크기를 지정
+user_bet = screen.textinput(title="Make you bet", prompt="Witch turtle will win the race? Enter a color: ")
+y_positions = [-100, -60, -20, 20, 60, 100]
+
+for turtle_index in range(0,6):
+    tim = Turtle(shape="turtle")
+    tim.penup()
+    tim.color(colors[turtle_index])
+    tim.goto(x=-240, y=y_positions[turtle_index])
+
+screen.exitonclick()
+```
+
+![image.png](attachment:71c91b05-ee75-42a3-b972-74b10ef241de:image.png)
+
+## 레이싱 프로젝트
+
+이제 출발선 까지 준비했으므로 무작위로 거북이가 움직여야 함
+
+임의의 숫자를 생성하고 반복문을 통해서 각 숫자만큼 객체들이 움직이게 해야 함
+
+여기서 생성된 객체를 따로따로 다른 값들을 줘야 하므로 빈 리스트에 객체를 담아서 반복문 실행
+
+```python
+from turtle import Turtle, Screen
+
+# 터틀 레이싱 게임 프로젝트
+is_race_on = False
+import random
+all_turtles = []
+
+colors = ["red","orange","yellow","green","blue","purple"]
+
+screen = Screen()
+screen.setup(width=500, height=400) # screen의 크기를 지정
+user_bet = screen.textinput(title="Make you bet", prompt="Witch turtle will win the race? Enter a color: ")
+y_positions = [-100, -60, -20, 20, 60, 100]
+
+for turtle_index in range(0,6):
+    new_turtle = Turtle(shape="turtle")
+    new_turtle.penup()
+    new_turtle.color(colors[turtle_index])
+    new_turtle.goto(x=-240, y=y_positions[turtle_index])
+    all_turtles.append(new_turtle)
+
+if user_bet:
+    is_race_on = True
+    
+while is_race_on:
+    # 임의의 숫자 가져오기
+    for turtle in all_turtles:
+        rand_distance = random.randint(0,10)
+        turtle.forward(rand_distance)
+    
+    
+screen.exitonclick()
+```
+
+all_turtles라는 빈 리스트를 만들고, 전에 만들었던 반복문 코드 마지막에 append를 통해 객체들을 리스트에 넣어줌
+
+user_bet이 선택되면 반복문이 실행되며 리스트에 들어있는 각 객체들은 각각의 거리값을 가지며 앞으로 이동함
+
+이제 마지막으로 x축이 250에 도착한다면 반복문을 종료해야 함.
+
+여기서 터틀 객체의 크기는 20x20이므로 거북이가 실제로 도착해야 하는 좌표는 230이 됨
+
+```python
+from turtle import Turtle, Screen
+
+# 터틀 레이싱 게임 프로젝트
+is_race_on = False
+import random
+all_turtles = []
+
+colors = ["red","orange","yellow","green","blue","purple"]
+
+screen = Screen()
+screen.setup(width=500, height=400) # screen의 크기를 지정
+user_bet = screen.textinput(title="Make you bet", prompt="Witch turtle will win the race? Enter a color: ")
+y_positions = [-100, -60, -20, 20, 60, 100]
+
+for turtle_index in range(0,6):
+    new_turtle = Turtle(shape="turtle")
+    new_turtle.penup()
+    new_turtle.color(colors[turtle_index])
+    new_turtle.goto(x=-240, y=y_positions[turtle_index])
+    all_turtles.append(new_turtle)
+
+if user_bet:
+    is_race_on = True
+
+while is_race_on:
+    # 임의의 숫자 가져오기
+    for turtle in all_turtles:
+        if turtle.xcor() > 230:
+            winner = turtle.pencolor()
+            is_race_on = False
+            if user_bet == winner:
+                print(f"You correct! winner is {winner}")
+            else:
+                print(f"You lose! winner is {winner}")
+            break
+        rand_distance = random.randint(0,10)
+        turtle.forward(rand_distance)
+```
+
+![image.png](attachment:df340f38-d9ec-4309-94b8-e77c17eebfac:image.png)
+
+이렇게 레이스가 종료되면 콘솔창에 결과를 말해주고 while문이 종료됨
+
+19일차 강의에서는 여러 객체를 만들고, 각 객체에 다른 메소드를 부여하여 각각의 행동을 지정할 수 있는 것을 배웠음
