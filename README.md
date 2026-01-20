@@ -5721,3 +5721,324 @@ while is_race_on:
 이렇게 레이스가 종료되면 콘솔창에 결과를 말해주고 while문이 종료됨
 
 19일차 강의에서는 여러 객체를 만들고, 각 객체에 다른 메소드를 부여하여 각각의 행동을 지정할 수 있는 것을 배웠음
+
+## 20 일차
+20일차와 21일차, 2일에 거쳐서 snake 게임 만들기 프로젝트를 진행
+
+## 뱀 몸체 만들기
+
+### 터틀 객체의 좌표 설정
+
+사각형 3개가 나란히 있는 상태의 객체를 만들어야 함
+
+객체 하나의 픽셀은 20x20
+
+따라서 (0,0), (0,-20), (0,-40)
+
+```python
+# 초기 설정(스크린 크기, 배경, 타이틀)
+screen = Screen()
+screen.setup(600, 600)
+screen.bgcolor("black")
+screen.title("My Snake Game")
+
+# 초기 터틀 객체
+segment_1 = Turtle(shape="square")
+segment_1.color("white")
+segment_2 = Turtle(shape="square")
+segment_2.color("white")
+segment_2.goto(-20,0)
+segment_3 = Turtle(shape="square")
+segment_3.color("white")
+segment_3.goto(-40,0) 
+```
+
+즉, 코드를 작성하면 goto함수를 활용해서 위의 코드를 작성할 수 있음
+
+![image.png](attachment:d4084836-71bf-440b-bbec-f8cc04163c82:image.png)
+
+이 객체를 일일이 만드는 것이 아니라 반복문을 활용해서 만들면
+
+```python
+# 초기 설정(스크린 크기, 배경, 타이틀)
+screen = Screen()
+screen.setup(600, 600)
+screen.bgcolor("black")
+screen.title("My Snake Game")
+
+starting_position = [(0,0), (-20,0), (-40,0)]
+# 초기 터틀 객체
+for position in starting_position:
+    new_segment = Turtle("square")
+    new_segment.color("white")
+    new_segment.penup()
+    new_segment.goto(position)
+```
+
+이렇게 위치좌표를 배열 안의 튜플로 만들어서 반복문을 실행할 수 있음
+
+## 뱀 움직이기
+
+```python
+# 뱀 움직이기
+game_is_on = True
+while game_is_on:
+    for segment in segments:
+        segment.forward(10)
+```
+
+이런식으로 뱀을 움직이게 할 수 있지만, 반복문 하나하나 객체들이 움직이기 때문에 자연스러운 움직임이 보이지 않음
+
+### tracer, update
+
+tracer 함수를 활용해서 객체가 움직이는 애니메이션을 끌 수 있음 → 객체는 이동했지만 화면에 안보임
+
+update 함수를 활용해 tracer 함수로 움직이지 않던 객체를 애니메이션 없이 한번에 움직이게 할 수 있음
+
+초기설정에서 screen.tracer(0) 으로 애니메이션을 끔
+
+![image.png](attachment:1f45b46c-6a21-476c-9bec-77619005e147:image.png)
+
+객체 생성 또한 애니메이션이라서 생성되지 않음
+
+여기서 while문의 첫 부분에 screen.update()를 해주게 된다면 객체가 한꺼번에 움직이는 것을 볼 수 있음
+
+[20260120-1130-07.3489934.mp4](attachment:127ee33f-c17d-4ad3-9fa3-3762f5aa3970:20260120-1130-07.3489934.mp4)
+
+```python
+from turtle import Screen, Turtle
+import time
+
+# 초기 설정(스크린 크기, 배경, 타이틀)
+screen = Screen()
+screen.setup(600, 600)
+screen.bgcolor("black")
+screen.title("My Snake Game")
+screen.tracer(0)
+
+starting_position = [(0,0), (-20,0), (-40,0)]
+
+segments = []
+
+# 초기 터틀 객체
+for position in starting_position:
+    new_segment = Turtle("square")
+    new_segment.color("white")
+    new_segment.penup()
+    new_segment.goto(position)
+    segments.append(new_segment)
+
+# 뱀 움직이기
+game_is_on = True
+while game_is_on:
+    screen.update()
+    for segment in segments:
+        segment.forward(20)
+        time.sleep(1)
+```
+
+여기서 time은 느린 속도로 객체의 이동을 확인하기 위해 import하여 사용함
+
+## 뱀 방향 바꾸기
+
+뱀의 방향을 바꾸기 위해서 첫 번째 객체의 방향을 바꾸면, 첫 번째 객체의 방향만 바뀌고 나머지 객체의 방향은 바뀌지 않음.
+
+즉, 머리와 몸통이 따로 노는 뱀이 탄생하게 됨
+
+→ 전부 다 앞으로 가는게 아니라, segment3를 segment2자리로, segment2를 segment1자리로, segment1은 방향을 바꿔서 앞으로 이동
+
+```python
+# 뱀 움직이기
+game_is_on = True
+while game_is_on:
+    screen.update()
+    time.sleep(0.1)
+    # 뱀 방향 바꾸기
+    for seg_num in range(len(segments)-1, 0, -1):
+        new_x = segments[seg_num - 1].xcor()
+        new_y = segments[seg_num - 1].ycor()
+        segments[seg_num].goto(new_x, new_y)
+    segments[0].forward(20)
+    segments[0].left(90)
+```
+
+반복문을 만듦, 총 뱀의 길이에서 0까지
+
+new_x → 해당 뱀 객체의 전 객체의 x좌표
+
+new_y → 해당 뱀 객체의 전 객체의 y좌표
+
+마지막으로 반복문이 끝나면 가장 첫 번째 객체(머리)를 이동시킴
+
+그러면 위에서 말한 것처럼 각 객체의 위치를 내 앞 객체의 위치로 이동시킬 수 있음
+
+즉 가장 중요한 포인트는 반복문에서 선택된 seg_num의 위치를 내 앞 객체의 위치로 이동시키는 것.
+
+→ 의문이 생길 수 있음, seg_num -1의 x와 y좌표를 추출해서 seg_num 객체의 좌표로 옮겼는데 그러면 내 앞 객체가 아니라 전 객체의 위치로 옮긴거 아니에요?
+
+→ 아님, 왜냐면 반복문을 가장 마지막 인덱스부터 시작했기 때문에 거꾸로 가는 반복문임
+
+[20260120-1203-54.4700602.mp4](attachment:bcf9899d-74fc-42d4-93e1-f2e935948e43:20260120-1203-54.4700602.mp4)
+
+## 뱀 클래스를 만들고, 객체지향 프로그래밍 하기
+
+snake.py에서 뱀 객체를 생성하고, 움직이는 메서드를 넣음
+
+```python
+from turtle import Turtle
+
+starting_position = [(0,0), (-20,0), (-40,0)]
+segments = []
+
+class Snake:
+    def __init__(self):
+        for position in starting_position:
+            new_segment = Turtle("square")
+            new_segment.color("white")
+            new_segment.penup()
+            new_segment.goto(position)
+            segments.append(new_segment)
+
+    def move(self):
+        # 뱀 방향 바꾸기
+        for seg_num in range(len(segments) - 1, 0, -1):
+            new_x = segments[seg_num - 1].xcor()
+            new_y = segments[seg_num - 1].ycor()
+            segments[seg_num].goto(new_x, new_y)
+        segments[0].forward(20)
+        segments[0].left(90)
+```
+
+main.py에서는 Screen 객체를 만들어 설정하고 while문을 통해 move 메서드를 실행
+
+```python
+from turtle import Screen, Turtle
+from snake import Snake
+import time
+
+from snake import Snake
+
+# 초기 설정(스크린 크기, 배경, 타이틀)
+screen = Screen()
+screen.setup(600, 600)
+screen.bgcolor("black")
+screen.title("My Snake Game")
+screen.tracer(0)
+
+snake = Snake()
+
+# 뱀 움직이기
+game_is_on = True
+while game_is_on:
+    screen.update()
+    time.sleep(0.1)
+
+    snake.move()
+
+screen.exitonclick()
+```
+
+이렇게 객체지향 프로그래밍을 만들 수 있음
+
+앞으로의 방향→  현재 snake.py를 만들어 뱀에 관한 객체 생성 및 움직이는 메소드를 넣음
+
+→ 먹이클래스를 만들어, Screen에 먹이를 생성하는 파일을 만듦
+
+→ 점수클래스를 만들어, 먹이를 먹을 때마다 점수가 올라가는 파일을 만들거임
+
+```python
+from turtle import Turtle
+
+starting_position = [(0,0), (-20,0), (-40,0)]
+
+class Snake:
+    def __init__(self):
+        self.segments = []
+        self.create_snake()
+    
+    def create_snake(self):
+        for position in starting_position:
+            new_segment = Turtle("square")
+            new_segment.color("white")
+            new_segment.penup()
+            new_segment.goto(position)
+            self.segments.append(new_segment)
+
+    def move(self):
+        # 뱀 방향 바꾸기
+        for seg_num in range(len(self.segments) - 1, 0, -1):
+            new_x = self.segments[seg_num - 1].xcor()
+            new_y = self.segments[seg_num - 1].ycor()
+            self.segments[seg_num].goto(new_x, new_y)
+        self.segments[0].forward(20)
+        self.segments[0].left(90)
+```
+
+강사님은 생성자를 실행하면서 create_snake() 메소드를 실행시킴, 해당 메소드의 self → 생성하는 객체가 되며 해당 객체의 segments 임을 명시해줄 수 있음
+
+move()메소드도 마찬가지로 이렇게 해주면 self.segments라고 자신의 객체임을 명시할 수 있음
+
+## 키 입력으로 뱀의 방향 바꾸기
+
+어제 배웠던 키 바인딩을 통해 뱀의 방향을 바꿀 수 있음
+
+먼저 이벤트를 듣기 위해 main.py에 해당 코드 입력
+
+```python
+screen.listen()
+screen.onkey(snake.up, "Up")
+screen.onkey(snake.down, "Down")
+screen.onkey(snake.left, "Left")
+screen.onkey(snake.right, "Right")
+```
+
+이제 해당 키를 누를 때마다 방향을 바꾸는 메소드를 snake.py에 만들기만 하면 됨
+
+→ setheading(0) / ← setheading(180) 이런식으로
+
+```python
+    def up(self):
+            self.segments[0].setheading(90)
+
+    def down(self):
+            self.segments[0].setheading(270)
+
+    def left(self):
+            self.segments[0].setheading(180)
+
+    def right(self):
+            self.segments[0].setheading(0)
+```
+
+여기서 뱀의 머리는 몸통을 만나면 게임오버인데 위를 향할 때, 아래키를 누른다면 만나게 되어있음
+
+이 문제를 해결하기 위해 조건문을 통해 각 메소드에 반대 방향인 경우에는 해당 키를 누를 수 없게 설정
+
+```python
+    def up(self):
+        if self.segments[0].heading() != DOWN:
+            self.segments[0].setheading(UP)
+
+    def down(self):
+        if self.segments[0].heading() != UP:
+            self.segments[0].setheading(DOWN)
+
+    def left(self):
+        if self.segments[0].heading() != RIGHT:
+            self.segments[0].setheading(LEFT)
+
+    def right(self):
+        if self.segments[0].heading() != LEFT:
+            self.segments[0].setheading(RIGHT)  
+```
+
+각 방향은 최상단에 상수로 만들어놓음
+
+```python
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
+```
+
+이렇게 하면 오류를 해결할 수 있다.
