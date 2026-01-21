@@ -6042,3 +6042,418 @@ RIGHT = 0
 ```
 
 이렇게 하면 오류를 해결할 수 있다.
+
+## 21 일차
+20일차의  snakegame 프로젝트를 이어서 마무리하는 시간을 가져보겠습니다 ㅎ
+
+## 클래스 상속
+
+클래스1, 클래스2가 있을 때, 클래스1에 어떤 메소드, 객체를 만들었다.
+
+클래스2에서도 그 객체와 메소드를 사용하면서 추가로 어떤 메소드를 만들어야 할 때,
+
+우리는 처음부터 시작하는게 아니라, 클래스2에서 클래스1을 상속하여 클래스1의 메소드를 활용할 수 있다.
+
+활용법은 class Fish(Animal): 이런식으로 소괄호 안에 상속받고 싶은 클래스를 입력하면 된다.
+
+```python
+class Animal:
+    def __init__(self):
+        self.num_eyes = 2
+
+    def breathe(self):
+        print("Inhale, exhale")
+
+class Fish(Animal):
+
+    def __init__(self):
+        super().__init__()
+
+    def swim(self):
+        print("Moving in water")
+
+nemo = Fish()
+nemo.swim()
+nemo.breathe()
+print(nemo.num_eyes)
+```
+
+⇒
+
+![image.png](attachment:7c572691-1d95-4dc3-996c-27161ce13243:image.png)
+
+이런식으로 Fish 클래스에서 Animal클래스의 메소드를 사용하며
+
+__init__()을 통해 Fish 객체를 생성하면 Animal클래스의 생성자 또한 실행된다.
+
+```python
+class Fish(Animal):
+
+    def __init__(self):
+        super().__init__()
+
+    def breathe(self):
+        super().breathe()
+        print("doing this underwater.")
+
+    def swim(self):
+        print("Moving in water")
+```
+
+추가로 Fish 클래스에 같은 이름의 메소드인 breathe를 만들었다.
+
+그리고 super()를 통해 상속하는 Animal클래스의 breathe를 실행하며, 자신만의 doing this underwater를 출력할수도 있다.
+
+## 뱀이 먹이를 먹었는지 알아내기
+
+### Food 클래스를 만들고 Turtle 클래스를 상속받게 하기
+
+```python
+from turtle import Turtle
+
+class Food(Turtle):
+    def __init__(self):
+        super().__init__()
+```
+
+이렇게 해주면 Food 객체가 생성되면 → Food 객체 = Turtle 객체
+
+이제 self.으로 Turtle 클래스의 메소드를 활용할 수 있음
+
+```python
+from turtle import Turtle
+import random
+
+class Food(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.shape("circle")
+        self.penup()
+        self.shapesize(stretch_wid=0.5, stretch_len=0.5)
+        self.color("blue")
+        self.speed("fastest")
+        random_x = random.randint(-280, 280)
+        random_y = random.randint(-280, 280)
+        self.goto(random_x, random_y)
+```
+
+생성되면 0.5x0.5크기의 작은 파란색 먹이가 랜덤한 좌표값에 생성됨
+
+이제 food객체를 main.py에서 만들어주면
+
+![image.png](attachment:d59ef1b8-bb88-4083-b194-f9047a188fce:image.png)
+
+이렇게 screen에 먹이가 뿅하고 나타남
+
+### 먹이와의 충돌을 감지
+
+distance라는 Turtle 클래스의 메소드를 활용, 
+
+distance(x, y) → 괄호안의 좌표와 비교함, 여기서 x값만 넣을 수 있는데 그 x값은 turtle 객체를 넣을 수 있음
+
+즉, 객체끼리 비교할 수 있음 → 우리는 뱀의 머리 객체와 먹이 객체를 비교하여 만나있으면 새롭게 먹이를 다시 생성하는 로직을 구상할 수 있음
+
+```python
+# 먹이와의 충돌을 감지
+    if snake.head.distance(food) < 15:
+        print("냠냠냠")
+```
+
+![image.png](attachment:e9ca0902-8e50-4474-9a86-2d9766098234:image.png)
+
+이렇게 먹이가 가까우면 냠냠냠을 출력함
+
+먹이 크기가 현재 10픽셀 10픽셀로 이루어져서 10보다는 좀 크게 설정해야 자연스러움
+
+여기에 더해서
+
+```python
+# 먹이와의 충돌을 감지
+    if snake.head.distance(food) < 15:
+        print("냠냠냠")
+        food.goto(random.randint(-280, 280), random.randint(-280, 280))
+```
+
+아래 먹이를 먹을 때, 다시 위치를 조정해주는 함수를 추가하면 먹은 먹이는 사라지고 새로운 먹이가 생김
+
+이 함수를 Food클래스에 만들어줄거임
+
+```python
+class Food(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.shape("circle")
+        self.penup()
+        self.shapesize(stretch_wid=0.5, stretch_len=0.5)
+        self.color("blue")
+        self.speed("fastest")
+        self.refresh()
+
+    def refresh(self):
+        random_x = random.randint(-280, 280)
+        random_y = random.randint(-280, 280)
+        self.goto(random_x, random_y)
+```
+
+```python
+# 먹이와의 충돌을 감지
+    if snake.head.distance(food) < 15:
+        print("냠냠냠")
+        food.refresh()
+```
+
+이렇게 하면 간결하게 main.py에서는 실행만 시키면서 Food 클래스에 만들어줄 수 있음
+
+## 점수판을 만들어 점수 기록하기
+
+Turtle 객체를 활용해서 write함수를 사용
+
+```python
+from turtle import Turtle
+
+class Scoreboard(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.score = 0
+        self.penup()
+        self.ht()
+        self.color("white")
+        self.write(f"Score: {self.score}", True, align="center", font=("Arial", 24, "normal"))
+```
+
+스코어보드 클래스를 하나 만들어주고 똑같이 main.py에 import해서 객체를 만들어줌
+
+![image.png](attachment:88131435-0294-48aa-97e3-a3dd732bc8ad:image.png)
+
+write함수를 써도 turtle객체의 초반 모양인 화살표는 그대로 남아있게 되는데,
+
+ht()함수를 활용해 모습을 감출 수 있음
+
+이제 이 스코어보드를 맨 상단으로 옮겨야됨
+
+```python
+class Scoreboard(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.score = 0
+        self.penup()
+        self.ht()
+        self.color("white")
+        self.goto(0, 260)
+        self.write(f"Score: {self.score}", True, align="center", font=("Arial", 24, "normal")
+```
+
+write를 하기전에 goto메소드로 객체의 위치를 옮기고 write를 하게되면 해당 위치에 글자를 쓰게됨
+
+![image.png](attachment:b6a51912-78cd-4307-80c7-88c7021118fb:image.png)
+
+### 점수 기록하기
+
+이제 점수를 기록하면 됨
+
+이건 매우 쉽겠죠?
+
+```python
+    def increase_score(self):
+        self.score += 1
+        self.write(self.score, True, align="center", font=("Arial", 24, "normal"))
+```
+
+scoreboard 클래스에 해당 메소드를 만들어줌, score를 1올리고 다시 write
+
+```python
+# 먹이와의 충돌을 감지
+    if snake.head.distance(food) < 15:
+        food.refresh()
+        scoreboard.increase_score()
+```
+
+![image.png](attachment:d7eac61d-3872-46f4-b773-04a69c0f420b:image.png)
+
+이렇게 하면 전에 쓴 write가 안지워지고 겹쳐버림
+
+clear() 함수를 활용해 객체를 초기화할 수 있음,(위치는 안변함)
+
+```python
+class Scoreboard(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.score = 0
+        self.penup()
+        self.ht()
+        self.color("white")
+        self.goto(0, 260)
+        self.update_score()
+
+    def update_score(self):
+        self.write(f"Score: {self.score}", align="center", font=("Arial", 24, "normal"))
+
+    def increase_score(self):
+        self.score += 1
+        self.clear()
+        self.update_score()
+```
+
+이렇게 update_score메소드를 하나 생성하고, 생성자와 increase_score에서는 해당 업데이트 메소드를 활용함, 또한 increase에서는 self.clear()를 통해 이전 wirte를 지움
+
+![image.png](attachment:ca9a1e6f-7669-451b-96aa-682276cd36b0:image.png)
+
+## Game Over
+
+뱀이 벽과 만날 때
+
+뱀의 머리가 몸통과 만날 때
+
+1. 벽에 부딫힐 때
+
+```python
+# game over
+    if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() < -280 or snake.head.ycor() > 280:
+        game_is_on = False
+```
+
+![image.png](attachment:52a4821e-c020-4d62-b81b-2d9229d1ce24:image.png)
+
+이렇게 벽에 부딫히면 멈춤
+
+→ 이거에 더해서 벽과 부딫히면 게임오버가 화면에 떠야함
+
+```python
+    def game_over(self):
+        self.goto(0, 0)
+        self.write(f"GAME OVER", align=ALIGNMENT, font=FONT)
+```
+
+![image.png](attachment:ecbcde14-f4a5-4f4f-b5ee-c1be16745398:image.png)
+
+점수와 게임오버가 같이 보이게 화면 정 중앙에 옮김
+
+1. 뱀이 자기 몸통과 부딫힐 때
+
+우선 뱀의 길이가 늘어나야 함, 
+
+snake 클래스에서 add_segment, extend 함수를 만들어보자
+
+```python
+    def create_snake(self):
+        for position in STARTING_POSITION:
+            self.add_segment(position) 
+               
+    def add_segment(self, position):
+        new_segment = Turtle("square")
+        new_segment.color("white")
+        new_segment.penup()
+        new_segment.goto(position)
+        self.segments.append(new_segment)
+```
+
+기존의 create_snake 메소드에 있던 함수들을 그대로 사용해 add_segment로 옮겨주고 create_snake는 add_segment를 호출하는 형식을 만들어준다.
+
+이제 extend 메소드는 add_segment를 불러주는데 position을 뱀의 가장 마지막 부분, 즉 -1인덱스의 position을 부르면 됨
+
+```python
+    def extend(self):
+        self.add_segment(self.segments[-1].position())
+```
+
+이렇게 하면 먹이를 먹을 때, extend()를 호출하고 그러면 뱀의 가장 꼬리에서 새로운 객체가 탄생함
+
+```python
+# 먹이와의 충돌을 감지
+    if snake.head.distance(food) < 15:
+        food.refresh()
+        snake.extend()
+        scoreboard.increase_score()
+```
+
+![image.png](attachment:43ee3053-1697-47b4-a300-9ae73fe8a3fe:image.png)
+
+길이가 늘어난 것을 확인할 수 있음
+
+이제 뱀의 몸통과의 충돌을 어떻게 확인할 것인가
+
+```python
+    for segment in snake.segments:
+        if (snake.head.distance(segment) != 0) and (snake.head.distance(segment) < 200):
+            game_is_on = False
+            scoreboard.game_over()
+```
+
+이렇게 하면 손쉽게 끝일 줄 알았는데 segments 배열에는 머리도 포함이라 시작하자마자 gameover가 뜸
+
+그래서 0이 아닐 때도 같이 넣어서 조건문을 작성했지만 그래도 똑같이 시작하자마자 gameover
+
+따라서 확실하게 만약에 객체가 같다면 pass하고 나머지들을 비교
+
+```python
+# game over
+    for segment in snake.segments:
+        if segment == snake.head:
+            pass
+        elif snake.head.distance(segment) < 10:
+            game_is_on = False
+            scoreboard.game_over()
+```
+
+![image.png](attachment:85665968-c007-4c1d-a4bc-f65ea119914a:image.png)
+
+## 파이썬에서 리스트와 튜플 슬라이싱하기
+
+```python
+# game over
+    for segment in snake.segments:
+        if segment == snake.head:
+            pass
+        elif snake.head.distance(segment) < 10:
+            game_is_on = False
+            scoreboard.game_over()
+```
+
+이 부분이 쓸데없이 길다
+
+결국 거리를 알아내고, 그 거리를 비교하는 로직
+
+우리는 segments 배열에서 슬라이싱을 통해 머리를 제외한 나머지 리스트만 가져오고
+
+그 리스트를 비교하면 굳이 2중 조건문을 쓰지 않아도 된다.
+
+key[0:5] → 0부터 5까지의 값을 덩어리로 가져온다, 여기서 중요한건 5는 포함되지 않음
+
+따라서 0,1,2,3,4를 가져오게 되는것
+
+```python
+# game over
+    for segment in snake.segments[1:]:
+        if snake.head.distance(segment) < 10:
+            game_is_on = False
+            scoreboard.game_over()
+```
+
+결국 우리는 반복문에서 segmets배열에서 머리를 제외하고 가져온 뒤
+
+한번의 조건문을 통해 바로 game_over 함수를 활용할 수 있음
+
+![image.png](attachment:b27b5058-8f8d-4e76-81bd-65217e11ca5f:image.png)
+
+지금 너무 빨리눌러서 안보이는 것 같은데 머리와 몸통이 겹쳤음
+
+슬라이싱은 다양한 방법으로 활용이 가능함
+
+key[0:5:2]  → 0 뛰고 2 뛰고 4 ⇒ [0, 2, 4]를 가져옴, 이렇게 건너뛰게 할 수도 있음
+
+key[::] → 모두 가져오기
+
+key[1:] → 1부터 모두 가져오기
+
+key[:5] → 처음부터 5(4) 까지 모두 가져오기
+
+key[::2] → 모두 가져오는데 한칸씩 띄워서 가져오기
+
+```python
+key = [1,2,3,4,5,6,7,8,9]
+print(key[::2])
+```
+
+![image.png](attachment:2bf093ba-a0b4-4899-be52-d2e336b7db17:image.png)
+
+튜플 또한 마찬가지로 슬라이싱을 활용 가능함
