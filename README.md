@@ -6457,3 +6457,344 @@ print(key[::2])
 ![image.png](attachment:2bf093ba-a0b4-4899-be52-d2e336b7db17:image.png)
 
 튜플 또한 마찬가지로 슬라이싱을 활용 가능함
+
+## 22 일차
+## pingpong 게임 프로젝트
+
+2명의 플레이어가 각각의 바를 가지고 있고 가운데에서부터 움직이는 공이 있음
+
+플레이어의 바에 맞으면 반대편으로 공이 이동하며, 바를 넘어서 상대의 벽에 부딫히면 점수를 획득하는 게임
+
+필요 클래스 : player_bar, ball, scoreboard
+
+### 1. main 세팅하기
+
+Screen 객체 생성 및 배경, 크기 등을 지정
+
+```python
+from turtle import Screen
+
+screen = Screen()
+screen.bgcolor("black")
+screen.setup(width=800, height=600)
+screen.title("pingpong-game")
+
+screen.exitonclick()
+```
+
+### 2. bar 클래스 생성
+
+각 플레이어의 바를 2개 생성
+
+바의 크기는 100 x 20으로 할 예정
+
+바는 위 아래로 움직여야됨, bar1 - (w,s) / bar2 - ( up, down)
+
+```python
+from turtle import Turtle
+
+class Bar(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.color("white")
+        self.shape("square")
+        self.resizemode("user")
+        self.turtlesize(5,1,1)
+        self.penup()
+
+    def create_bar1(self):
+        self.goto(-380,0)
+
+    def create_bar2(self):
+        self.goto(375,0)
+
+    def up_bar(self):
+        new_y = self.ycor() + 20
+        self.goto(self.xcor(), new_y)
+
+    def down_bar(self):
+        new_y = self.ycor() - 20
+        self.goto(self.xcor(), new_y)
+```
+
+위의 코드를 player_bar라는 파일에 만들어줌
+
+```python
+from turtle import Screen
+from player_bar import Bar
+
+screen = Screen()
+screen.bgcolor("black")
+screen.setup(width=800, height=600)
+screen.title("pingpong-game")
+screen.tracer(0)
+
+bar1 = Bar()
+bar1.create_bar1()
+
+bar2 = Bar()
+bar2.create_bar2()
+
+screen.listen()
+screen.onkeypress(bar1.up_bar, "w")
+screen.onkeypress(bar1.down_bar, "s")
+screen.onkeypress(bar2.up_bar, "Up")
+screen.onkeypress(bar2.down_bar, "Down")
+
+is_game_on = True
+while is_game_on:
+    screen.update()
+
+screen.exitonclick()
+```
+
+main.py에서 위에서 만든 파일을 활용
+
+![image.png](attachment:d91d63f2-b212-47b4-a83b-f712dde8e0a6:image.png)
+
+키 입력에 따라 각각의 바들이 움직이는 것을 확인
+
+### 3. 공 클래스
+
+공 또한 터틀 객체를 원형으로 생성
+
+move라는 메소드를 만들어서 화면에 들어가면 공이 자동으로 오른쪽 상단으로 이동하게 설정
+
+```python
+from turtle import Turtle
+
+class Ball(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.color("white")
+        self.shape("circle")
+        self.penup()
+
+    def move(self):
+        new_x = self.xcor() + 20
+        new_y = self.ycor() + 10
+        self.goto(new_x, new_y)
+
+```
+
+![image.png](attachment:33c52b77-df03-4cb2-afde-61078a8fabd1:image.png)
+
+이제 이 공이 바에 부딪치거나, 왼쪽이나 오른쪽 벽에 움직였을 때, 로직을 추가해야 함
+
+```python
+# 벽에 부딫혔을 때
+    if ball.xcor() > 390 or ball.xcor() < -398:
+        ball.reset()
+```
+
+```python
+    def reset(self):
+        self.goto(0,0)
+```
+
+이렇게 하면 벽에 부딪칠 때 다시 중앙으로 돌아감
+
+이제 bar에 부딪칠 때를 생각해야 함, 저 터틀 객체에 닿아야 하는데.. 
+
+```python
+# 바에 부딫혔을 때
+    if bar1.distance(ball) < 20 or bar2.distance(ball) < 20:
+        print("바에 닿았음")
+```
+
+이렇게 하니까 정 가운데만 인식이 됨, 옆 부분에 닿으면 인식 못하고 벽에 부딪쳐버림
+
+distance를 50으로 완화하고, x축의 거리가 일정 이상일 때 바에 부딪친걸로 봐야할듯
+
+```python
+from turtle import Turtle
+
+class Ball(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.color("white")
+        self.shape("circle")
+        self.position_x = 20
+        self.position_y = 10
+        self.penup()
+
+    def move(self):
+        new_x = self.xcor() + self.position_x
+        new_y = self.ycor() + self.position_y
+        self.goto(new_x, new_y)
+
+    def reset(self):
+        self.goto(0,0)
+        self.position_x *= -1
+        self.position_y *= -1
+
+    def touch_bar(self):
+        self.position_x *= -1
+
+    def touch_wall(self):
+        self.position_y *= -1
+```
+
+reset으로 game_over가 되면 0,0으로 이동
+
+touch_bar를 하면 x축을 기준으로 반대로 이동
+
+touch_wall를 하면 y축을 기준으로 반대로 이동
+
+```python
+is_game_on = True
+while is_game_on:
+    time.sleep(0.1)
+    screen.update()
+    ball.move()
+
+    # 벽에 부딫혔을 때
+    if ball.xcor() > 390 or ball.xcor() < -400:
+        ball.reset()
+
+    # 바에 부딫혔을 때
+    if (ball.distance(bar1) < 55 and ball.xcor() < -360)  or (ball.distance(bar2) < 50 and ball.xcor() > 350) :
+        ball.touch_bar()
+
+    # 위 또는 아래 벽에 부딪쳤을 때
+    if ball.ycor() > 280 or ball.ycor() < -280:
+        ball.touch_wall()
+```
+
+메인의 while로직, 벽에 부딪쳤을 때(game_over) → reset 호출
+
+바에 부딪쳤을 때 → 볼과 바의 거리가 55이하 및 볼의 x좌표가 game_over 이상인 경우
+
+위 또는 아래 벽에 부딪쳤을 때 → 위 아래만 해당하니 ycor을 비교
+
+### 4. 좌표 계산 디테일
+
+![image.png](attachment:33aa28fd-9b05-4b85-a9bc-a6feef313033:image.png)
+
+```python
+from turtle import Screen
+from player_bar import Bar
+from ball import Ball
+import time
+from sideline import Sideline
+
+screen = Screen()
+screen.bgcolor("black")
+screen.setup(width=800, height=600)
+screen.title("pingpong-game")
+screen.tracer(0)
+
+sideline = Sideline()
+
+bar1 = Bar()
+bar1.create_bar1()
+
+bar2 = Bar()
+bar2.create_bar2()
+
+screen.listen()
+screen.onkeypress(bar1.up_bar, "w")
+screen.onkeypress(bar1.down_bar, "s")
+screen.onkeypress(bar2.up_bar, "Up")
+screen.onkeypress(bar2.down_bar, "Down")
+
+ball = Ball()
+
+is_game_on = True
+while is_game_on:
+    time.sleep(0.1)
+    screen.update()
+    ball.move()
+
+    # 벽에 부딫혔을 때
+    if ball.xcor() > 385 or ball.xcor() < -385:
+        ball.reset()
+
+    # 바에 부딫혔을 때
+    if (ball.distance(bar1) < 54 and ball.xcor() < -360)  or (ball.distance(bar2) < 54 and ball.xcor() > 360) :
+        ball.touch_bar()
+
+    # 위 또는 아래 벽에 부딪쳤을 때
+    if ball.ycor() > 285 or ball.ycor() < -285:
+        ball.touch_wall()
+
+screen.exitonclick()
+```
+
+```python
+from turtle import Turtle
+
+class Sideline(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.ht()
+        self.color('white')
+        self.penup()
+        self.goto(400,300)
+        self.pendown()
+        self.goto(-400, 300)
+        self.goto(-400, -300)
+        self.goto(400, -300)
+        self.goto(400,300)
+```
+
+위의 sideline은 정확하게 좌표를 지정하기 위해서 Screen 영역에 선을 그림
+
+![image.png](attachment:95cb3ced-4d67-45ea-9909-2b489d627494:image.png)
+
+### 5. 점수 계산
+
+마지막으로 점수를 계산하는 scoreboard 파일을 만들고, 점수가 나면 해당 점수를 올려야됨, 이건 전 프로젝트에서도 했으니 쉽게 할 수 있음
+
+```python
+from turtle import Turtle
+
+class Scoreboard(Turtle):
+    def __init__(self, position):
+        super().__init__()
+        self.score = 0
+        self.penup()
+        self.color("white")
+        self.ht()
+        self.goto(position, 200)
+        self.update_score()
+
+    def update_score(self):
+        self.clear()
+        self.write(f"{self.score}", align="center", font=("Arial", 24, "normal"))
+
+    def get_score(self):
+        self.score += 1
+        self.update_score()
+```
+
+이렇게 점수판을 만들어주고
+
+```python
+left_scoreboard = Scoreboard(-100)
+right_scoreboard = Scoreboard(100)
+```
+
+main.py에서 위의 scoreboard 객체를 2개 만들어줌, 생성자에서 position으로 위치값을 받으니 파라미터로 x좌표값을 넘겨줌
+
+![image.png](attachment:fe58339b-9b0b-4fdf-8a65-00307fc5cfae:image.png)
+
+그러면 이렇게 각 위치에 점수판이 생김
+
+```python
+# 벽에 부딫혔을 때
+    if ball.xcor() > 385:
+        left_scoreboard.get_score()
+        ball.reset()
+    elif ball.xcor() < -385:
+        right_scoreboard.get_score()
+        ball.reset()
+```
+
+이제 벽을 부딪치는 로직을 나눠서 각각의 점수를 올려주면
+
+![image.png](attachment:aeb3c20b-8a7a-4ada-a3d5-5dfccbc48f6e:image.png)
+
+이렇게 각각의 점수가 올라가는 것을 볼 수 있음
+
+끝!
