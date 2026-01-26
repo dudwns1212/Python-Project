@@ -6798,3 +6798,385 @@ main.py에서 위의 scoreboard 객체를 2개 만들어줌, 생성자에서 pos
 이렇게 각각의 점수가 올라가는 것을 볼 수 있음
 
 끝!
+
+## 23 일차
+터틀 크로스 프로젝트
+
+다양한 색깔의 차들이 도로를 달리며, 내 turtle객체는 up키 또는 좌우 키를 활용해서 도로를 건너야함
+
+도로를 모두 건너면 다음 단계로 이동하며, 이때 차의 속도가 빨라짐
+
+차와 turtle객체가 부딪치면 game_over가 되며 다시 level1 부터 시작함
+
+해설을 보지 않고 일단 만들어보려고 함
+
+### 1. 설계를 하고 클래스를 생성
+
+![image.png](attachment:3d3bd12a-ca27-447f-a536-fdf0c30e309c:image.png)
+
+회사 짜투리 시간에 진행하고 있어서 폴더 이름이 다를 수 있음
+
+우선 움직이는 차 객체를 만들 car
+
+성공하면 올라가는 단계를 체크하는 level
+
+내가 직접 움직이는 my_turtle
+
+점수를 표시하는 score
+
+screen의 범위를 눈으로 파악하기 위해 만든 sideline
+
+### 2. screen 구성 및 myturtle 객체 생성
+
+스크린은 x,y ⇒ 600,400으로 설계함(너무 크면 안좋을 것 같아서)
+
+![image.png](attachment:f1adbe18-aa5a-4260-9c36-795949b1db86:image.png)
+
+기본 객체 크기는 20x20이므로 객체의 좌표는 0, 190이 되어야함(아래에 붙어있다는 기준으로)
+
+```java
+# 길건너기 게임 프로젝트
+from turtle import Screen
+from my_turtle import MyTurtle
+from sideline import Sideline
+from road import Road
+
+screen = Screen()
+screen.setup(width=600, height=420)
+screen.title("turtle cross game")
+screen.tracer(0)
+
+# 내 본체
+myCharacter = MyTurtle()
+
+# 스크린 범위 확인
+sideline = Sideline()
+
+# 도로 선 그리기
+position_y = -180
+for _ in range(13):
+    road = Road(position_y)
+    position_y += 30
+
+is_game_on = True
+
+while is_game_on:
+    screen.update()
+
+screen.exitonclick()
+```
+
+main은 위의 코드로 구성함
+
+```java
+from turtle import Turtle
+
+class MyTurtle(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.shape("turtle")
+        self.penup()
+        self.left(90)
+        self.goto(0,-200)
+```
+
+my_turtle은 위의 코드로 구성했으며 진행하면서 더 추가할 예정임
+
+```java
+from turtle import Turtle
+
+class Sideline(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.ht()
+        self.color('black')
+        self.penup()
+        self.goto(300,210)
+        self.pendown()
+        self.goto(-300, 210)
+        self.goto(-300, -210)
+        self.goto(300, -210)
+        self.goto(300,210)
+```
+
+sideline은 위의 코드로 구성했으며 22일차에 이미 구성했었던 코드를 그대로 reusing함
+
+### 3. 차 객체 만들기
+
+y폭은 400이다, 객체의 크기는 20이다, 
+
+도로의 크기를 30으로 잡고 차의 크기도 20으로 잡는다.
+
+```java
+from turtle import Turtle
+
+class Road(Turtle):
+    def __init__(self, position):
+        super().__init__()
+        self.ht()
+        self.penup()
+        self.goto(300, position)
+        self.setheading(180)
+        for _ in range(20):
+            self.pendown()
+            self.forward(20)
+            self.penup()
+            self.forward(10)
+```
+
+도로 선을 그리는 객체를 만들었다.
+
+```java
+# 도로 선 그리기
+position_y = -180
+for _ in range(13):
+    road = Road(position_y)
+    position_y += 30
+```
+
+main에 해당 코드를 추가하여 screen에 표시했는데 
+
+![image.png](attachment:8286cf79-f966-48cf-b9a0-1e011a946115:image.png)
+
+왜그런지는 모르겠지만 위 아래에 10정도가 부족해진다.
+
+아마 선의 폭이나 그런게 작용해서 20정도가 차지하는 것 같다. 따라서 크기를 420으로 늘린 후 좌표를 다시 설정(위의 코드들도 수정함)
+
+![image.png](attachment:2fb29e84-f590-44d9-b0ba-091e059f02bb:image.png)
+
+딱 맞는 모습을 볼 수 있다
+
+이제 차량이 생성되는 곳을 좌표로 지정해야 한다. 
+
+y값은 도로의 정 중앙 ex) -180~-150의 중간 → -165가 y좌표
+
+차는 총 12구간에 나타나므로 -165 += 30을 해주면서 차의 좌표를 만들어줄 수 있다.
+
+라고 했는데 시작파일을 줬었네, 다시 처음부터 시작
+
+![image.png](attachment:02fb2670-0569-49ca-9526-673103955a21:image.png)
+
+이렇게 4가지 파일이 주어졌고 안에 들어있는 코드는 뭐 없었음, 간단한 클래스 이름과, 상수들이 적혀있음
+
+### 1. player.py
+
+```python
+from turtle import Turtle
+
+STARTING_POSITION = (0, -280)
+MOVE_DISTANCE = 10
+FINISH_LINE_Y = 280
+
+class Player(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.shape("turtle")
+        self.penup()
+        self.goto(STARTING_POSITION)
+        self.left(90)
+
+    def move(self):
+        self.forward(MOVE_DISTANCE)
+        if self.ycor() == FINISH_LINE_Y:
+            self.goto(STARTING_POSITION)
+
+```
+
+먼저 내가 움직이는 player 객체에서 생성자로 내 거북이를 만들어주고, 스타트 위치로 옮겨줌
+
+up 키를 누르면 실행되는 move 함수를 만들어주고, finish 라인에 도착하면 시작 라인으로 돌아가게 설정
+
+### 2. main.py
+
+```python
+import time
+from turtle import Screen
+from player import Player
+from car_manager import CarManager
+from scoreboard import Scoreboard
+
+screen = Screen()
+screen.setup(width=600, height=600)
+screen.tracer(0)
+
+player = Player()
+
+screen.listen()
+screen.onkey(player.move, 'Up')
+
+game_is_on = True
+while game_is_on:
+    time.sleep(0.1)
+    screen.update()
+
+```
+
+메인에서는 실행에서 필요한 screen을 정의해주고 up키를 누르면 앞으로 가게 리스너이벤트를 등록해줌
+
+1번에서 만든 player 객체를 만들어서 움직이는지 확인 완료
+
+![image.png](attachment:83302fe5-63ed-4ff1-bbc4-31f607ed65fd:image.png)
+
+### 3. car_manager.py
+
+차량은 시작라인을 제외하고 무작위 y축에 생성되며 색깔은 주어졌음
+
+```python
+from turtle import Turtle
+import random
+
+COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
+STARTING_MOVE_DISTANCE = 5
+MOVE_INCREMENT = 10
+
+class CarManager:
+    def __init__(self):
+        self.all_cars = []
+
+    def create_car(self):
+        new_car = Turtle("square")
+        new_car.resizemode("user")
+        new_car.shapesize(1, 2, 1)
+        new_car.color(random.choice(COLORS))
+        new_car.penup()
+        new_car.goto(320, random.randint(-260, 260))
+        self.all_cars.append(new_car)
+
+    def drive(self):
+        for car in self.all_cars:
+            car.backward(STARTING_MOVE_DISTANCE)
+```
+
+우선 클래스 생성자에 배열을 하나 만들어줌, 생성된 car 객체들은 모두 저 배열에 들어감
+
+car 객체를 생성하는 메소드를 만든 후 마지막에 append로 리스트에 객체를 넣어줌
+
+drive메소드에서 반복문을 통해서 배열에 있는 모든 차들을 앞으로 이동시킴
+
+![image.png](attachment:dcdbbb17-89bc-4757-90fc-de0ae1ffb110:image.png)
+
+이건 깰 수가 없음, 차량의 속도를 줄일수도 있지만 확률을 통해 차량의 생성을 억제할 수 있음
+
+```python
+    def create_car(self):
+        dice = random.randint(1,6)
+        if dice == 1:
+            new_car = Turtle("square")
+            new_car.resizemode("user")
+            new_car.shapesize(1, 2, 1)
+            new_car.color(random.choice(COLORS))
+            new_car.penup()
+            new_car.goto(320, random.randint(-260, 260))
+            self.all_cars.append(new_car)
+```
+
+1~6 사이의 숫자를 랜덤으로 뽑고, 1일 때만 객체를 생성함(1/6 확률)
+
+![image.png](attachment:a6fae847-f570-4888-a3ea-f8cb5e5c7fdc:image.png)
+
+나이스함
+
+### 4. 충돌했을 때
+
+만약 거북이와 차의 거리가 20보다 가까우면 반복문을 종료함
+
+```python
+game_is_on = True
+while game_is_on:
+    time.sleep(0.1)
+    screen.update()
+
+    car_manager.create_car()
+    car_manager.drive()
+
+    for car in car_manager.all_cars:
+        if car.distance(player) < 20:
+            game_is_on = False
+```
+
+main의 반복문에 맨 마지막의 for문을 추가함
+
+### 5. 결승점 도달 시 속도 up, level up
+
+```python
+    def go_to_start(self):
+        self.goto(STARTING_POSITION)
+
+    def finish(self):
+        if self.ycor() > FINISH_LINE_Y:
+            return True
+        else:
+            return False
+```
+
+player.py에 해당 메소드 생성
+
+go_to_start는 따로 빼줌, 레벨이 올라가면 결승점에 도달해도 다시 안돌아가는 버그가 있길래 따로 빼준거
+
+y좌표가 결승점보다 크면 True를 반환함
+
+```python
+    def __init__(self):
+		    self.all_cars = []
+		    self.car_speed = STARTING_MOVE_DISTANCE
+    
+    def level_up(self):
+        self.car_speed += MOVE_INCREMENT
+```
+
+car_manager.py 파일에 생성자에 차의 속도를 나타내는 변수를 추가하고, level_up이라는 메소드를 추가해, 차의 스피드를 더해줌
+
+```python
+    if player.finish():
+        player.go_to_start()
+        car_manager.level_up()
+```
+
+이제 마지막으로 main의 반복문 안에 해당 구문을 추가하면 차의 속도가 level이 올라갈수록 빨라짐
+
+### 6. level과 game over 표시하기
+
+이건 쉽죠
+
+```python
+from turtle import Turtle
+
+FONT = ("Courier", 24, "normal")
+
+class Scoreboard(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.score = 1
+        self.ht()
+        self.penup()
+        self.goto(-200,250)
+        self.color('black')
+        self.update_score()
+
+    def update_score(self):
+        self.clear()
+        self.write(f"Level : {self.score}", align="center", font=FONT)
+
+    def game_over(self):
+        self.goto(0,0)
+        self.write("Game Over", align="center", font=FONT)
+```
+
+스코어보드 파일에 생성자, Level을 갱신 해주는 update_score, 게임이 종료됐을 때, 알려주는 game_over 메소드를 생성함
+
+```python
+    for car in car_manager.all_cars:
+        if car.distance(player) < 20:
+            scoreboard.game_over()
+            game_is_on = False
+
+    if player.finish():
+        player.go_to_start()
+        car_manager.level_up()
+        scoreboard.score += 1
+        scoreboard.update_score()
+```
+
+기존의 main에 있던 로직에서 scoreboard 메소드들을 추가하면 끝
+
+![image.png](attachment:767b90df-ff41-41d6-ba50-a469185a9373:image.png)
