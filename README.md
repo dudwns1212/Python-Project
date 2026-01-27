@@ -7180,3 +7180,204 @@ class Scoreboard(Turtle):
 기존의 main에 있던 로직에서 scoreboard 메소드들을 추가하면 끝
 
 ![image.png](attachment:767b90df-ff41-41d6-ba50-a469185a9373:image.png)
+
+## 23일차 추가
+길 건너기 게임에서 다음의 사항을 포함 시킴
+
+### 1. 왼쪽, 오른쪽, 뒤로가기 추가
+
+```python
+# 이벤트 리스너 등록
+screen.listen()
+screen.onkeypress(player.move, "Up")
+screen.onkeypress(player.left_move, "Left")
+screen.onkeypress(player.right_move, "Right")
+screen.onkeypress(player.back_move, "Down")
+```
+
+```python
+class MyTurtle(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.player_speed = 12
+        self.FINISH_LINE = 280
+        self.shape("turtle")
+        self.penup()
+        self.setheading(90)
+        self.goto(START_POSITION)
+
+    def move(self):
+        self.setheading(90)
+        self.forward(self.player_speed)
+
+    def finish(self):
+        self.goto(START_POSITION)
+
+    def left_move(self):
+        self.setheading(180)
+        self.forward(self.player_speed)
+    def right_move(self):
+        self.setheading(0)
+        self.forward(self.player_speed)
+    def back_move(self):
+        self.setheading(270)
+        self.forward(self.player_speed)
+```
+
+이건 뭐 그냥 추가만 하면 되는거라 바로 진행했다.
+
+### 2. Item 기능 추가
+
+1. 화면에 랜덤한 위치에 확률(1/500)에 따라 아이템이 생성됨
+2. 아이템은 산호색 원형으로 지정했고, distance가 15미만이면 먹어진 것으로 정함
+3. 아이템의 종류는 3가지, 내 속도 up, 차 속도 down, 화면의 모든 차 clear
+
+```python
+from turtle import Turtle
+import random as rd
+
+ITEM = ["speed_low", "clear", "speed_up"]
+
+class EventItem:
+    def __init__(self):
+        self.all_item = []
+
+    def create_item(self):
+        dice = rd.randint(1,6)
+        if dice == 1:
+            new_item = Turtle("circle")
+            new_item.color("cyan")
+            new_x = rd.randint(-280,280)
+            new_y = rd.randint(-250,250)
+            new_item.penup()
+            new_item.goto(new_x,new_y)
+
+            new_item.event_type = rd.choice(ITEM)
+            self.all_item.append(new_item)
+
+```
+
+이벤트 클래스를 만듦, 
+
+지금 dice가 1/6으로 되어있는데 검증 때문에 저렇고 6을 500으로 바꿔주면 됨
+
+아이템은 랜덤한 x좌표 280~280, y좌표는 차의 좌표에 맞게 250~250사이에 생성됨
+
+마지막으로 append하기 전에, event_type이라는 속성을 만들고 거기에 item 3개중에 하나를 랜덤으로 넣음
+
+다음으로 main에 아이템과 닿았을 때 상황을 코드로 생성
+
+```python
+    for it in item.all_item:
+        if it.distance(player) < 15:
+            if it.event_type == "speed_up":
+                player.speed_up_item()
+            elif it.event_type == "speed_low":
+                car.speed_low_item()
+            else:
+                car.clear_item()
+            it.ht()
+            item.all_item.remove(it)
+```
+
+아이템의 위치와 내 객체의 위치가 15미만인 경우에서 조건문을 나눠 아이템의 종류가 무엇인지 판별
+
+각각의 아이템에 따라서 함수들이 실행됨
+
+함수를 실행했다면 아이템의 모습을 숨기고, 아이템 리스트에서 해당 아이템을 삭제하여 먹은 것 처럼 UI를 설정함
+
+SpeedUp
+
+```python
+from turtle import Turtle
+
+START_POSITION = (0, -280)
+
+class MyTurtle(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.player_speed = 12
+        self.FINISH_LINE = 280
+        self.shape("turtle")
+        self.penup()
+        self.setheading(90)
+        self.goto(START_POSITION)
+
+    def move(self):
+        self.setheading(90)
+        self.forward(self.player_speed)
+
+    def finish(self):
+        self.goto(START_POSITION)
+
+    def left_move(self):
+        self.setheading(180)
+        self.forward(self.player_speed)
+    def right_move(self):
+        self.setheading(0)
+        self.forward(self.player_speed)
+    def back_move(self):
+        self.setheading(270)
+        self.forward(self.player_speed)
+
+    def speed_up_item(self):
+        self.player_speed += 1
+```
+
+맨 아래 함수이며, 이걸 적용하기 위해 self.player_speed 속성을 생성하고, 아이템을 먹을 경우 +1
+
+거리가 +1 늘어나는 것 이지만, 실제 게임 체감으로는 속도가 올라간 느낌
+
+SpeedDown/Clear
+
+```python
+from turtle import Turtle
+import random
+
+COLORS = ["red","orange","yellow","green","blue","indigo","purple"]
+INCREASE_SPEED = 5
+
+class Car:
+    def __init__(self):
+        self.all_cars = []
+        self.car_speed = 5
+
+    def create_car(self):
+        dice = random.randint(1,6)
+        if dice == 1:
+            new_car = Turtle("square")
+            new_car.resizemode("user")
+            new_car.shapesize(1,2,1)
+            new_car.color(random.choice(COLORS))
+            random_y = random.randint(-250,250)
+            new_car.penup()
+            new_car.goto(300, random_y)
+            self.all_cars.append(new_car)
+
+    def drive(self):
+        for car in self.all_cars:
+            car.backward(self.car_speed)
+
+    def speed_up(self):
+        self.car_speed += INCREASE_SPEED
+
+    def speed_low_item(self):
+        self.car_speed /= 2
+
+    def clear_item(self):
+        for car in self.all_cars:
+            car.ht()
+        self.all_cars.clear()
+```
+
+두 함수는 모두 Car 클래스에 있음, 우선 클리어부터 설명하자면
+
+clear_item은 반복문을 통해서 아이템을 먹은 당시에 리스트에 있는 모든 car 객체들의 모습을 숨기고
+
+당시의 리스트를 빈 리스트로 만듦, 이후에 생기는 객체는 적용 안됨
+
+speed_low_item의 경우는 위에서 했던 speed_up_item과 동일함, 다만 car 객체의 경우 level이 올라가면 속도가 +5씩 빨라지기에 + 또는 -로 설정해버리면 초반에는 효율이 너무 좋고, 뒤에서는 너무 미비함
+
+따라서 현재 속도의 절반으로 설정
+
+이렇게 추가 개발을 하고 게임을 해봤는데 재밌음 ㅋㅋ
