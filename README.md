@@ -7381,3 +7381,445 @@ speed_low_item의 경우는 위에서 했던 speed_up_item과 동일함, 다만 
 따라서 현재 속도의 절반으로 설정
 
 이렇게 추가 개발을 하고 게임을 해봤는데 재밌음 ㅋㅋ
+
+## 24 일차
+# 뱀 게임 수정하기
+
+### 뱀 게임에 최고 점수 추가하기
+
+```python
+from turtle import Turtle
+
+ALIGNMENT = "center"
+FONT = ("Courier", 24, "normal")
+
+class Scoreboard(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.score = 0
+        self.highscore = 0
+        self.penup()
+        self.ht()
+        self.color("white")
+        self.goto(0, 260)
+        self.update_score()
+
+    def update_score(self):
+        self.clear()
+        self.write(f"Score: {self.score}  High Score: {self.highscore}", align=ALIGNMENT, font=FONT)
+
+    def increase_score(self):
+        self.score += 1
+        self.update_score()
+
+    def reset(self):
+        if self.score > self.highscore:
+            self.highscore = self.score
+        self.score = 0
+        self.update_score()
+```
+
+해당 클래스에 highscore라는 속성을 추가함
+
+원래는 gameover였지만 이제는 게임이 끝나면 바로 새 게임이 시작되므로 reset으로 바꿈
+
+reset에는 본래 지금의 점수가 최고점수라면 highscore에 score를 넣어줌
+
+reset이므로 현재의 score는 0으로 넣어줌
+
+마지막으로 update를 실행하며, update에는 기존의 score와 highscore를 보여주도록 함
+
+![image.png](attachment:8a9072ba-a913-4fe9-a99c-2c04c2b29ba8:image.png)
+
+현재는 죽어도 다시 시작되는 로직은 안만들었기에 저렇게 부딪치면 멈추고 HighScore에 현재 점수가 반영되는 것을 볼 수 있음
+
+### 게임 지속하기
+
+```python
+from turtle import Turtle
+
+STARTING_POSITION = [(0,0), (-20,0), (-40,0)]
+MOVE_DISTANCE = 20
+UP = 90
+DOWN = 270
+LEFT = 180
+RIGHT = 0
+
+class Snake:
+    def __init__(self):
+        self.go_home()
+
+    def create_snake(self):
+        for position in STARTING_POSITION:
+            self.add_segment(position)
+
+    def extend(self):
+        self.add_segment(self.segments[-1].position())
+
+    def add_segment(self, position):
+        new_segment = Turtle("square")
+        new_segment.color("white")
+        new_segment.penup()
+        new_segment.goto(position)
+        self.segments.append(new_segment)
+
+    def move(self):
+        # 뱀 방향 바꾸기
+        for seg_num in range(len(self.segments) - 1, 0, -1):
+            new_x = self.segments[seg_num - 1].xcor()
+            new_y = self.segments[seg_num - 1].ycor()
+            self.segments[seg_num].goto(new_x, new_y)
+        self.segments[0].forward(MOVE_DISTANCE)
+
+    def up(self):
+        if self.head.heading() != DOWN:
+            self.head.setheading(UP)
+
+    def down(self):
+        if self.head.heading() != UP:
+            self.head.setheading(DOWN)
+
+    def left(self):
+        if self.head.heading() != RIGHT:
+            self.head.setheading(LEFT)
+
+    def right(self):
+        if self.head.heading() != LEFT:
+            self.head.setheading(RIGHT)
+
+    def go_home(self):
+        self.segments = []
+        self.create_snake()
+        self.head = self.segments[0]
+
+```
+
+go_home이라는 메소드를 만들어서, 객체를 새로 생성하는(생성자가 아닌) 메소드를 만들어줬음
+
+코드가 겹치니까 생성자에 있던 코드는 해당 함수로 교체함 그리고 실행하면
+
+![image.png](attachment:96d997ec-b582-4ca3-883d-d0c8f6d79a03:image.png)
+
+이렇게 기존의 거북이가 사라지지 않음, 
+
+```python
+    def __init__(self):
+        self.segments = []
+        self.create_snake()
+        self.head = self.segments[0]   
+   
+    def go_home(self):
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+```
+
+따라서 segments.clear()를 통해 해결하였고, 게임을 플레이하는데 잔 오류가 생겨서 생성자도 그냥 입력해놈
+
+![image.png](attachment:5398f3ff-e33a-4e71-8738-d706bbd2d22c:image.png)
+
+게임은 잘 작동하는데 여전히 안사라짐, 배열에서 없애는것 만으로는 안되나봄
+
+ht()활용해서 모습을 숨겨야겠음
+
+```python
+    def go_home(self):
+        for segment in self.segments:
+            segment.ht()
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+```
+
+지금은 게임을 종료하면 다시 highscore가 0으로 돌아간다.
+
+어떻게하면 다시 게임을해도 최고점수가 기억되게 할 수 있을까
+
+### With 키워드 사용 방법
+
+![image.png](attachment:4a7c9af9-d91a-4ef7-8484-847c9398e43e:image.png)
+
+my_file에는 Hello my name is gyj를 적어둠
+
+```python
+file = open("my_file.txt")
+contents = file.read()
+print(contents)
+```
+
+main.py에 위의 코드를 적고 실행해주면 해당 파일을 읽어서 contents에 내가 적은 값을 넣어줌
+
+![image.png](attachment:2c10f0fe-c904-45e4-8a7f-93318173087d:image.png)
+
+파일을 열고 하고싶은 코드를 작성한 후 마지막에는 항상 file.close()로 닫아줘야함
+
+이유는 리소스를 낭비하지 않기 위해서임
+
+```python
+with open("my_file.txt") as file:
+    contents = file.read()
+    print(contents)
+```
+
+with 키워드를 이용하면 file이름을 붙여서 불러줄 수 있음
+
+전의 코드와 같아 보이지만 다른점은 with키워드를 사용하면 마지막에 닫아줄 필요가 없다는거임
+
+with는 들여쓰기의 구문이 끝나면 자동으로 file을 닫아줌
+
+```python
+with open("my_file.txt", mode="w") as file:
+    file.write("New text")
+```
+
+파일에 새로운 text를 쓰기 위해서는 mode를 w로 변경해줘야 함
+
+다만, w로 변경하면 읽는게 안됨(기본은 r모드)
+
+![image.png](attachment:fa4c9846-5f7d-4b36-afb0-358bfac236d3:image.png)
+
+코드를 실행해주면 파일에 새로운 text가 입력된 것을 볼 수 있음
+
+만약에 기존에 있던 글에서 더해서 쓰고싶다면
+
+```python
+with open("my_file.txt", mode="a") as file:
+    file.write("New text2")
+```
+
+모드를 a로 변경해주면 됨
+
+![image.png](attachment:850d5a73-231f-446f-821c-a7fd12bed00f:image.png)
+
+실행 후 확인하면 새로운 글이 써진 것을 볼 수 있고, 줄바꿈 \n도 가능함
+
+```python
+with open("new_file.txt", mode="w") as file:
+    file.write("HI My new File")
+```
+
+새롭게 파일을 만들고 싶다면 새롭게 만들고싶은 파일 이름을 적고, mode를 w로 해주면 됨
+
+![image.png](attachment:9e61f375-dd0f-4ee0-8299-bef8fb59cc99:image.png)
+
+새로운 파일이 생성됐으며 내가 쓴 글이 적용된 것을 볼 수 있음
+
+이제 뱀 프로젝트로 돌아가서 파일에 최고 점수를 기록하고 파일에 있는 최고 점수를 읽어서 값을 넣어줄 수 있음, scoreboard를 생성할 때, 파일에서 최고점수를 읽고 값을 대입하는거임
+
+### 뱀 게임에서 파일에 최고 점수 읽고 쓰기
+
+![image.png](attachment:06972dd5-5e0d-4820-a6f2-45394ec213b2:image.png)
+
+우선 highscore_text라는 파일을 만들어줌
+
+```python
+class Scoreboard(Turtle):
+    def __init__(self):
+        super().__init__()
+        self.score = 0
+        with open("highscore_text.txt") as data:
+            self.highscore = int(data.read())
+        self.penup()
+        self.ht()
+        self.color("white")
+        self.goto(0, 260)
+        self.update_score()
+```
+
+기존에 highscore를 0으로 정의했던 코드를 파일에서 점수를 읽어오는 코드로 변환함
+
+```python
+    def reset(self):
+        if self.score > self.highscore:
+            self.highscore = self.score
+            with open("highscore_text.txt", mode="w") as data:
+                data.write(str(self.highscore))
+        self.score = 0
+        self.update_score()
+```
+
+reset에서 최고점수를 바꿔주고 해당 점수를 파일에 기록함
+
+![image.png](attachment:30e826ec-9a51-4cb3-aac2-6768d9c3fb36:image.png)
+
+우선 highscore를 3으로 바꿔준 후, 종료하고 다시 실행해보면
+
+![image.png](attachment:3a370057-a981-4286-8426-7951e7fd1378:image.png)
+
+여전히 최고점수가 3으로 남아있는 것을 확인할 수 있음
+
+### 상대 및 절대 파일 경로에 대한 이해
+
+C:\Users\ernmq\PycharmProjects
+
+Root 폴더 → C: (c드라이브)
+
+내가 위에서 만든 highscore.txt의 경로는 
+
+C:\Users\ernmq\PycharmProjects\day20\highscore_text.txt 
+
+이 경로가 해당 파일의 절대 경로이다. 즉 내 파일의 근원부터 현재 어디 폴더에 위치하는지 나타내는 경로
+
+그럼 만약에 내가 day20 안의 example이라는 폴더에 위치해 있다고 가정해보자
+
+그러면 내가 highscore_text.txt에 어떻게 접근할 수 있을까? → ../highscore_text.txt 이렇게 접근이 가능함
+
+../ → 내 상위 경로를 가리킴(day20), 그 안에 있는 해당 파일에 접근하겠다는 의미임
+
+그렇다면 프로젝트에서 처럼, 내가 같은 폴더 안의 파일을 읽고 싶은데 절대 경로로 파일을 읽고 싶다면
+
+main.py에서 file.txt를 읽는다 → ./file.txt 로 작성할 수 있다. 하지만 같은 디렉토리에 있으므로 생략이 가능하다. 따라서 그냥 file.txt로 읽는다
+
+![image.png](attachment:bc3d3646-3a41-44ed-aeac-8d91a9190c77:image.png)
+
+기존에 파이썬에 있던 txt 파일들을 바탕화면으로 옮겨줬다
+
+![image.png](attachment:75727abf-da16-45c3-a195-49d14c28d74c:image.png)
+
+해당 파일의 속성을 들어가보면 파일의 절대경로를 알 수 있다.
+
+![image.png](attachment:f03e1973-31ed-4da7-ad89-789ceb260845:image.png)
+
+파이참으로 돌아가서 해당 main을 실행하면 오류가 발생하는것을 볼 수 있다.
+
+왜냐면 해당 디렉토리에 파일이 없어서 읽을 수 없다.
+
+![image.png](attachment:f6de3d2c-252f-48e0-bea8-6a17479f9059:image.png)
+
+이렇게 절대 경로를 통해서 파일을 읽을 수 있다.
+
+```python
+with open(r"../../OneDrive\바탕 화면\new_file.txt") as file:
+    #C:\Users\ernmq\PycharmProjects\day24\main.py
+    contents = file.read()
+    print(contents)
+```
+
+또한 이렇게, 현재 아래 main.py의 경로를 보고 ../../을 통해 ernmq 폴더로 이동 후 바탕 화면 위치를 찾아서 해당 파일을 읽을 수도 있다.
+
+### 메일 머지 프로젝트
+
+![image.png](attachment:401aec77-0f3f-4819-a227-00b082d91024:image.png)
+
+```python
+Dear [name],
+
+You are invited to my birthday this Saturday.
+
+Hope you can make it!
+
+Angela
+
+```
+
+편지 예시
+
+```python
+Aang
+Zuko
+Appa
+Katara
+Sokka
+Momo
+Uncle Iroh
+Toph
+```
+
+편지 쓸 친구들, 편지가 저장될 경로는 Output/ReadyToSend 안에 넣어야됨
+
+우선 해당 이름들을 배열로 생성해야됨
+
+![image.png](attachment:fd33a9b9-5084-4eed-894d-fc071faf2f01:image.png)
+
+파일 경로를 읽어서 해당 file안에 있는 이름들을 \n을 기준으로 spilt하여 배열로 만듦
+
+```python
+with open("Input/Letters/starting_letter.txt") as letter_default:
+    letters = letter_default.read()
+```
+
+미리 만들어진 편지 틀을 파일에서 읽어서 letters에 담음
+
+```python
+for name in names:
+    with open(f"Output/ReadyToSend/letter_for_{name}", mode='w') as letter:
+        letter.write(letters.replace('[name]', f"{name}"))
+```
+
+마지막으로 write를 하는데, 해당 기본 편지 틀에 있는 [name]을 현재 반복문의 name으로 바꿔 편지를 작성함
+
+![image.png](attachment:216631a9-ac46-496f-b655-8fe54d76d817:image.png)
+
+![image.png](attachment:e9b3b5de-5e68-4a74-bda8-dfc99baac96c:image.png)
+
+이렇게 편지에 각각의 이름이 들어갈 수 있음
+
+### 강의 해설
+
+```python
+with open("Input/Names/invited_names.txt") as name:
+    names = name.readlines()
+    print(names)
+```
+
+![image.png](attachment:fe4919ce-867f-44a7-a694-ed0dddfeb49a:image.png)
+
+```python
+with open("Input/Letters/starting_letter.txt") as letter_file:
+    letter_contents = letter_file.read()
+    for name in names:
+        new_letter = letter_contents.replace(PLACEHOLDER, name)
+        print(new_letter)
+```
+
+![image.png](attachment:b2b81881-d572-4763-ab40-69b38cc1a011:image.png)
+
+\n이 들어가 있어서 줄이 띄어진 것이 보임
+
+```python
+with open("Input/Letters/starting_letter.txt") as letter_file:
+    letter_contents = letter_file.read()
+    for name in names:
+        stripped_name = name.strip()
+        print(stripped_name)
+        new_letter = letter_contents.replace(PLACEHOLDER, stripped_name)
+```
+
+![image.png](attachment:c20079bd-9f53-4a52-904d-611ee35690c6:image.png)
+
+strip()을 활용하면 앞 뒤의 공백을 모두 없애줌(\n까지 없애주나봄)
+
+![image.png](attachment:b930378a-b62f-4c32-ba76-e5a2fab7d5fc:image.png)
+
+후에 new_letter를 확인해보면 정상적인 편지를 확인할 수 있음
+
+```python
+with open("Input/Letters/starting_letter.txt") as letter_file:
+    letter_contents = letter_file.read()
+    for name in names:
+        stripped_name = name.strip()
+        new_letter = letter_contents.replace(PLACEHOLDER, stripped_name)
+        with open(f"Output/ReadyToSend/letter_for_{stripped_name}", mode="w") as completed_letter:
+            completed_letter.write(new_letter)
+```
+
+후에 write는 로직은 동일한데 같은 반복문 안에서 처리하는게 달랐음
+
+![image.png](attachment:cf08f6e1-3a98-4626-884f-b9a59df28773:image.png)
+
+```python
+Dear Momo,
+
+You are invited to my birthday this Saturday.
+
+Hope you can make it!
+
+Angela
+
+```
+
+실행해주면 편지들이 생성되며, 내용도 잘 나온것을 확인할 수 있음
+
+내 방식대로 해결해본 후에 해설을 보면, 새로운 함수들을 배우면서 깨닫게 더 큼
+
+새로운 함수를 활용해서 코드를 다시 짜보면 확실히 내 코드보다 깔끔하며 가독성도 더 좋아보임
