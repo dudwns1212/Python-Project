@@ -7823,3 +7823,351 @@ Angela
 내 방식대로 해결해본 후에 해설을 보면, 새로운 함수들을 배우면서 깨닫게 더 큼
 
 새로운 함수를 활용해서 코드를 다시 짜보면 확실히 내 코드보다 깔끔하며 가독성도 더 좋아보임
+
+## 25일차
+## CSV 파일을 읽어서 데이터화
+
+```python
+# with open("weather_data.csv", mode='r') as weather:
+#     data.append(weather.readlines())
+#     print(data)
+
+import csv
+
+with open("weather_data.csv", mode='r') as weather:
+    data=(csv.reader(weather))
+    for _ in data:
+        print(_)
+```
+
+24일차에 배웠던 파일을 읽는 with open을 이용해 csv파일을 읽고
+
+파이썬에 기본적으로 있는 csv 라이브러리를 활용해서 간편하게 리스트로 만들 수 있다
+
+![image.png](attachment:8d567dc9-6f16-4aac-8b11-6e0a4a0332fc:image.png)
+
+### temperatures 리스트 만들기
+
+현재 만든 리스트를 활용해서 온도만 따로 뺀 정수형 리스트를 만들어야 함
+
+```python
+import csv
+
+with open("weather_data.csv", mode='r') as weather:
+    data=(csv.reader(weather))
+    temperatures = []
+    for temperature in data:
+        if temperature[1] == 'temp':
+            continue
+        temperatures.append(int(temperature[1]))
+    print(temperatures)
+```
+
+이렇게 만들어볼 수 있다.
+
+만약에 데이터가 간단하지 않고 매우 복잡하다면, 코드가 훨씬 더 어려워지는데
+
+이러한 데이터를 간단하게 읽고 데이터로 변환하려면 Pandas를 활용해야 한다.
+
+## Pandas
+
+```python
+import pandas
+data = pandas.read_csv("weather_data.csv")
+print(data)
+```
+
+![image.png](attachment:ee43e44b-84f7-4889-96ce-fd70e5e43fa6:image.png)
+
+ㅋㅋ지린다, 이래서 판다스판다스 하는구나 3줄로 끝나버리네
+
+![image.png](attachment:0ed802bc-3712-47ec-ade4-79e8598d6153:image.png)
+
+위 사진처럼 특정 컬럼만 보고싶다면 `print(data["temp"])` 이렇게 대괄호 안에 컬럼을 입력하면 됨
+
+판다스는 첫 번째 줄을 각 열의 제목으로 사용하기 때문에 손쉽게 사용할 수 있음
+
+## 행과 열
+
+```python
+print(type(data))
+print(type(data["temp"]))
+```
+
+![image.png](attachment:551454ea-6f50-4de9-83af-042ccc429c1f:image.png)
+
+행과 열을 가지는 표 형식의 데이터는 판다스에서 DataFrame이라는 클래스이며
+
+해당 컬럼에 대한 각 데이터들을 Series 클래스임
+
+즉, 전체 표는 데이터프레임, 각 열(날씨, 상태, 요일)은 시리즈임
+
+### 판다스의 여러 API 활용
+
+```python
+data_dict = data.to_dict()
+print(data_dict)
+print(data_dict["day"])
+print(data_dict["temp"])
+```
+
+![image.png](attachment:5663d7e9-73a8-4e83-907b-fd897c5abc91:image.png)
+
+리스트 형태를 Dictionary형태로 바꿀 수 있음
+
+```python
+temp_list = data["temp"].to_list()
+print(temp_list)
+print(type(temp_list))
+```
+
+data[”temp”] → 시리즈 타입
+
+이 시리즈 타입을 list 타입으로 바꿔줄 수 있음
+
+![image.png](attachment:07c7ebca-5a4e-487a-a624-7fc220fff3c0:image.png)
+
+값은 동일함
+
+### 온도 열에서 평균 온도 구하기
+
+python에서는 수학적인 값들을 계산할 때, numpy라는 라이브러리를 활용함
+
+```python
+import numpy
+
+avg = numpy.average(temp_list)
+print(avg)
+```
+
+![image.png](attachment:642c6960-8236-4b09-a36c-5741fa357715:image.png)
+
+평균값 이외에도 최소, 최대 등등 다양한 함수들이 있음
+
+numpy를 사용하지 않아도 판다스 내부 함수에 평균값을 계산하는 메소드가 있음
+
+```python
+avg = data["temp"].mean()
+print(avg)
+avg2 = temp_list.mean()
+print(avg2)
+```
+
+avg는 series 타입이며 avg2는 list타입임
+
+![image.png](attachment:c90897b7-19e7-4065-87b4-859f208d69f1:image.png)
+
+당연하지만 list에는 평균값을 구하는 메소드가 없어서 오류가 발생하며, series 타입은 잘 작동함
+
+### 최댓값 최솟값
+
+```python
+data_temp = data["temp"]
+print(data_temp.max())
+print(data_temp.min())
+```
+
+![image.png](attachment:e953a9c3-2fd2-490a-9865-df46d6e42e72:image.png)
+
+### 행 데이터 출력
+
+```python
+# 행 데이터 구하기, 월요일
+data_monday = data[data.day == "Monday"]
+print(data_monday)
+```
+
+![image.png](attachment:241917d9-f5e1-469d-8459-ef5e9d935204:image.png)
+
+데이터프레임(data)에서 data.day(day컬럼) 이 월요일인 값을 꺼냄
+
+### 온도가 가장 높은 데이터가 있는 행을 구하기
+
+```python
+# 온도가 가장 높은 데어티가 있는 행을 구하기
+data_temp_max = data[data.temp == data.temp.max()]
+print(data_temp_max)
+```
+
+![image.png](attachment:d88796d2-c4ad-4014-9434-262d7ff3fe36:image.png)
+
+### dict to dataframe
+
+```python
+data_dict = {
+    "students": ["Amy", "Jack", "Mike"],
+    "scores": [76, 56, 65]
+}
+data = pandas.DataFrame(data_dict)
+print(data)
+```
+
+![image.png](attachment:690dabc9-2b8c-48f6-8660-88d365257502:image.png)
+
+이렇게 딕셔너리 형태의 값을 DataFrame으로 바꿔줄 수 있음
+
+### 새로운 csv 파일 만들기
+
+```python
+data_dict = {
+    "students": ["Amy", "Jack", "Mike"],
+    "scores": [76, 56, 65]
+}
+data = pandas.DataFrame(data_dict)
+print(data)
+data.to_csv("new_data.csv")
+```
+
+![image.png](attachment:4759039b-30c8-42bc-812c-4aaac37a7431:image.png)
+
+이렇게 to_csv를 활용해서 새롭게 파일로 추가할 수 있음
+
+## 판다스로 하는 데이터 분석
+
+![image.png](attachment:19598a91-8c23-443f-a881-182cc4f8b823:image.png)
+
+미국에 있는 다람쥐의 생태분석 자료임
+
+이 자료를 활용해서 회색 다람쥐는 얼마나 있는지 확인
+
+```python
+data = pandas.read_csv("2018_Central_Park_Squirrel_Census_-_Squirrel_Data.csv")
+gray_color = len(data[data["Primary Fur Color"] == "Gray"])
+cinnamon_color = len(data[data["Primary Fur Color"] == "Cinnamon"])
+black_color = len(data[data["Primary Fur Color"] == "Black"])
+
+dict_data = {
+    "Fur Color": ["Gray", "Cinnamon", "Black"],
+    "Count": [gray_color, cinnamon_color, black_color]
+}
+
+data_color = pandas.DataFrame(dict_data)
+data_color.to_csv("color_data.csv")
+```
+
+1. csv 파일 읽어서 확인
+2. data[data[”primary Fur Color”] == Gray] → 마지막에 data[] 해주는거 주의!!
+3. 각 색깔별로 DataFrame을 확인 후 len을 활용해 총 컬럼의 길이(개수) 추출
+4. dict 형태 만들기, 열 → 색, 개수 + [행 값들]
+5. dict 형태를 DataFrame 형태로 만들고 Csv 파일로 만들기
+
+## 미국 주 이름 맞추기 게임 프로젝트
+
+```python
+import turtle
+
+screen = turtle.Screen()
+screen.title("U.S States Game")
+image = "blank_states_img.gif"
+turtle.addshape(image)
+turtle.shape(image)
+
+screen.exitonclick()
+```
+
+![image.png](attachment:d43f8f47-16e1-4a18-91ea-8ebd3c18ffea:image.png)
+
+이렇게 addshape 함수를 통해서 gif파일로 배경에 그림을 넣을 수 있다
+
+```python
+import turtle
+
+screen = turtle.Screen()
+
+screen.title("U.S States Game")
+image = "blank_states_img.gif"
+turtle.addshape(image)
+turtle.shape(image)
+
+def get_mouse_click_coor(x, y):
+    print(x,y)
+
+turtle.onscreenclick(get_mouse_click_coor)
+
+turtle.mainloop()
+```
+
+get_mouse_click_coor 함수는 클릭한 위치의 x와 y좌표를 출력해주는 함수이며
+
+onscreenclick는 클릭할 때 실행되는 이벤트 리스너 함수이다. 
+
+이벤트 리스너로 클릭 시에 get_mouse_click_coor가 실행되며 해당 좌표가 출력됨
+
+mainloop는 screen화면이 클릭해도 사라지지 않게 하기 위한 메서드이다
+
+![image.png](attachment:2f7c18df-d177-4a4c-a160-84bf60ae275c:image.png)
+
+이제 주들의 중심 좌표를 알았다면 csv파일에 정리할 수 있다(사실 파일로 이미 받았음)
+
+![image.png](attachment:4f022c68-c08c-49f9-8670-29e8a42d4aa2:image.png)
+
+```python
+import turtle
+import pandas
+
+screen = turtle.Screen()
+
+screen.title("U.S States Game")
+image = "blank_states_img.gif"
+turtle.addshape(image)
+turtle.shape(image)
+
+data = pandas.read_csv("50_states.csv")
+all_states = data["state"].to_list()
+
+guessed_states = []
+
+while len(guessed_states) < 50:
+    answer_state = screen.textinput(title=f"{len(guessed_states)}/50 State Correct",
+                                    prompt="What's another state's name?").title()
+    if answer_state in all_states:
+        guessed_states.append(answer_state)
+        t = turtle.Turtle()
+        t.ht()
+        t.penup()
+        t.color("black")
+        state_data = data[data.state == answer_state]
+        t.goto(int(state_data.x.iloc[0]), int(state_data.y.iloc[0]))
+        t.write(answer_state)
+
+screen.exitonclick()
+```
+
+answer를 통해 input값으로 사용자에게 미국 주를 맞추라고 던져주고, 값을 받음(tilte로 앞글자만 대문자)
+
+while문은 50개 주를 모두 맞출 때 까지 반복됨
+
+그 다음 if문을 통해서 사용자가 입력한 값이 csv파일에 있는 주 이름의 값과 같은지 확인하고 있다면
+
+turtle.write 메서드를 통해서 해당 위치에 주 이름을 입력함
+
+여기서 x와 y좌표가 필요하므로, 해당 주 이름의 열 데이터를 뽑아서 x와 y값을 뽑음
+
+```python
+while len(guessed_states) < 50:
+    answer_state = screen.textinput(title=f"{len(guessed_states)}/50 State Correct",
+                                    prompt="What's another state's name?").title()
+    if answer_state == "Exit":
+        missing_state = []
+        for state in all_states:
+            if state not in guessed_states:
+                missing_state.append(state)
+        new_data = pandas.DataFrame(missing_state)
+        new_data.to_csv("missing_file")
+        break
+
+    if answer_state in all_states:
+        if answer_state not in guessed_states:
+            guessed_states.append(answer_state)
+        t = turtle.Turtle()
+        t.ht()
+        t.penup()
+        t.color("black")
+        state_data = data[data.state == answer_state]
+        t.goto(int(state_data.x.iloc[0]), int(state_data.y.iloc[0]))
+        t.write(answer_state)
+```
+
+마지막으로 같은 값을 입력했을 때는 score가 안올라가게 설정했으며
+
+Exit를 입력 시 while문을 빠져나오면서 못맞춘 값들을 새 파일에 저장함
