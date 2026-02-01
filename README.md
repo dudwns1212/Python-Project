@@ -8171,3 +8171,397 @@ while len(guessed_states) < 50:
 마지막으로 같은 값을 입력했을 때는 score가 안올라가게 설정했으며
 
 Exit를 입력 시 while문을 빠져나오면서 못맞춘 값들을 새 파일에 저장함
+
+## 26 일차
+목록과 디렉토리에 관한 이해
+
+## 리스트 컴프리헨션을 통해 리스트 생성하기
+
+```python
+# 기존의 코드
+numbers = [1,2,3]
+new_list = []
+
+for n in numbers:
+    add_1 = n+1
+    new_list.append(add_1)
+
+print(new_list) # [2,3,4]
+
+# 리스트 컴프리헨션을 사용하는 방법
+new_numbers = [item+1 for item in numbers]
+print(new_numbers) # [2,3,4]
+```
+
+기존에 여러 줄로 복잡하게 구성한 코드를 리스트 컴프리헨션을 활용해 1줄로 생성함
+
+기본구조는 [new_item for n in list] 
+
+list : 기존의 리스트
+
+n : 기존의 리스트 안의 원소값
+
+new_item : 새로운 리스트의 원소값(보통 n을 활용하여 다른 값으로 변환함)
+
+리스트 컴프리헨션이라고 해서 무조건 리스트만 되는 것은 아님, 문자열 또한 가능함
+
+```python
+name = "Angela"
+new_name = [letter for letter in name]
+print(new_name) # ['A', 'n', 'g', 'e', 'l', 'a']
+```
+
+이렇게 문자열의 각 자리를 리스트에 담을 수 있으며, upper()를 활용해 모두 대문자로 바꿔 리스트에 넣는 등 활용이 가능함
+
+이렇게 리스트 컴프리헨션에서 활용이 가능한 나열된 형태를 Sequences라고 함
+
+시퀸스에는 list, range, string, tuple 등이 있음
+
+### range(1~4)를 활용하여 2배의 범위를 가진 리스트를 생성하기
+
+```python
+ex_1 = [n*2 for n in range(1,5)]
+print(ex_1) # [2,4,6,8]
+```
+
+매우 쉽군
+
+### 조건부 리스트 컴프리헨션
+
+new_list = [new_item for item in list if test]
+
+if조건을 활용할 수 있다.
+
+```python
+names = ["Alex", "Beth", "Caroline", "Dave", "Elanor", "Freddie" ]
+# 4글자 이하로 구성
+new_names = [new_name for new_name in names if len(new_name) < 5]
+print(new_names) # ["Alex", "Beth", "Dave"]
+```
+
+![image.png](attachment:fc47e39f-dbf0-4319-8c24-08076180e5e5:image.png)
+
+### 5글자 이상의 이름만 가져오며, 모두 대문자로 변환
+
+```python
+# 5글자 이상, 모두 대문자
+ex_2 = [new_name.upper() for new_name in names if len(new_name) >= 5]
+print(ex_2) # ['CAROLINE', 'ELANOR', 'FREDDIE']
+```
+
+## 제곱수 실습
+
+**제곱수 실습**
+
+리스트 컴프리헨션을 사용하여 `squared_numbers`라는 새 리스트를 만들 것입니다. 이 새 리스트에는 `numbers` 리스트의 각 숫자가 제곱된 숫자가 포함되어야 합니다.
+
+예를 들어,
+
+`4 * 4 = 16`
+
+4의 제곱은 16입니다.
+
+- *절대** `numbers`리스트를 직접 수정하지 마세요. 루프 대신 **List Comprehension**을 사용해보세요.
+
+목표 출력:
+
+`[1, 1, 4, 9, 25, 64, 169, 441, 1156, 3025]`
+
+```python
+numbers = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+squared_numbers = [num*num for num in numbers]
+print(squared_numbers)
+```
+
+![image.png](attachment:f183780e-5bad-4cf8-ad3d-bf56ee8718b7:image.png)
+
+## 짝수 필터링 실습
+
+**짝수 필터링 실습**
+
+이 list comprehension 연습에서 여러 숫자 중에서 짝수를 걸러내기 위해 list comprehension을 사용하는 연습을 할 것입니다.
+
+먼저 list_of_strings를 `numbers`라는 정수 리스트로 변환하기 위해 list comprehension을 사용하세요.
+
+그런 다음 다시 리스트 컴프리헨션을 사용하여 `result`라는 새 리스트를 만드세요.
+
+이 새 리스트는 `numbers`리스트에서 짝수만 포함해야 합니다.
+
+다시 한 번 루프 대신 Python의 **List Comprehension**을 사용해보세요.
+
+```python
+list_of_strings = ['9', '0', '32', '8', '2', '8', '64', '29', '42', '99']
+numbers = [int(num) for num in list_of_strings]
+result = [num for num in numbers if num%2 == 0]
+print(result)
+```
+
+![image.png](attachment:6725d79d-efb3-4faf-aa14-451a0272426f:image.png)
+
+## 데이터 중첩
+
+**데이터 중첩**
+
+💪 이번 실습은 어렵습니다. 💪
+
+file1.txt와 file2.txt 안을 살펴보세요. 각 파일에는 각각 새 줄에 하나의 숫자가 포함되어 있습니다.
+
+file1과 file2에 공통으로 있는 숫자를 포함하는 `result`라는 리스트를 만들 것입니다.
+
+예를 들어, file1.txt에 다음이 포함되어 있다면:
+
+1
+
+2
+
+3
+
+그리고 file2.txt에 다음이 포함되어 있다면:
+
+2
+
+3
+
+4
+
+result = [2, 3]
+
+중요: 출력은 문자열이 아닌 정수의 리스트여야 합니다!
+
+반복문 대신 **리스트 컴프리헨션**을 사용해보세요.
+
+```python
+with open("file1.txt") as file1:
+    list_1 = [string.strip() for string in file1.readlines()]
+
+with open("file2.txt") as file2:
+    list_2 = [string.strip() for string in file2.readlines()]
+    
+# 정수형 리스트화
+new_list_1 = [int(num) for num in list_1]
+new_list_2 = [int(num) for num in list_2]
+
+# 중복값만 리스트에 넣기
+result = [num for num in new_list_1 if num in new_list_2]
+
+print(result)
+```
+
+![image.png](attachment:7631d7a6-7d89-4a36-8066-ee715515231c:image.png)
+
+## 미국 주 게임에 List 컴프리헨션 적용시키기
+
+```python
+    if answer_state == "Exit":
+        missing_state = []
+        for state in all_states:
+            if state not in guessed_states:
+                missing_state.append(state)
+        new_data = pandas.DataFrame(missing_state)
+        new_data.to_csv("missing_file")
+        break
+```
+
+사용자가 Exit를 입력하면 반복문을 통해 맞추지 못한 주의 이름이 새로운 파일에 써지며 생성되는 코드인데 이 코드를 리스트 컴프리헨션을 통해 짧게 수정할 수 있다
+
+```python
+    if answer_state == "Exit":
+        missing_state = [state for state in all_states if state not in guessed_states]
+        new_data = pandas.DataFrame(missing_state)
+        new_data.to_csv("missing_file")
+        break
+```
+
+## 딕셔너리 컴프리헨션
+
+new_dict = {**new_key**:**new_value** for **item** in **list**}
+
+→ new_dict = {**new_key**:**new_value** for (**key**, **value**) ****in **dict.itmes()**}
+
+→ new_dict = {**new_key**:**new_value** for (**key**, **value**) ****in **dict.itmes()** if **test**}
+
+```python
+# 딕셔너리 컴프리헨션
+import random
+students_scores = {student:random.randint(1,100) for student in names}
+print(students_scores)
+```
+
+![image.png](attachment:fd3b6680-6e75-4bea-be8e-933106227227:image.png)
+
+```python
+# 딕셔너리를 활용한 컴프리헨션
+passed_students = {key:value for(key, value) in dict.items(students_scores) if value > 60}
+print(passed_students)
+```
+
+![image.png](attachment:ad8e25cd-b5f0-43cf-9d9d-eb52b08e2452:image.png)
+
+딕셔너리를 활용할 때는 dict.items(dictionary) 를 써야 오류가 발생하지 않음, 그냥 딕셔너리만 넣는다면 오류가 발생함, 또는 아래와 같은 코드로 작성할수도 있음
+
+```python
+passed_students = {student:score for(student, score) in students_scores.items() if score > 60}
+```
+
+key와 value에 이름을 붙일 수 있으며, 딕셔너리.items() 로 딕셔너리를 사용할 수 있다.
+
+## 딕셔너리 컴프리헨션1
+
+주어진 문장의 각 단어를 취하여 각 단어의 글자 수를 계산하는 `result`라는 딕셔너리를 만들기 위해 딕셔너리 컴프리헨션을 사용할 것입니다.
+
+문장을 단어의 리스트로 변환하는 방법을 알아보기 위해 구글링해보세요. *
+
+- 절대** 직접 딕셔너리를 생성하지 마세요. 루프 대신 **딕셔너리 컴프리헨션**을 사용해보세요.
+
+이 연습을 간단하게 유지하기 위해 공백이 없는 단어 뒤에 오는 모든 구두점을 단어의 일부로 계산하세요. 따라서 "Swallow?"의 길이는 8입니다.
+
+```python
+sentence = "What is the Airspeed Velocity of an Unladen Swallow?"
+result = {word:len(word) for word in sentence.split(" ")}
+```
+
+![image.png](attachment:8f1fa0f2-346c-4272-8c78-866cccb7564a:image.png)
+
+## 딕셔너리 컴프리헨션2
+
+섭씨 온도를 화씨 온도로 변환하는 `weather_f`라는 딕셔너리를 만들기 위해 딕셔너리 컴프리헨션을 사용할 것입니다.
+
+`temp_c`를 `temp_f`로 변환하려면 이 공식을 사용하세요:
+
+`(temp_c * 9/5) + 32 = temp_f`
+
+섭씨에서 화씨로 변환하는 차트
+
+![](https://img-c.udemycdn.com/redactor/raw/coding_exercise_instructions/2024-08-02_15-08-18-b00faeae64310d6fb7272605cd37a8da.png)
+
+- 절대** 직접 딕셔너리를 생성하지 마세요. 루프 대신 **딕셔너리 컴프리헨션**을 사용해보세요.
+
+```python
+weather_c = {"Monday": 12, "Tuesday": 14, "Wednesday": 15, "Thursday": 14, "Friday": 21, "Saturday": 22, "Sunday": 24}
+
+weather_f = {day:(temp * 9/5) + 32 for (day,temp) in weather_c.items()}
+
+print(weather_f)
+```
+
+![image.png](attachment:4f9a1107-bf15-4043-8a76-8e85f605f655:image.png)
+
+## 판다스 데이터 프레임에서 반복하는 방법
+
+```python
+import pandas
+student_data_frame = pandas.DataFrame(student_dict)
+print(student_data_frame)
+
+for(key, value) in student_data_frame.items():
+    print(key)
+    print(value)
+```
+
+![image.png](attachment:5a227e56-dba7-4e5b-8a36-778734662b83:image.png)
+
+위의 코드는 컬럼을 기준으로 해당 데이터들을 뽑은 것
+
+```python
+for(index, row) in student_data_frame.iterrows():
+    print(index)
+    print(row)
+```
+
+![image.png](attachment:492c00e8-7635-4b8c-adf2-251ae1bddcc2:image.png)
+
+index와 iterrows() 메서드를 통해서 해당 index의 행을 뽑을 수 있음(유의미한 데이터값)
+
+그럼 1번째 행의 score를 뽑기 위해서는?
+
+```python
+for(index, row) in student_data_frame.iterrows():
+    if index == 1:
+        print(row.score)
+```
+
+![image.png](attachment:0801c125-48a2-433b-b288-1721a3af6302:image.png)
+
+## NATO 알파벳 음성기호 프로젝트
+
+![image.png](attachment:695bbbee-588a-4420-a2d5-b4023832e85c:image.png)
+
+```python
+student_dict = {
+    "student": ["Angela", "James", "Lily"], 
+    "score": [56, 76, 98]
+}
+
+#Looping through dictionaries:
+for (key, value) in student_dict.items():
+    #Access key and value
+    pass
+
+import pandas
+student_data_frame = pandas.DataFrame(student_dict)
+
+#Loop through rows of a data frame
+for (index, row) in student_data_frame.iterrows():
+    #Access index and row
+    #Access row.student or row.score
+    pass
+
+# Keyword Method with iterrows()
+# {new_key:new_value for (index, row) in df.iterrows()}
+
+#TODO 1. Create a dictionary in this format:
+{"A": "Alfa", "B": "Bravo"}
+
+#TODO 2. Create a list of the phonetic code words from a word that the user inputs.
+```
+
+위의 메인파일과 알파벳 코드가 적힌 csv파일을 받음
+
+프로젝트 수행 사항은 다음과 같음
+
+1. 다음과 같은 형식으로 dictionary를 생성 {”A” : “Alfa”, …}
+2. 사용자가 입력하는 단어로부터 음성 규약 단어 리스트를 생성
+    
+    Thomas → [”Tango”, “Hotel” …]
+    
+
+### 1. dictionary 생성하기
+
+```python
+#TODO 1. Create a dictionary in this format:
+nato_data_frame = pandas.read_csv("nato_phonetic_alphabet.csv")
+nato_key = {row.letter:row.code for (index, row) in nato_data_frame.iterrows()}
+print(nato_key)
+```
+
+![image.png](attachment:303bdbee-d253-4caf-8173-86c15ae053a1:image.png)
+
+강의에서 배운 내용으로, data_frame을 생성하고, 딕셔너리 컴프리헨션 및 iterrows() 메서드를 활용하여 새로운 nato_key라는 딕셔너리를 생성함
+
+### 2. 사용자 입력으로 부터 Nato 리스트 생성
+
+```python
+#TODO 2. Create a list of the phonetic code words from a word that the user inputs.
+user_input = input("단어를 입력하세요 : ").upper()
+user_input_list = [word.upper() for word in user_input]
+nato_list = [nato_key[key] for key in user_input_list]
+print(nato_list)
+```
+
+1. input 값 받기
+2. input 값으로부터 key를 뽑기위해 리스트 생성
+3. key값에 따른 nato 단어 리스트 생성
+
+![image.png](attachment:1c3b192a-46f4-4b32-9fd1-b6319a17382d:image.png)
+
+### 해설
+
+```python
+# 해설
+output_list = [nato_key[key] for key in user_input]
+print(output_list)
+```
+
+그냥 user_input_list를 만들 필요가 없는데 굳이 만들었음,,,
+
+끝!
