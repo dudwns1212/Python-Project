@@ -8565,3 +8565,434 @@ print(output_list)
 그냥 user_input_list를 만들 필요가 없는데 굳이 만들었음,,,
 
 끝!
+
+## 27일차
+## Tkinter로 Window와 Label 만들기
+
+![image.png](attachment:e80a279f-bec2-4adc-834b-1891ad1bdea4:image.png)
+
+tutle 패키지 처럼, 파이썬에서 GUI를 표현해주는 라이브러리로 tkinter 패키지 안에 Tk 클래스를 활용해서 화면을 만들고 사이즈를 정할 수 있다.
+
+또한 화면에 라벨링을 해줄 수 있는데 tkinter.Label() 을 통해 만들 수 있으며 소괄호 안에 내가 원하는 문자열과 폰트 등을 지정할 수 있다.
+
+pack 메서드는 라벨의 위치, 크기 등을 변환할 수 있는 메서드이다.
+
+![image.png](attachment:859434c6-ea92-4297-887a-6f6278fa4fcf:image.png)
+
+## 선택적 인수에 기본값 설정하기
+
+### Advanced Python Arguments
+
+기본값을 받는 함수 
+
+```python
+def my_function(a=1, b=2, c=3):
+    sum_param = a + b + c
+    print(sum_param)
+    
+my_function()
+my_function(b=5)
+```
+
+![image.png](attachment:a1a1b4cf-e442-4ae2-b39b-3673de546bd3:image.png)
+
+이렇게 기본값을 가지면 그냥 함수를 불러도, 만약 값을 바꾸고 싶다면 b만 바꿔도 나머지 인자들은 default 값을 가지기 때문에 함수가 잘 작동한다.
+
+## args : 여러 인수를 갖는 함수 만들기
+
+```python
+def add_arg(*args):
+    for n in args:
+        print(n)
+
+add_arg(3,5,7,9)
+```
+
+인자로 *args 를 사용하면 여러 값을 받는 파라미터가 된다.
+
+![image.png](attachment:6acf82ce-4a91-49d9-b103-de0ed11001f0:image.png)
+
+기본적으로 print(args)를 하게 된다면 tuple 형태가 나옴
+
+ex) : (3,5,7,9)
+
+## **kwargs: 임의의 숫자 키워드 인수 다루기
+
+```python
+def calculate(**kwargs):
+    print(kwargs)
+    print(type(kwargs))
+
+calculate(add=3, multiply=5)
+```
+
+![image.png](attachment:84b0e3ee-eec9-446f-b77e-aaddf51d6368:image.png)
+
+**kwargs는 딕셔너리 형태로 인자를 받으며 무슨 이름을 붙이든 상관없다
+
+```python
+def calculate(**kwargs):
+    print(kwargs)
+    print(type(kwargs))
+    for key, value in kwargs.items():
+        print(key)
+        print(value)
+
+    print(kwargs["add"])
+
+calculate(add=3, multiply=5)
+```
+
+![image.png](attachment:b3628ee7-646f-458f-9440-3026c804dd22:image.png)
+
+이렇게 다양한 형태로 변형하여 사용할 수 있음
+
+모든 입력을 검색해서 우리가 원하는 값을 찾을 수 있도록 해줌
+
+```python
+def cal(n, **kwargs):
+    n += kwargs["add"]
+    n -= kwargs["minus"]
+    n *= kwargs["gop"]
+    print(n)
+
+cal(2,add=3, gop=3, minus=1)
+```
+
+클래스에서도 활용이 가능하다
+
+```python
+class Car:
+    def __init__(self, **kw):
+        self.make = kw["make"]
+        self.model = kw["model"]
+
+my_car = Car(make="Nissan", model="GT-R")
+print(my_car.model)
+```
+
+![image.png](attachment:83cd869a-5d1f-4843-89f2-8b931b8fdfa8:image.png)
+
+만약에 생성할 때, model의 값을 주지 않는다면 아래 사진처럼 model의 값을 주지 않아서 오류가 발생함
+
+![image.png](attachment:c6592897-190a-4808-830f-bd9a33a3e555:image.png)
+
+```python
+class Car:
+    def __init__(self, **kw):
+        self.make = kw.get("make")
+        self.model = kw.get("model")
+
+my_car = Car(make="Nissan")
+print(my_car.model)
+```
+
+딕셔너리는 [] 말고도 .get으로도 value를 불러올 수 있으며 이렇게 get으로 불러오면 없는 값이 있어도 오류가 뜨지 않는다
+
+![image.png](attachment:7d9f5144-9636-4b72-8c2a-899879108848:image.png)
+
+## Tkinter 위젯 설정 바꾸기
+
+![image.png](attachment:fd7ca95e-bb94-40f8-b67c-aee1a206d310:image.png)
+
+```python
+my_label["text"] = "new Text"
+my_label.config(text="New Text")
+
+button = tkinter.Button(text="Click Me")
+button.pack()
+```
+
+딕셔너리 형태임을 알고 있으므로 첫 번째 줄 처럼 [”key”] = “key” 로 변환할 수도 있고
+
+config를 활용해 바꿔줄 수도 있다.
+
+또한 button을 통해서 화면에 버튼을 넣어 줄 수도 있다
+
+```python
+def button_click():
+    print("I got clicked")
+
+button = tkinter.Button(text="Click Me", command=button_click)
+button.pack()
+```
+
+버튼에 이벤트 리스너를 command 키워드를 통해 달아줄 수 있다.
+
+![image.png](attachment:859ae37c-bb16-4114-a6b2-5bbc10023025:image.png)
+
+### 버튼 클릭 시 라벨 변환
+
+```python
+def button_click():
+    my_label["text"] = "Button Clicked"
+
+button = tkinter.Button(text="Click Me", command=button_click)
+button.pack()
+```
+
+![image.png](attachment:2d0a71d9-d9b5-4590-8223-066b74b039b4:image.png)
+
+위에서도 말했지만 config로도 변환이 가능하다
+
+### Entry
+
+```python
+# Entry
+input = tkinter.Entry()
+input.pack()
+```
+
+![image.png](attachment:beace731-5c49-4a71-bee3-41da5086f5ec:image.png)
+
+Entry 클래스를 활용하면 위의 사진처럼 텍스트를 입력할 수 있는 상자를 만들 수 있다.
+
+화면에 생성되는건 pack메서드임
+
+입력된 값을 받고싶다면 get 메서드를 활용한다.
+
+```python
+def button_click():
+    my_label["text"] = "Button Clicked"
+    print(input.get())
+
+button = tkinter.Button(text="Click Me", command=button_click)
+button.pack()
+
+# Entry
+input = tkinter.Entry(width=10)
+input.pack()
+```
+
+![image.png](attachment:78469c0b-472c-4d8a-bb3f-b244930168d5:image.png)
+
+![image.png](attachment:aee6aa38-c8a5-439a-a077-47cae3f18b0f:image.png)
+
+이렇게 텍스트를 입력하고 버튼을 누르면 값이 출력된다
+
+### 다양한 위젯
+
+Label, Button, Entry 이외에도
+
+Text : 여러 줄을 입력할 수 있는 Entry
+
+Spinbox : 상하로 이동할 수 있는 박스
+
+Scale : 축을 따라 이동하는 박스
+
+Checkbutton : 체크를 할 수 있는 버튼
+
+Radiobutton : 체크는 동일, 원형
+
+Listbox : 리스트 형태의 박스
+
+```python
+from tkinter import *
+
+#Creating a new window and configurations
+window = Tk()
+window.title("Widget Examples")
+window.minsize(width=500, height=500)
+
+#Labels
+label = Label(text="This is old text")
+label.config(text="This is new text")
+label.pack()
+
+#Buttons
+def action():
+    print("Do something")
+
+#calls action() when pressed
+button = Button(text="Click Me", command=action)
+button.pack()
+
+#Entries
+entry = Entry(width=30)
+#Add some text to begin with
+entry.insert(END, string="Some text to begin with.")
+#Gets text in entry
+print(entry.get())
+entry.pack()
+
+#Text
+text = Text(height=5, width=30)
+#Puts cursor in textbox.
+text.focus()
+#Adds some text to begin with.
+text.insert(END, "Example of multi-line text entry.")
+#Get's current value in textbox at line 1, character 0
+print(text.get("1.0", END))
+text.pack()
+
+#Spinbox
+def spinbox_used():
+    #gets the current value in spinbox.
+    print(spinbox.get())
+spinbox = Spinbox(from_=0, to=10, width=5, command=spinbox_used)
+spinbox.pack()
+
+#Scale
+#Called with current scale value.
+def scale_used(value):
+    print(value)
+scale = Scale(from_=0, to=100, command=scale_used)
+scale.pack()
+
+#Checkbutton
+def checkbutton_used():
+    #Prints 1 if On button checked, otherwise 0.
+    print(checked_state.get())
+#variable to hold on to checked state, 0 is off, 1 is on.
+checked_state = IntVar()
+checkbutton = Checkbutton(text="Is On?", variable=checked_state, command=checkbutton_used)
+checked_state.get()
+checkbutton.pack()
+
+#Radiobutton
+def radio_used():
+    print(radio_state.get())
+#Variable to hold on to which radio button value is checked.
+radio_state = IntVar()
+radiobutton1 = Radiobutton(text="Option1", value=1, variable=radio_state, command=radio_used)
+radiobutton2 = Radiobutton(text="Option2", value=2, variable=radio_state, command=radio_used)
+radiobutton1.pack()
+radiobutton2.pack()
+
+#Listbox
+def listbox_used(event):
+    # Gets current selection from listbox
+    print(listbox.get(listbox.curselection()))
+
+listbox = Listbox(height=4)
+fruits = ["Apple", "Pear", "Orange", "Banana"]
+for item in fruits:
+    listbox.insert(fruits.index(item), item)
+listbox.bind("<<ListboxSelect>>", listbox_used)
+listbox.pack()
+window.mainloop()
+
+```
+
+![image.png](attachment:d4d93b44-baf9-49f2-bbe3-739e22862f70:image.png)
+
+## Tkinter 레이아웃 메니저
+
+Pack , Place, Grid
+
+pack : 각각의 위젯을 논리적 형태로 다음 위젯 옆에 배치하는 역할, 디폴트값으로 center와 최상단에 위치하며 다음 pack은 그 아래 위치하게 됨
+
+place : 정확한 위치에 위젯을 배치, x와 y값을 주어서 위치값을 정해줌
+
+grid : column, row를 지정하여 위치를 나눔 (표 형태)
+
+### 그리드를 활용하여 배치
+
+```python
+# 라벨
+my_label = tkinter.Label(text="I Am a Label", font=("Arial", 24, "bold"))
+my_label.grid(column=0, row=0)
+my_label["text"] = "new Text"
+my_label.config(text="New Text")
+
+# button
+button = tkinter.Button(text="Click Me", command=button_click)
+button.grid(column=1, row=1)
+
+# Entry
+input = tkinter.Entry(width=10)
+input.grid(column=3, row=2)
+
+# new button
+new_button = tkinter.Button(text="New Button")
+new_button.grid(column=2, row=0)
+```
+
+![image.png](attachment:4902101c-f804-4bee-ba4e-64cc69f5824b:image.png)
+
+ 
+
+### Padding
+
+```python
+window.config(padx=20, pady=20)
+
+# 라벨
+my_label = tkinter.Label(text="I Am a Label", font=("Arial", 24, "bold"))
+my_label.grid(column=0, row=0)
+my_label["text"] = "new Text"
+my_label.config(text="New Text")
+
+# button
+button = tkinter.Button(text="Click Me", command=button_click)
+button.grid(column=1, row=1)
+
+# Entry
+input = tkinter.Entry(width=10)
+input.grid(column=3, row=2)
+
+# new button
+new_button = tkinter.Button(text="New Button")
+new_button.grid(column=2, row=0)
+```
+
+윈도우에 있는 모든 위젯의 x와 y에 20씩 여유를 두게 됨
+
+![image.png](attachment:c917ff87-5f5f-4b5c-8a36-b254efd6036b:image.png)
+
+위의 사진과 비교하면 윈도우 화면의 x와 y에 붙어있던 위젯들이 좀 띄어진 것을 볼 수 있음
+
+## 마일을 킬로미터로 바꾸는 프로젝트
+
+우선 먼저 해보기
+
+```python
+from tkinter import *
+from turtledemo.penrose import start
+
+window = Tk()
+window.minsize(width=400, height=200)
+window.config(padx=40, pady=40)
+
+def calc():
+    mile = input.get()
+    ans_km = int(float(mile) * 1.609)
+    answer.config(text=ans_km)
+
+# label
+is_equal_to = Label(text="is_equal_to", font=("Arial", 10, "bold"), padx=10, pady=5)
+is_equal_to.grid(column=0, row=1)
+
+miles = Label(text="Miles", font=("Arial", 10, "bold"), padx=10, pady=5)
+miles.grid(column=2, row=0)
+
+answer = Label(text="0", font=("Arial", 10, "bold"), padx=10, pady=5)
+answer.grid(column=1, row=1)
+
+km = Label(text="Km", font=("Arial", 10, "bold"), padx=10, pady=5)
+km.grid(column=2, row=1)
+
+# entry
+input = Entry(width=10)
+input.grid(column=1, row=0)
+
+calculate_button = Button(text="Calculate", command=calc)
+calculate_button.grid(column=1, row=3)
+
+indow.mainloop()
+```
+
+![image.png](attachment:df4cb9ba-80f9-42d0-b4d4-e7775df963a6:image.png)
+
+거의 똑같은데 하나 추가하자면 
+
+```python
+def calc():
+    mile = float(input.get())
+    ans_km = round(mile * 1.609)
+    answer.config(text=ans_km)
+```
+
+이렇게 해주는게 더 깔끔해보임
+
+끝!
