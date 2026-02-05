@@ -321,7 +321,7 @@ snake 클래스에서 add_segment, extend 함수를 만들어보자
         scoreboard.increase_score()
 ```
 
-![image.png](attachment:43ee3053-1697-47b4-a300-9ae73fe8a3fe:image.png)
+<img width="948" height="994" alt="스크린샷 2026-01-21 201552" src="https://github.com/user-attachments/assets/5a5125a9-625d-4013-a4d4-3675c99e7be8" />
 
 길이가 늘어난 것을 확인할 수 있음
 
@@ -350,7 +350,7 @@ snake 클래스에서 add_segment, extend 함수를 만들어보자
             scoreboard.game_over()
 ```
 
-![image.png](attachment:85665968-c007-4c1d-a4bc-f65ea119914a:image.png)
+<img width="961" height="1003" alt="스크린샷 2026-01-21 202953" src="https://github.com/user-attachments/assets/2850012f-374e-4cb1-ad6a-4eb262089dc9" />
 
 ## 파이썬에서 리스트와 튜플 슬라이싱하기
 
@@ -388,7 +388,7 @@ key[0:5] → 0부터 5까지의 값을 덩어리로 가져온다, 여기서 중�
 
 한번의 조건문을 통해 바로 game_over 함수를 활용할 수 있음
 
-![image.png](attachment:b27b5058-8f8d-4e76-81bd-65217e11ca5f:image.png)
+<img width="939" height="984" alt="스크린샷 2026-01-21 203342" src="https://github.com/user-attachments/assets/224a6943-febb-47cd-b0c2-3d66035e864d" />
 
 지금 너무 빨리눌러서 안보이는 것 같은데 머리와 몸통이 겹쳤음
 
@@ -409,7 +409,7 @@ key = [1,2,3,4,5,6,7,8,9]
 print(key[::2])
 ```
 
-![image.png](attachment:2bf093ba-a0b4-4899-be52-d2e336b7db17:image.png)
+<img width="212" height="63" alt="스크린샷 2026-01-21 203801" src="https://github.com/user-attachments/assets/31273c84-dea6-4e4e-a46a-c44649f10b7a" />
 
 튜플 또한 마찬가지로 슬라이싱을 활용 가능함
 
@@ -505,7 +505,7 @@ screen.exitonclick()
 
 main.py에서 위에서 만든 파일을 활용
 
-![image.png](attachment:d91d63f2-b212-47b4-a83b-f712dde8e0a6:image.png)
+<img width="1236" height="974" alt="스크린샷 2026-01-24 104300" src="https://github.com/user-attachments/assets/577f7c0b-4820-48b0-a463-27c32dbb13c3" />
 
 키 입력에 따라 각각의 바들이 움직이는 것을 확인
 
@@ -532,7 +532,7 @@ class Ball(Turtle):
 
 ```
 
-![image.png](attachment:33c52b77-df03-4cb2-afde-61078a8fabd1:image.png)
+<img width="1228" height="977" alt="스크린샷 2026-01-24 105124" src="https://github.com/user-attachments/assets/a1c533d4-30e1-4356-af14-02f5dbd77490" />
 
 이제 이 공이 바에 부딪치거나, 왼쪽이나 오른쪽 벽에 움직였을 때, 로직을 추가해야 함
 
@@ -624,7 +624,7 @@ while is_game_on:
 
 ### 4. 좌표 계산 디테일
 
-![image.png](attachment:33aa28fd-9b05-4b85-a9bc-a6feef313033:image.png)
+<img width="1027" height="797" alt="스크린샷 2026-01-24 120026" src="https://github.com/user-attachments/assets/37d8c3dc-ab7a-44fa-997a-e115d4a29016" />
 
 ```python
 from turtle import Screen
@@ -695,7 +695,7 @@ class Sideline(Turtle):
 
 위의 sideline은 정확하게 좌표를 지정하기 위해서 Screen 영역에 선을 그림
 
-![image.png](attachment:95cb3ced-4d67-45ea-9909-2b489d627494:image.png)
+<img width="1264" height="949" alt="스크린샷 2026-01-24 120123" src="https://github.com/user-attachments/assets/a68b6a48-22a8-4d04-89d7-00e228c4647a" />
 
 ### 5. 점수 계산
 
@@ -732,7 +732,7 @@ right_scoreboard = Scoreboard(100)
 
 main.py에서 위의 scoreboard 객체를 2개 만들어줌, 생성자에서 position으로 위치값을 받으니 파라미터로 x좌표값을 넘겨줌
 
-![image.png](attachment:fe58339b-9b0b-4fdf-8a65-00307fc5cfae:image.png)
+<img width="1228" height="975" alt="스크린샷 2026-01-24 123057" src="https://github.com/user-attachments/assets/a8e07060-474e-4161-9631-4ec20864268b" />
 
 그러면 이렇게 각 위치에 점수판이 생김
 
@@ -748,7 +748,7 @@ main.py에서 위의 scoreboard 객체를 2개 만들어줌, 생성자에서 pos
 
 이제 벽을 부딪치는 로직을 나눠서 각각의 점수를 올려주면
 
-![image.png](attachment:aeb3c20b-8a7a-4ada-a3d5-5dfccbc48f6e:image.png)
+<img width="1236" height="985" alt="스크린샷 2026-01-24 123143" src="https://github.com/user-attachments/assets/2aff0987-6477-4414-9ce7-610a4202fd5b" />
 
 이렇게 각각의 점수가 올라가는 것을 볼 수 있음
 
@@ -767,7 +767,7 @@ main.py에서 위의 scoreboard 객체를 2개 만들어줌, 생성자에서 pos
 
 ### 1. 설계를 하고 클래스를 생성
 
-![image.png](attachment:3d3bd12a-ca27-447f-a536-fdf0c30e309c:image.png)
+<img width="349" height="247" alt="image (19)" src="https://github.com/user-attachments/assets/cde29ca4-a9d7-40e4-af09-6605685f9c77" />
 
 회사 짜투리 시간에 진행하고 있어서 폴더 이름이 다를 수 있음
 
@@ -785,7 +785,7 @@ screen의 범위를 눈으로 파악하기 위해 만든 sideline
 
 스크린은 x,y ⇒ 600,400으로 설계함(너무 크면 안좋을 것 같아서)
 
-![image.png](attachment:f1adbe18-aa5a-4260-9c36-795949b1db86:image.png)
+<img width="815" height="594" alt="image (20)" src="https://github.com/user-attachments/assets/bc4da232-8978-47c6-af15-56104cfd66c4" />
 
 기본 객체 크기는 20x20이므로 객체의 좌표는 0, 190이 되어야함(아래에 붙어있다는 기준으로)
 
@@ -891,13 +891,13 @@ for _ in range(13):
 
 main에 해당 코드를 추가하여 screen에 표시했는데 
 
-![image.png](attachment:8286cf79-f966-48cf-b9a0-1e011a946115:image.png)
+<img width="788" height="570" alt="image (21)" src="https://github.com/user-attachments/assets/89d2ff15-f9c2-4e9d-8562-f931e0e75f5b" />
 
 왜그런지는 모르겠지만 위 아래에 10정도가 부족해진다.
 
 아마 선의 폭이나 그런게 작용해서 20정도가 차지하는 것 같다. 따라서 크기를 420으로 늘린 후 좌표를 다시 설정(위의 코드들도 수정함)
 
-![image.png](attachment:2fb29e84-f590-44d9-b0ba-091e059f02bb:image.png)
+<img width="868" height="757" alt="image (22)" src="https://github.com/user-attachments/assets/4c055206-8fd5-4672-a7e3-1f4624a15579" />
 
 딱 맞는 모습을 볼 수 있다
 
@@ -909,7 +909,7 @@ y값은 도로의 정 중앙 ex) -180~-150의 중간 → -165가 y좌표
 
 라고 했는데 시작파일을 줬었네, 다시 처음부터 시작
 
-![image.png](attachment:02fb2670-0569-49ca-9526-673103955a21:image.png)
+<img width="370" height="199" alt="image (23)" src="https://github.com/user-attachments/assets/22b5ba13-5274-4b5b-8a0b-db2688cf1f32" />
 
 이렇게 4가지 파일이 주어졌고 안에 들어있는 코드는 뭐 없었음, 간단한 클래스 이름과, 상수들이 적혀있음
 
@@ -970,7 +970,7 @@ while game_is_on:
 
 1번에서 만든 player 객체를 만들어서 움직이는지 확인 완료
 
-![image.png](attachment:83302fe5-63ed-4ff1-bbc4-31f607ed65fd:image.png)
+<img width="930" height="964" alt="image (24)" src="https://github.com/user-attachments/assets/a8ac15f4-bad2-4435-a19e-6c404ddafc5e" />
 
 ### 3. car_manager.py
 
@@ -1008,7 +1008,7 @@ car 객체를 생성하는 메소드를 만든 후 마지막에 append로 리스
 
 drive메소드에서 반복문을 통해서 배열에 있는 모든 차들을 앞으로 이동시킴
 
-![image.png](attachment:dcdbbb17-89bc-4757-90fc-de0ae1ffb110:image.png)
+<img width="924" height="970" alt="스크린샷 2026-01-26 203640" src="https://github.com/user-attachments/assets/77f9a06e-d157-4053-b277-c1abc2146913" />
 
 이건 깰 수가 없음, 차량의 속도를 줄일수도 있지만 확률을 통해 차량의 생성을 억제할 수 있음
 
@@ -1027,7 +1027,7 @@ drive메소드에서 반복문을 통해서 배열에 있는 모든 차들을 �
 
 1~6 사이의 숫자를 랜덤으로 뽑고, 1일 때만 객체를 생성함(1/6 확률)
 
-![image.png](attachment:a6fae847-f570-4888-a3ea-f8cb5e5c7fdc:image.png)
+<img width="933" height="979" alt="스크린샷 2026-01-26 204030" src="https://github.com/user-attachments/assets/c8ad95ff-6bb8-4d9e-9de7-08b0bd8f1f1e" />
 
 나이스함
 
@@ -1134,7 +1134,7 @@ class Scoreboard(Turtle):
 
 기존의 main에 있던 로직에서 scoreboard 메소드들을 추가하면 끝
 
-![image.png](attachment:767b90df-ff41-41d6-ba50-a469185a9373:image.png)
+<img width="939" height="971" alt="스크린샷 2026-01-26 213106" src="https://github.com/user-attachments/assets/286f5398-7b6a-4cba-aa54-1305bc01d755" />
 
 ## 23일차 추가
 길 건너기 게임에서 다음의 사항을 포함 시킴
@@ -1384,7 +1384,7 @@ reset이므로 현재의 score는 0으로 넣어줌
 
 마지막으로 update를 실행하며, update에는 기존의 score와 highscore를 보여주도록 함
 
-![image.png](attachment:8a9072ba-a913-4fe9-a99c-2c04c2b29ba8:image.png)
+<img width="944" height="996" alt="스크린샷 2026-01-28 192544" src="https://github.com/user-attachments/assets/6db9cde8-f51a-4db1-9885-034dc2c6f874" />
 
 현재는 죽어도 다시 시작되는 로직은 안만들었기에 저렇게 부딪치면 멈추고 HighScore에 현재 점수가 반영되는 것을 볼 수 있음
 
@@ -1453,7 +1453,7 @@ go_home이라는 메소드를 만들어서, 객체를 새로 생성하는(생성
 
 코드가 겹치니까 생성자에 있던 코드는 해당 함수로 교체함 그리고 실행하면
 
-![image.png](attachment:96d997ec-b582-4ca3-883d-d0c8f6d79a03:image.png)
+<img width="933" height="972" alt="스크린샷 2026-01-28 193209" src="https://github.com/user-attachments/assets/ef2f2698-d9c7-49c5-8a99-a1475db9500e" />
 
 이렇게 기존의 거북이가 사라지지 않음, 
 
@@ -1471,7 +1471,7 @@ go_home이라는 메소드를 만들어서, 객체를 새로 생성하는(생성
 
 따라서 segments.clear()를 통해 해결하였고, 게임을 플레이하는데 잔 오류가 생겨서 생성자도 그냥 입력해놈
 
-![image.png](attachment:5398f3ff-e33a-4e71-8738-d706bbd2d22c:image.png)
+<img width="931" height="971" alt="스크린샷 2026-01-28 194344" src="https://github.com/user-attachments/assets/4c99a688-67da-4663-b68f-2eb16ad79fa3" />
 
 게임은 잘 작동하는데 여전히 안사라짐, 배열에서 없애는것 만으로는 안되나봄
 
@@ -1492,7 +1492,7 @@ ht()활용해서 모습을 숨겨야겠음
 
 ### With 키워드 사용 방법
 
-![image.png](attachment:4a7c9af9-d91a-4ef7-8484-847c9398e43e:image.png)
+<img width="226" height="154" alt="스크린샷 2026-01-28 195225" src="https://github.com/user-attachments/assets/c9d92636-602b-4032-9cc9-8465d078018d" />
 
 my_file에는 Hello my name is gyj를 적어둠
 
@@ -1504,7 +1504,7 @@ print(contents)
 
 main.py에 위의 코드를 적고 실행해주면 해당 파일을 읽어서 contents에 내가 적은 값을 넣어줌
 
-![image.png](attachment:2c10f0fe-c904-45e4-8a7f-93318173087d:image.png)
+<img width="443" height="233" alt="스크린샷 2026-01-28 195322" src="https://github.com/user-attachments/assets/16bd95ac-127b-4ec6-9248-ebfcae4ddf8c" />
 
 파일을 열고 하고싶은 코드를 작성한 후 마지막에는 항상 file.close()로 닫아줘야함
 
@@ -1531,7 +1531,7 @@ with open("my_file.txt", mode="w") as file:
 
 다만, w로 변경하면 읽는게 안됨(기본은 r모드)
 
-![image.png](attachment:fa4c9846-5f7d-4b36-afb0-358bfac236d3:image.png)
+<img width="406" height="222" alt="스크린샷 2026-01-28 200722" src="https://github.com/user-attachments/assets/1d737e92-3ff2-4565-ab8b-119870868278" />
 
 코드를 실행해주면 파일에 새로운 text가 입력된 것을 볼 수 있음
 
@@ -1544,7 +1544,7 @@ with open("my_file.txt", mode="a") as file:
 
 모드를 a로 변경해주면 됨
 
-![image.png](attachment:850d5a73-231f-446f-821c-a7fd12bed00f:image.png)
+<img width="815" height="233" alt="스크린샷 2026-01-28 200826" src="https://github.com/user-attachments/assets/0673441f-fdca-489c-b21f-b0482fd18f23" />
 
 실행 후 확인하면 새로운 글이 써진 것을 볼 수 있고, 줄바꿈 \n도 가능함
 
@@ -1555,7 +1555,7 @@ with open("new_file.txt", mode="w") as file:
 
 새롭게 파일을 만들고 싶다면 새롭게 만들고싶은 파일 이름을 적고, mode를 w로 해주면 됨
 
-![image.png](attachment:9e61f375-dd0f-4ee0-8299-bef8fb59cc99:image.png)
+<img width="1046" height="259" alt="스크린샷 2026-01-28 201001" src="https://github.com/user-attachments/assets/f9466861-1f90-4216-8c6f-86914ce6a825" />
 
 새로운 파일이 생성됐으며 내가 쓴 글이 적용된 것을 볼 수 있음
 
@@ -1563,7 +1563,7 @@ with open("new_file.txt", mode="w") as file:
 
 ### 뱀 게임에서 파일에 최고 점수 읽고 쓰기
 
-![image.png](attachment:06972dd5-5e0d-4820-a6f2-45394ec213b2:image.png)
+<img width="734" height="276" alt="스크린샷 2026-01-28 201337" src="https://github.com/user-attachments/assets/d01686dc-ba95-4561-886c-0218c54f99a4" />
 
 우선 highscore_text라는 파일을 만들어줌
 
@@ -1595,11 +1595,11 @@ class Scoreboard(Turtle):
 
 reset에서 최고점수를 바꿔주고 해당 점수를 파일에 기록함
 
-![image.png](attachment:30e826ec-9a51-4cb3-aac2-6768d9c3fb36:image.png)
+<img width="950" height="991" alt="스크린샷 2026-01-28 201606" src="https://github.com/user-attachments/assets/b3822f8c-d9e3-481b-baa9-472a8fccbde4" />
 
 우선 highscore를 3으로 바꿔준 후, 종료하고 다시 실행해보면
 
-![image.png](attachment:3a370057-a981-4286-8426-7951e7fd1378:image.png)
+<img width="971" height="1015" alt="스크린샷 2026-01-28 201634" src="https://github.com/user-attachments/assets/280a1b9c-b9b0-45f9-acca-700ad5d26890" />
 
 여전히 최고점수가 3으로 남아있는 것을 확인할 수 있음
 
@@ -1625,21 +1625,21 @@ C:\Users\ernmq\PycharmProjects\day20\highscore_text.txt
 
 main.py에서 file.txt를 읽는다 → ./file.txt 로 작성할 수 있다. 하지만 같은 디렉토리에 있으므로 생략이 가능하다. 따라서 그냥 file.txt로 읽는다
 
-![image.png](attachment:bc3d3646-3a41-44ed-aeac-8d91a9190c77:image.png)
+<img width="1014" height="508" alt="스크린샷 2026-01-28 202941" src="https://github.com/user-attachments/assets/f98d153f-b741-4e63-8345-25d2d1298b1e" />
 
 기존에 파이썬에 있던 txt 파일들을 바탕화면으로 옮겨줬다
 
-![image.png](attachment:75727abf-da16-45c3-a195-49d14c28d74c:image.png)
+<img width="499" height="251" alt="image (25)" src="https://github.com/user-attachments/assets/e660c785-a4b2-4bac-a4c7-bdf201499739" />
 
 해당 파일의 속성을 들어가보면 파일의 절대경로를 알 수 있다.
 
-![image.png](attachment:f03e1973-31ed-4da7-ad89-789ceb260845:image.png)
+<img width="1361" height="700" alt="스크린샷 2026-01-28 203244" src="https://github.com/user-attachments/assets/f4fb2fd0-5fe9-4672-8243-14222854afbf" />
 
 파이참으로 돌아가서 해당 main을 실행하면 오류가 발생하는것을 볼 수 있다.
 
 왜냐면 해당 디렉토리에 파일이 없어서 읽을 수 없다.
 
-![image.png](attachment:f6de3d2c-252f-48e0-bea8-6a17479f9059:image.png)
+<img width="1494" height="467" alt="스크린샷 2026-01-28 204307" src="https://github.com/user-attachments/assets/48bd7ad1-33a7-4d9c-8179-f65f95b06a40" />
 
 이렇게 절대 경로를 통해서 파일을 읽을 수 있다.
 
@@ -1654,7 +1654,7 @@ with open(r"../../OneDrive\바탕 화면\new_file.txt") as file:
 
 ### 메일 머지 프로젝트
 
-![image.png](attachment:401aec77-0f3f-4819-a227-00b082d91024:image.png)
+<img width="736" height="393" alt="스크린샷 2026-01-28 205348" src="https://github.com/user-attachments/assets/df2e1f45-a127-4bef-b867-dc24d24643af" />
 
 ```python
 Dear [name],
@@ -1684,7 +1684,7 @@ Toph
 
 우선 해당 이름들을 배열로 생성해야됨
 
-![image.png](attachment:fd33a9b9-5084-4eed-894d-fc071faf2f01:image.png)
+<img width="1651" height="397" alt="스크린샷 2026-01-28 205734" src="https://github.com/user-attachments/assets/86d8d290-b7d8-4b1f-b18d-7e0359cbd579" />
 
 파일 경로를 읽어서 해당 file안에 있는 이름들을 \n을 기준으로 spilt하여 배열로 만듦
 
@@ -1703,9 +1703,9 @@ for name in names:
 
 마지막으로 write를 하는데, 해당 기본 편지 틀에 있는 [name]을 현재 반복문의 name으로 바꿔 편지를 작성함
 
-![image.png](attachment:216631a9-ac46-496f-b655-8fe54d76d817:image.png)
+<img width="1079" height="417" alt="스크린샷 2026-01-28 210550" src="https://github.com/user-attachments/assets/e236babf-7fe3-4a96-bc13-65b709875594" />
 
-![image.png](attachment:e9b3b5de-5e68-4a74-bda8-dfc99baac96c:image.png)
+<img width="1125" height="480" alt="스크린샷 2026-01-28 210559" src="https://github.com/user-attachments/assets/5c327a06-f3c7-4a18-b765-be947a4b8fc8" />
 
 이렇게 편지에 각각의 이름이 들어갈 수 있음
 
@@ -1717,7 +1717,7 @@ with open("Input/Names/invited_names.txt") as name:
     print(names)
 ```
 
-![image.png](attachment:fe4919ce-867f-44a7-a694-ed0dddfeb49a:image.png)
+<img width="1076" height="69" alt="스크린샷 2026-01-28 210834" src="https://github.com/user-attachments/assets/285126f4-2260-4005-ad1c-7d99b0a6881a" />
 
 ```python
 with open("Input/Letters/starting_letter.txt") as letter_file:
@@ -1727,7 +1727,7 @@ with open("Input/Letters/starting_letter.txt") as letter_file:
         print(new_letter)
 ```
 
-![image.png](attachment:b2b81881-d572-4763-ab40-69b38cc1a011:image.png)
+<img width="732" height="670" alt="image (26)" src="https://github.com/user-attachments/assets/a712f921-9d7f-41cf-a76f-a3c5e27f97f6" />
 
 \n이 들어가 있어서 줄이 띄어진 것이 보임
 
@@ -1740,11 +1740,11 @@ with open("Input/Letters/starting_letter.txt") as letter_file:
         new_letter = letter_contents.replace(PLACEHOLDER, stripped_name)
 ```
 
-![image.png](attachment:c20079bd-9f53-4a52-904d-611ee35690c6:image.png)
+<img width="393" height="294" alt="image (27)" src="https://github.com/user-attachments/assets/508560c5-b8dd-4632-b6a4-0b34b0d8be60" />
 
 strip()을 활용하면 앞 뒤의 공백을 모두 없애줌(\n까지 없애주나봄)
 
-![image.png](attachment:b930378a-b62f-4c32-ba76-e5a2fab7d5fc:image.png)
+<img width="624" height="824" alt="스크린샷 2026-01-28 211625" src="https://github.com/user-attachments/assets/546f6016-3d18-47e3-b269-1a3e058abc23" />
 
 후에 new_letter를 확인해보면 정상적인 편지를 확인할 수 있음
 
@@ -1760,7 +1760,7 @@ with open("Input/Letters/starting_letter.txt") as letter_file:
 
 후에 write는 로직은 동일한데 같은 반복문 안에서 처리하는게 달랐음
 
-![image.png](attachment:cf08f6e1-3a98-4626-884f-b9a59df28773:image.png)
+<img width="443" height="412" alt="스크린샷 2026-01-28 211843" src="https://github.com/user-attachments/assets/1f20c04d-8072-4661-9d2d-2cec049ef0bb" />
 
 ```python
 Dear Momo,
@@ -1799,7 +1799,7 @@ with open("weather_data.csv", mode='r') as weather:
 
 파이썬에 기본적으로 있는 csv 라이브러리를 활용해서 간편하게 리스트로 만들 수 있다
 
-![image.png](attachment:8d567dc9-6f16-4aac-8b11-6e0a4a0332fc:image.png)
+<img width="480" height="297" alt="스크린샷 2026-01-31 202831" src="https://github.com/user-attachments/assets/7c4080c7-0906-4ac3-81ae-060c7262b41f" />
 
 ### temperatures 리스트 만들기
 
@@ -1832,11 +1832,11 @@ data = pandas.read_csv("weather_data.csv")
 print(data)
 ```
 
-![image.png](attachment:ee43e44b-84f7-4889-96ce-fd70e5e43fa6:image.png)
+<img width="382" height="288" alt="스크린샷 2026-01-31 204900" src="https://github.com/user-attachments/assets/92ff823c-155a-47dc-bf8a-0d6b65cc3360" />
 
 ㅋㅋ지린다, 이래서 판다스판다스 하는구나 3줄로 끝나버리네
 
-![image.png](attachment:0ed802bc-3712-47ec-ade4-79e8598d6153:image.png)
+<img width="253" height="237" alt="스크린샷 2026-01-31 205018" src="https://github.com/user-attachments/assets/5747e830-bdea-4ea4-8130-b1c2076c2570" />
 
 위 사진처럼 특정 컬럼만 보고싶다면 `print(data["temp"])` 이렇게 대괄호 안에 컬럼을 입력하면 됨
 
@@ -1849,7 +1849,7 @@ print(type(data))
 print(type(data["temp"]))
 ```
 
-![image.png](attachment:551454ea-6f50-4de9-83af-042ccc429c1f:image.png)
+<img width="409" height="76" alt="스크린샷 2026-01-31 205352" src="https://github.com/user-attachments/assets/9983dd06-97d5-486a-a683-2d629940839e" />
 
 행과 열을 가지는 표 형식의 데이터는 판다스에서 DataFrame이라는 클래스이며
 
@@ -1866,7 +1866,7 @@ print(data_dict["day"])
 print(data_dict["temp"])
 ```
 
-![image.png](attachment:5663d7e9-73a8-4e83-907b-fd897c5abc91:image.png)
+<img width="1389" height="282" alt="스크린샷 2026-01-31 205854" src="https://github.com/user-attachments/assets/c7aee1d7-27ec-4fac-8564-bbbd3cba7ed7" />
 
 리스트 형태를 Dictionary형태로 바꿀 수 있음
 
@@ -1880,7 +1880,7 @@ data[”temp”] → 시리즈 타입
 
 이 시리즈 타입을 list 타입으로 바꿔줄 수 있음
 
-![image.png](attachment:07c7ebca-5a4e-487a-a624-7fc220fff3c0:image.png)
+<img width="595" height="201" alt="스크린샷 2026-01-31 210205" src="https://github.com/user-attachments/assets/eb3856e9-0b02-49a0-aa6a-17eca012889a" />
 
 값은 동일함
 
@@ -1895,7 +1895,7 @@ avg = numpy.average(temp_list)
 print(avg)
 ```
 
-![image.png](attachment:642c6960-8236-4b09-a36c-5741fa357715:image.png)
+<img width="412" height="185" alt="스크린샷 2026-01-31 210604" src="https://github.com/user-attachments/assets/fd60bc33-70bc-4499-b552-74696f88ec28" />
 
 평균값 이외에도 최소, 최대 등등 다양한 함수들이 있음
 
@@ -1910,7 +1910,7 @@ print(avg2)
 
 avg는 series 타입이며 avg2는 list타입임
 
-![image.png](attachment:c90897b7-19e7-4065-87b4-859f208d69f1:image.png)
+<img width="791" height="341" alt="스크린샷 2026-01-31 210926" src="https://github.com/user-attachments/assets/c5911486-0bcd-43f2-a954-c75c27d2f08e" />
 
 당연하지만 list에는 평균값을 구하는 메소드가 없어서 오류가 발생하며, series 타입은 잘 작동함
 
@@ -1922,7 +1922,7 @@ print(data_temp.max())
 print(data_temp.min())
 ```
 
-![image.png](attachment:e953a9c3-2fd2-490a-9865-df46d6e42e72:image.png)
+<img width="126" height="121" alt="스크린샷 2026-01-31 211122" src="https://github.com/user-attachments/assets/4da3c5c8-318c-4059-b97d-fc7f0cc67eeb" />
 
 ### 행 데이터 출력
 
@@ -1932,7 +1932,7 @@ data_monday = data[data.day == "Monday"]
 print(data_monday)
 ```
 
-![image.png](attachment:241917d9-f5e1-469d-8459-ef5e9d935204:image.png)
+<img width="400" height="162" alt="스크린샷 2026-01-31 211718" src="https://github.com/user-attachments/assets/372ad688-6bc4-4c60-b770-505b4e59bb7c" />
 
 데이터프레임(data)에서 data.day(day컬럼) 이 월요일인 값을 꺼냄
 
@@ -1944,7 +1944,7 @@ data_temp_max = data[data.temp == data.temp.max()]
 print(data_temp_max)
 ```
 
-![image.png](attachment:d88796d2-c4ad-4014-9434-262d7ff3fe36:image.png)
+<img width="467" height="213" alt="스크린샷 2026-01-31 213203" src="https://github.com/user-attachments/assets/74cda4e4-a7ea-415b-9cf0-d9a87f93ac3c" />
 
 ### dict to dataframe
 
@@ -1957,7 +1957,7 @@ data = pandas.DataFrame(data_dict)
 print(data)
 ```
 
-![image.png](attachment:690dabc9-2b8c-48f6-8660-88d365257502:image.png)
+<img width="566" height="259" alt="스크린샷 2026-01-31 215024" src="https://github.com/user-attachments/assets/629e6783-7015-4346-9f92-aa29d82da05a" />
 
 이렇게 딕셔너리 형태의 값을 DataFrame으로 바꿔줄 수 있음
 
@@ -1973,13 +1973,13 @@ print(data)
 data.to_csv("new_data.csv")
 ```
 
-![image.png](attachment:4759039b-30c8-42bc-812c-4aaac37a7431:image.png)
+<img width="424" height="204" alt="스크린샷 2026-01-31 215146" src="https://github.com/user-attachments/assets/90ee26b4-1b56-4008-a408-7e2b77fb0c60" />
 
 이렇게 to_csv를 활용해서 새롭게 파일로 추가할 수 있음
 
 ## 판다스로 하는 데이터 분석
 
-![image.png](attachment:19598a91-8c23-443f-a881-182cc4f8b823:image.png)
+<img width="1535" height="565" alt="스크린샷 2026-01-31 215822" src="https://github.com/user-attachments/assets/4013002c-6776-46ef-8d4b-adad2f96a0c0" />
 
 미국에 있는 다람쥐의 생태분석 자료임
 
@@ -2020,7 +2020,7 @@ turtle.shape(image)
 screen.exitonclick()
 ```
 
-![image.png](attachment:d43f8f47-16e1-4a18-91ea-8ebd3c18ffea:image.png)
+<img width="1164" height="1119" alt="스크린샷 2026-02-01 014223" src="https://github.com/user-attachments/assets/955a1fe9-1a7a-4480-bd12-3e7fe284cf7d" />
 
 이렇게 addshape 함수를 통해서 gif파일로 배경에 그림을 넣을 수 있다
 
@@ -2050,11 +2050,11 @@ onscreenclick는 클릭할 때 실행되는 이벤트 리스너 함수이다.
 
 mainloop는 screen화면이 클릭해도 사라지지 않게 하기 위한 메서드이다
 
-![image.png](attachment:2f7c18df-d177-4a4c-a160-84bf60ae275c:image.png)
+<img width="1517" height="858" alt="스크린샷 2026-02-01 015054" src="https://github.com/user-attachments/assets/247f3eaf-7dbd-415b-9fd4-84d76d7617d1" />
 
 이제 주들의 중심 좌표를 알았다면 csv파일에 정리할 수 있다(사실 파일로 이미 받았음)
 
-![image.png](attachment:4f022c68-c08c-49f9-8670-29e8a42d4aa2:image.png)
+<img width="685" height="592" alt="스크린샷 2026-02-01 015207" src="https://github.com/user-attachments/assets/85b62b22-8265-4868-9173-9257ed8793fa" />
 
 ```python
 import turtle
@@ -2194,7 +2194,7 @@ new_names = [new_name for new_name in names if len(new_name) < 5]
 print(new_names) # ["Alex", "Beth", "Dave"]
 ```
 
-![image.png](attachment:fc47e39f-dbf0-4319-8c24-08076180e5e5:image.png)
+<img width="590" height="289" alt="스크린샷 2026-02-01 165624" src="https://github.com/user-attachments/assets/4a1e2be5-ccd5-4859-a04c-540ca3de8e1f" />
 
 ### 5글자 이상의 이름만 가져오며, 모두 대문자로 변환
 
@@ -2228,7 +2228,7 @@ squared_numbers = [num*num for num in numbers]
 print(squared_numbers)
 ```
 
-![image.png](attachment:f183780e-5bad-4cf8-ad3d-bf56ee8718b7:image.png)
+<img width="791" height="325" alt="스크린샷 2026-02-01 170315" src="https://github.com/user-attachments/assets/c6db8ee3-5cc6-4bc6-8736-bcd07bf32dce" />
 
 ## 짝수 필터링 실습
 
@@ -2251,7 +2251,7 @@ result = [num for num in numbers if num%2 == 0]
 print(result)
 ```
 
-![image.png](attachment:6725d79d-efb3-4faf-aa14-451a0272426f:image.png)
+<img width="829" height="331" alt="스크린샷 2026-02-01 170745" src="https://github.com/user-attachments/assets/8d0dcb29-5b79-46c2-8539-7152b16990de" />
 
 ## 데이터 중첩
 
@@ -2302,7 +2302,7 @@ result = [num for num in new_list_1 if num in new_list_2]
 print(result)
 ```
 
-![image.png](attachment:7631d7a6-7d89-4a36-8066-ee715515231c:image.png)
+<img width="805" height="307" alt="스크린샷 2026-02-01 171730" src="https://github.com/user-attachments/assets/ab8ad9d4-c426-4e25-b387-1fcd5f429edb" />
 
 ## 미국 주 게임에 List 컴프리헨션 적용시키기
 
@@ -2342,7 +2342,7 @@ students_scores = {student:random.randint(1,100) for student in names}
 print(students_scores)
 ```
 
-![image.png](attachment:fd3b6680-6e75-4bea-be8e-933106227227:image.png)
+<img width="1675" height="115" alt="스크린샷 2026-02-01 173157" src="https://github.com/user-attachments/assets/150def59-bd51-4c1c-bf5c-e74fd3f8b540" />
 
 ```python
 # 딕셔너리를 활용한 컴프리헨션
@@ -2350,7 +2350,7 @@ passed_students = {key:value for(key, value) in dict.items(students_scores) if v
 print(passed_students)
 ```
 
-![image.png](attachment:ad8e25cd-b5f0-43cf-9d9d-eb52b08e2452:image.png)
+<img width="978" height="73" alt="스크린샷 2026-02-01 173950" src="https://github.com/user-attachments/assets/e4e622d1-fffe-43b8-9622-57b222cd49d0" />
 
 딕셔너리를 활용할 때는 dict.items(dictionary) 를 써야 오류가 발생하지 않음, 그냥 딕셔너리만 넣는다면 오류가 발생함, 또는 아래와 같은 코드로 작성할수도 있음
 
@@ -2375,7 +2375,7 @@ sentence = "What is the Airspeed Velocity of an Unladen Swallow?"
 result = {word:len(word) for word in sentence.split(" ")}
 ```
 
-![image.png](attachment:8f1fa0f2-346c-4272-8c78-866cccb7564a:image.png)
+<img width="785" height="294" alt="스크린샷 2026-02-01 174610" src="https://github.com/user-attachments/assets/5d230aba-aaa7-485f-9ca9-d84ec5e18906" />
 
 ## 딕셔너리 컴프리헨션2
 
@@ -2399,7 +2399,7 @@ weather_f = {day:(temp * 9/5) + 32 for (day,temp) in weather_c.items()}
 print(weather_f)
 ```
 
-![image.png](attachment:4f9a1107-bf15-4043-8a76-8e85f605f655:image.png)
+<img width="833" height="298" alt="스크린샷 2026-02-01 174911" src="https://github.com/user-attachments/assets/45dc066b-4ae3-459c-80f0-26d07f8de639" />
 
 ## 판다스 데이터 프레임에서 반복하는 방법
 
@@ -2413,7 +2413,7 @@ for(key, value) in student_data_frame.items():
     print(value)
 ```
 
-![image.png](attachment:5a227e56-dba7-4e5b-8a36-778734662b83:image.png)
+<img width="408" height="471" alt="스크린샷 2026-02-01 175441" src="https://github.com/user-attachments/assets/bc44470c-b0c8-4903-ab07-e27906187ac9" />
 
 위의 코드는 컬럼을 기준으로 해당 데이터들을 뽑은 것
 
@@ -2423,7 +2423,7 @@ for(index, row) in student_data_frame.iterrows():
     print(row)
 ```
 
-![image.png](attachment:492c00e8-7635-4b8c-adf2-251ae1bddcc2:image.png)
+<img width="446" height="417" alt="스크린샷 2026-02-01 175746" src="https://github.com/user-attachments/assets/af3622b9-0206-401c-8a57-87bbb19cb186" />
 
 index와 iterrows() 메서드를 통해서 해당 index의 행을 뽑을 수 있음(유의미한 데이터값)
 
@@ -2435,11 +2435,11 @@ for(index, row) in student_data_frame.iterrows():
         print(row.score)
 ```
 
-![image.png](attachment:0801c125-48a2-433b-b288-1721a3af6302:image.png)
+<img width="362" height="110" alt="스크린샷 2026-02-01 180020" src="https://github.com/user-attachments/assets/1bf90e48-4ad7-4077-b041-89101eb2d4b3" />
 
 ## NATO 알파벳 음성기호 프로젝트
 
-![image.png](attachment:695bbbee-588a-4420-a2d5-b4023832e85c:image.png)
+<img width="357" height="180" alt="스크린샷 2026-02-01 180230" src="https://github.com/user-attachments/assets/48392657-433f-41d0-9cdd-a23c4de1adc6" />
 
 ```python
 student_dict = {
@@ -2489,7 +2489,7 @@ nato_key = {row.letter:row.code for (index, row) in nato_data_frame.iterrows()}
 print(nato_key)
 ```
 
-![image.png](attachment:303bdbee-d253-4caf-8173-86c15ae053a1:image.png)
+<img width="1876" height="200" alt="스크린샷 2026-02-01 181512" src="https://github.com/user-attachments/assets/59022579-8ceb-497a-9b2d-019f7addf5da" />
 
 강의에서 배운 내용으로, data_frame을 생성하고, 딕셔너리 컴프리헨션 및 iterrows() 메서드를 활용하여 새로운 nato_key라는 딕셔너리를 생성함
 
@@ -2507,7 +2507,7 @@ print(nato_list)
 2. input 값으로부터 key를 뽑기위해 리스트 생성
 3. key값에 따른 nato 단어 리스트 생성
 
-![image.png](attachment:1c3b192a-46f4-4b32-9fd1-b6319a17382d:image.png)
+<img width="509" height="158" alt="스크린샷 2026-02-01 182524" src="https://github.com/user-attachments/assets/789bf3fd-5903-4e2e-b2b1-419b1f17cfa1" />
 
 ### 해설
 
@@ -2524,7 +2524,7 @@ print(output_list)
 ## 27일차
 ## Tkinter로 Window와 Label 만들기
 
-![image.png](attachment:e80a279f-bec2-4adc-834b-1891ad1bdea4:image.png)
+<img width="1221" height="874" alt="스크린샷 2026-02-02 192828" src="https://github.com/user-attachments/assets/5a35be65-8e1e-4739-9e14-d9aa8a51f0a5" />
 
 tutle 패키지 처럼, 파이썬에서 GUI를 표현해주는 라이브러리로 tkinter 패키지 안에 Tk 클래스를 활용해서 화면을 만들고 사이즈를 정할 수 있다.
 
@@ -2532,7 +2532,7 @@ tutle 패키지 처럼, 파이썬에서 GUI를 표현해주는 라이브러리�
 
 pack 메서드는 라벨의 위치, 크기 등을 변환할 수 있는 메서드이다.
 
-![image.png](attachment:859434c6-ea92-4297-887a-6f6278fa4fcf:image.png)
+<img width="1455" height="815" alt="스크린샷 2026-02-02 193216" src="https://github.com/user-attachments/assets/4bdc8dd6-f4cd-4a0f-b3e4-426465a17800" />
 
 ## 선택적 인수에 기본값 설정하기
 
@@ -2549,7 +2549,7 @@ my_function()
 my_function(b=5)
 ```
 
-![image.png](attachment:a1a1b4cf-e442-4ae2-b39b-3673de546bd3:image.png)
+<img width="253" height="207" alt="스크린샷 2026-02-02 193701" src="https://github.com/user-attachments/assets/7fcbc882-8c91-4fac-a91f-8930ca7d8a36" />
 
 이렇게 기본값을 가지면 그냥 함수를 불러도, 만약 값을 바꾸고 싶다면 b만 바꿔도 나머지 인자들은 default 값을 가지기 때문에 함수가 잘 작동한다.
 
@@ -2565,7 +2565,7 @@ add_arg(3,5,7,9)
 
 인자로 *args 를 사용하면 여러 값을 받는 파라미터가 된다.
 
-![image.png](attachment:6acf82ce-4a91-49d9-b103-de0ed11001f0:image.png)
+<img width="279" height="163" alt="스크린샷 2026-02-02 194656" src="https://github.com/user-attachments/assets/47720488-9f3b-4348-93fd-4fb37b7b8587" />
 
 기본적으로 print(args)를 하게 된다면 tuple 형태가 나옴
 
@@ -2581,7 +2581,7 @@ def calculate(**kwargs):
 calculate(add=3, multiply=5)
 ```
 
-![image.png](attachment:84b0e3ee-eec9-446f-b77e-aaddf51d6368:image.png)
+<img width="383" height="165" alt="스크린샷 2026-02-02 195349" src="https://github.com/user-attachments/assets/8ab3cc18-c84c-4e86-b172-d78162d4e954" />
 
 **kwargs는 딕셔너리 형태로 인자를 받으며 무슨 이름을 붙이든 상관없다
 
@@ -2598,7 +2598,7 @@ def calculate(**kwargs):
 calculate(add=3, multiply=5)
 ```
 
-![image.png](attachment:b3628ee7-646f-458f-9440-3026c804dd22:image.png)
+<img width="402" height="315" alt="스크린샷 2026-02-02 195554" src="https://github.com/user-attachments/assets/109d9e54-05b4-4ba5-a8fb-67b5726e5b6e" />
 
 이렇게 다양한 형태로 변형하여 사용할 수 있음
 
@@ -2626,11 +2626,11 @@ my_car = Car(make="Nissan", model="GT-R")
 print(my_car.model)
 ```
 
-![image.png](attachment:83cd869a-5d1f-4843-89f2-8b931b8fdfa8:image.png)
+<img width="126" height="63" alt="스크린샷 2026-02-02 200454" src="https://github.com/user-attachments/assets/2602cf2f-1ae0-4b57-a770-acff4ffbbecc" />
 
 만약에 생성할 때, model의 값을 주지 않는다면 아래 사진처럼 model의 값을 주지 않아서 오류가 발생함
 
-![image.png](attachment:c6592897-190a-4808-830f-bd9a33a3e555:image.png)
+<img width="897" height="262" alt="스크린샷 2026-02-02 200918" src="https://github.com/user-attachments/assets/a9ca6ce5-f319-4185-acc5-08317c70df6e" />
 
 ```python
 class Car:
@@ -2644,11 +2644,11 @@ print(my_car.model)
 
 딕셔너리는 [] 말고도 .get으로도 value를 불러올 수 있으며 이렇게 get으로 불러오면 없는 값이 있어도 오류가 뜨지 않는다
 
-![image.png](attachment:7d9f5144-9636-4b72-8c2a-899879108848:image.png)
+<img width="395" height="109" alt="스크린샷 2026-02-02 201052" src="https://github.com/user-attachments/assets/b2cf7fce-6299-4ffd-9e36-ab189af1c4e1" />
 
 ## Tkinter 위젯 설정 바꾸기
 
-![image.png](attachment:fd7ca95e-bb94-40f8-b67c-aee1a206d310:image.png)
+<img width="779" height="508" alt="스크린샷 2026-02-02 201826" src="https://github.com/user-attachments/assets/c7d92369-e9c4-4dd9-b148-910698819718" />
 
 ```python
 my_label["text"] = "new Text"
@@ -2674,7 +2674,7 @@ button.pack()
 
 버튼에 이벤트 리스너를 command 키워드를 통해 달아줄 수 있다.
 
-![image.png](attachment:859ae37c-bb16-4114-a6b2-5bbc10023025:image.png)
+<img width="280" height="293" alt="스크린샷 2026-02-02 202214" src="https://github.com/user-attachments/assets/40528559-c807-4564-9c38-16f54a954b6e" />
 
 ### 버튼 클릭 시 라벨 변환
 
@@ -2686,7 +2686,7 @@ button = tkinter.Button(text="Click Me", command=button_click)
 button.pack()
 ```
 
-![image.png](attachment:2d0a71d9-d9b5-4590-8223-066b74b039b4:image.png)
+<img width="804" height="543" alt="스크린샷 2026-02-02 202346" src="https://github.com/user-attachments/assets/b35a5473-9274-4828-ae23-5a128a2dc5ac" />
 
 위에서도 말했지만 config로도 변환이 가능하다
 
@@ -2698,7 +2698,7 @@ input = tkinter.Entry()
 input.pack()
 ```
 
-![image.png](attachment:beace731-5c49-4a71-bee3-41da5086f5ec:image.png)
+<img width="777" height="541" alt="스크린샷 2026-02-02 202553" src="https://github.com/user-attachments/assets/b11b802e-26b3-4654-8c0e-7d72d79062ee" />
 
 Entry 클래스를 활용하면 위의 사진처럼 텍스트를 입력할 수 있는 상자를 만들 수 있다.
 
@@ -2719,9 +2719,9 @@ input = tkinter.Entry(width=10)
 input.pack()
 ```
 
-![image.png](attachment:78469c0b-472c-4d8a-bb3f-b244930168d5:image.png)
+<img width="772" height="515" alt="스크린샷 2026-02-02 202858" src="https://github.com/user-attachments/assets/3a49950b-fa65-4bdb-94e6-53ea9704de70" />
 
-![image.png](attachment:aee6aa38-c8a5-439a-a077-47cae3f18b0f:image.png)
+<img width="249" height="234" alt="스크린샷 2026-02-02 202906" src="https://github.com/user-attachments/assets/1e9f37f7-1e63-4f0f-8ffb-68ef674e854f" />
 
 이렇게 텍스트를 입력하고 버튼을 누르면 값이 출력된다
 
@@ -2829,7 +2829,7 @@ window.mainloop()
 
 ```
 
-![image.png](attachment:d4d93b44-baf9-49f2-bbe3-739e22862f70:image.png)
+<img width="771" height="825" alt="스크린샷 2026-02-02 203914" src="https://github.com/user-attachments/assets/b82053ec-081a-4b43-8a4f-25a2eba57fbf" />
 
 ## Tkinter 레이아웃 메니저
 
@@ -2863,7 +2863,7 @@ new_button = tkinter.Button(text="New Button")
 new_button.grid(column=2, row=0)
 ```
 
-![image.png](attachment:4902101c-f804-4bee-ba4e-64cc69f5824b:image.png)
+<img width="775" height="505" alt="스크린샷 2026-02-02 205104" src="https://github.com/user-attachments/assets/35dd425b-a10a-4b8e-ade0-5c976e16b63c" />
 
  
 
@@ -2893,7 +2893,7 @@ new_button.grid(column=2, row=0)
 
 윈도우에 있는 모든 위젯의 x와 y에 20씩 여유를 두게 됨
 
-![image.png](attachment:c917ff87-5f5f-4b5c-8a36-b254efd6036b:image.png)
+<img width="769" height="532" alt="스크린샷 2026-02-02 205326" src="https://github.com/user-attachments/assets/93b64c3f-16bc-469e-a280-0ca8177bb259" />
 
 위의 사진과 비교하면 윈도우 화면의 x와 y에 붙어있던 위젯들이 좀 띄어진 것을 볼 수 있음
 
@@ -2937,7 +2937,7 @@ calculate_button.grid(column=1, row=3)
 indow.mainloop()
 ```
 
-![image.png](attachment:df4cb9ba-80f9-42d0-b4d4-e7775df963a6:image.png)
+<img width="607" height="351" alt="스크린샷 2026-02-02 211012" src="https://github.com/user-attachments/assets/657c4179-3c3c-48c2-8b14-c478352b90e8" />
 
 거의 똑같은데 하나 추가하자면 
 
@@ -2949,517 +2949,5 @@ def calc():
 ```
 
 이렇게 해주는게 더 깔끔해보임
-
-끝!
-
-## 28 일차
-## Pomodoro 프로젝트
-
-![image.png](attachment:a0fe2d6f-0441-4a48-8302-299333b5b6a4:image.png)
-
-25분 → 5분 휴식 → 25분 → 5분 휴식 … 4번 반복하면 20분 휴식을 하는 타이머이며
-
-작업을 하다가 쉬는시간이 되면 가장 첫 창에 Pomodoro가 떠야함
-
-### UI 세팅
-
-```python
-from tkinter import *
-# ---------------------------- CONSTANTS ------------------------------- #
-PINK = "#e2979c"
-RED = "#e7305b"
-GREEN = "#9bdeac"
-YELLOW = "#f7f5dd"
-FONT_NAME = "Courier"
-WORK_MIN = 25
-SHORT_BREAK_MIN = 5
-LONG_BREAK_MIN = 20
-
-# ---------------------------- TIMER RESET ------------------------------- # 
-
-# ---------------------------- TIMER MECHANISM ------------------------------- # 
-
-# ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
-
-# ---------------------------- UI SETUP ------------------------------- #
-window = Tk()
-window.title("Pomodoro")
-
-window.mainloop()
-```
-
-기본적인 세팅이므로 설명은 생략
-
-### Tkinter에 이미지를 배경으로 넣고 타이머를 추가
-
-```python
-canvas = Canvas(width=200, height=224)
-tomato_image = PhotoImage(file="tomato.png")
-canvas.create_image(100, 112, image=tomato_image)
-canvas.pack()
-```
-
-canvas는 Tkinter 안에 있는 클래스로, 화면에 이미지를 넣을 수 있다.
-
-create_image로 canvas안에 이미지를 넣을 수 있으며, 여기서 image를 넣어줄 때 PhotoImage로 넣어줘야 한다.(그렇게 파라미터가 설정 되어있음)
-
-![image.png](attachment:9be64ec0-58df-4b81-ac6e-806c17021778:image.png)
-
-이렇게 작업하면 귀여운 토마토가 배경에 나오게 된다
-
-```python
-canvas.create_text(103,112, text="00:00")
-```
-
-canvas에는 text도 넣을 수 있는데 위의 코드를 작성 후 실행해주면
-
-![image.png](attachment:8cfd27e3-6fcb-4c15-82d9-8689f8cef12b:image.png)
-
-이렇게 지정해준 위치에 텍스트가 표시된다.
-
-(화면에 공백은 window.config(padx, pady)를 넣어줬다.)
-
-이제 canvas text에 추가적으로 값을 더 넣어서 텍스트를 꾸며본다.
-
-색상을 정해주는 fill과 폰트를 정해주는 font를 설정
-
-```python
-canvas.create_text(103,130, text="00:00", fill="white", font=(FONT_NAME, 35, "bold")) 
-```
-
-![image.png](attachment:8b18b36e-412a-41c2-8b94-7b73ccaa9d4e:image.png)
-
-배경이 밋밋하니 배경 색을 추가해보자
-
-```python
-window.config(padx=100, pady=50, bg=YELLOW)
-```
-
-여기서 YELLOW는 상수로 위에 정의해둔 색상 코드이다. bg에는 원래 `"#f7f5dd"` 이렇게 색상 코드가 들어가야 한다.
-
-![image.png](attachment:d4b95346-f2fd-4f1a-86c7-45abfb6b129b:image.png)
-
-실행을 해보니, canvas영역인 부분은 배경색이 여전히 흰색이다.
-
-canvas에도 배경색을 추가해보자
-
-```python
-canvas = Canvas(width=200, height=224, bg=YELLOW)
-```
-
-![image.png](attachment:3ec3139d-4d9d-41cc-859a-2234c28fbd33:image.png)
-
-잘 안보이는데 canvas영역에 약간의 경계선으로 하얀색이 보인다.
-
-이를 제거하려면 canvas에 `highlightthickness=0` 을 설정해줘야 한다.
-
-![image.png](attachment:391e0264-3e08-4668-9226-0b4f50de8d71:image.png)
-
-오른쪽에 벌레가 먹은듯한 부분은 canvas 이미지를 약간 조정해주면 된다.
-
-```python
-window = Tk()
-window.title("Pomodoro")
-window.config(padx=100, pady=50, bg=YELLOW)
-
-canvas = Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
-tomato_image = PhotoImage(file="tomato.png")
-canvas.create_image(100, 112, image=tomato_image)
-canvas.create_text(103,130, text="00:00", fill="white", font=(FONT_NAME, 35, "bold"))
-canvas.pack()
-```
-
-### 도전과제
-
-![image.png](attachment:15a620c3-3fb8-4f94-a3c0-2c44bf2829aa:image.png)
-
-Text의 색상을 바꾸는 방법은 fg=”#~~”
-
-```python
-# ---------------------------- UI SETUP ------------------------------- #
-window = Tk()
-window.title("Pomodoro")
-window.config(padx=100, pady=50, bg=YELLOW)
-
-# canvas
-canvas = Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
-tomato_image = PhotoImage(file="tomato.png")
-canvas.create_image(100, 112, image=tomato_image)
-canvas.create_text(103,130, text="00:00", fill="white", font=(FONT_NAME, 35, "bold"))
-canvas.grid(column=1, row=1)
-
-# label
-timer_label = Label(bg=YELLOW, fg=GREEN, text="Timer", font=(FONT_NAME, 40, "bold"))
-timer_label.grid(column=1, row=0)
-check_label = Label(text="✓", fg=GREEN, bg=YELLOW, font=(FONT_NAME, 15, "bold"))
-check_label.grid(column=1, row=3)
-
-# button
-start_button = Button(text="Start")
-start_button.grid(column=0, row=2)
-restart_button = Button(text="Restart")
-restart_button.grid(column=2, row=2)
-
-window.mainloop()
-```
-
-![image.png](attachment:e95821da-baa1-4cfe-b0c8-cbfe4a4560d4:image.png)
-
-쨘 최대한 동일하게 따라해봤다
-
-### 카운트다운 메커니즘 구현하기
-
-이벤트 구동형 - Event Driven
-
-```python
-def say_something(thing):
-    print(thing)
-
-window.after(1000, say_something, "Hello")
-```
-
-Tk클래스의 메서드로 after라는 함수는 내가 지정한 ms초 뒤에 지정된 함수가 실행됨
-
-위의 코드를 보면 1000ms → 1초 , say_something  → 함수, “Hello” → thing(parameter)
-
-```python
-def count_down(count):
-    canvas.itemconfig(timer_text, text=count)
-    if count > 0:
-        window.after(1000, count_down, count-1)
-
-timer_text = canvas.create_text(103,130, text="00:00", fill="white", font=(FONT_NAME, 35, "bold"))
-
-count_down(5)
-```
-
-이전에 만들었던 canvas를 변수로 정의하고, count_down함수 안에서 canvas의 설정을 변경한다.
-
-캔바스의 경우에는 itemconfig로 변경할 수 있으며 text를 count로 변경하면 아래의 사진과 같이 카운트 다운이 시작된다.
-
-중요한점은 count_down(5)가 canvas를 만든 후에 정의되어야 오류가 나지 않는다.
-
-![image.png](attachment:2a5f2a0b-c4cd-40db-a245-10f525f885a6:image.png)
-
-### 버튼과 연계
-
-위에서 count_down(5)를 따로 아래 실행해줬는데 버튼을 누르면 시작되는 함수로 만들어준다.
-
-```python
-def start_timer():
-    count_down(5)
-    
-start_button = Button(text="Start", command=start_timer)
-```
-
-![image.png](attachment:56f1a243-593c-4a5b-9c66-190a976d21d6:image.png)
-
-![image.png](attachment:5350f339-715a-4c71-a615-b3d74cd6ccb2:image.png)
-
-코드를 작성 후 클릭하면 시작 화면은 우리가 처음에 설정한 Text가 나오고, Start버튼을 누르게 된다면 타이머가 시작된다.
-
-### 초 → 분
-
-우리는 5초가 아닌 25분, 5분 등 분 단위로 시간 타이머를 설정해야 한다.
-
-```python
-# ---------------------------- TIMER MECHANISM ------------------------------- # 
-def start_timer():
-    count_down(5 * 60)
-
-# ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
-def count_down(count):
-    mm = math.floor(count / 60)
-    ss = count % 60
-    
-    canvas.itemconfig(timer_text, text=f"{mm}:{ss}")
-    if count > 0:
-        window.after(1000, count_down, count-1)
-```
-
-math 라이브러리는 import math로 파이썬에 임포트 해주고 사용
-
-floor메서드는 나누고 나서 남은 소수점을 반올림하지 않고 그냥 없애줌
-
-mm ⇒ 60으로 나눈 정수, ss ⇒ 60으로 나눈 나머지가 된다.
-
-![image.png](attachment:522eb8e3-c943-498d-ab06-7c679e23f0ff:image.png)
-
-하지만 문제가 처음 시작할 때 5:0 → 이렇게 표시가 된다
-
-이거를 5:00로 변경해야 한다.
-
-### 파이썬 동적 타이핑
-
-![image.png](attachment:03a1f1dc-9e7d-4c09-89dd-194c4fb48d6e:image.png)
-
-이 문제를 해결하기 위해서는 동적 타이핑이 필요하다
-
-![image.png](attachment:d74a5fe2-4df5-44bc-9dc8-8170a28a133b:image.png)
-
-처음 3 + “4”를 그냥 콘솔에 입력하면, int와 str은 더할 수 없다고 나온다.
-
-그렇다면 파이쏜 콘솔에 a라는 변수에 3을 넣으면 → int
-
-그 다음 a에 Hello라는 문자열을 넣으면 → str로 타입이 변경되는데 이를 동적 타이핑이라고 한다.
-
-```python
-# ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
-def count_down(count):
-    mm = math.floor(count / 60)
-    ss = count % 60
-
-    if ss == 0:
-        ss = '00'
-    canvas.itemconfig(timer_text, text=f"{mm}:{ss}")
-    if count > 0:
-        window.after(1000, count_down, count-1)
-```
-
-즉 우리는 동적 타이핑을 이용해 이렇게 표시할 수 있으며, 이제 초가 0이면 00으로 표시가 된다
-
-하지만 9, 8, 7.. 이렇게 1자리의 초나 분의 경우에도 09 이런식으로 00:00으로 표시가 되어야 한다.
-
-```python
-    if mm < 10:
-        mm = f"0{mm}"
-    if ss < 10:
-        ss = f"0{ss}"
-```
-
-![image.png](attachment:b8ebd385-ffa6-4628-bd78-df8efe904961:image.png)
-
-![image.png](attachment:bc35fc80-7e87-4d0d-8a00-f8071ff3f1bc:image.png)
-
-이런식으로 조건문을 짜주게 된다면 초나 분이 이제 00의 형식으로 맞춰지게 된다.
-
-### 타이머 세션 및 값 설정하기
-
-25분 → 5분휴식 → 25분 → 5분휴식 → 25분 → 5분 휴식 → 25분 → 20분 휴식
-
-4번째 휴식에는 20분의 휴식시간이 주어짐
-
-```python
-# ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
-def count_down(count):
-    global resp
-    if count == 0:
-        resp += 1
-        print(resp)
-        if resp == 4:
-            count = 20 * 60
-            resp = 0
-        else:
-            count = 5 * 60
-
-    mm = math.floor(count / 60)
-    ss = count % 60
-
-    if mm < 10:
-        mm = f"0{mm}"
-    if ss < 10:
-        ss = f"0{ss}"
-    canvas.itemconfig(timer_text, text=f"{mm}:{ss}")
-    if count > 0:
-        window.after(1000, count_down, count-1)
-```
-
-resp는 전역변수로 상단에 0을 초기값으로 넣어줌
-
-![image.png](attachment:ec344e17-b77e-48dd-983b-2b52b311d050:image.png)
-
-검증을 위해서 우선 1분을 기본으로 설정 
-
-![image.png](attachment:22ea2494-a301-4046-a735-e1557a6b4982:image.png)
-
-시간이 다 지나면 1번째 휴식시간 5분이 주어짐
-
-이제 다시 25분 일하는 타이머가 작동되며 4번째 휴식에서 20분이 주어짐
-
-이러면 resp는 항상 +1을 해주며 홀수 = 일, 짝수 = 쉬는시간
-
-```python
-# ---------------------------- TIMER MECHANISM ------------------------------- # 
-def start_timer():
-    global resp
-    work_sec = WORK_MIN * 60
-    short_break_sec = SHORT_BREAK_MIN * 60
-    long_break_sec = LONG_BREAK_MIN * 60
-
-    resp += 1
-    if resp % 2 == 0:
-        if resp == 2:
-            count_down(long_break_sec)
-            resp = 0
-        else:
-            count_down(short_break_sec)
-    else:
-        count_down(work_sec)
-
-# ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
-def count_down(count):
-    mm = math.floor(count / 60)
-    ss = count % 60
-
-    if mm < 10:
-        mm = f"0{mm}"
-    if ss < 10:
-        ss = f"0{ss}"
-    canvas.itemconfig(timer_text, text=f"{mm}:{ss}")
-    if count > 0:
-        window.after(1000, count_down, count-1)
-    elif count == 0:
-        start_timer()
-```
-
-시간을 설정하여 start_timer에서 count변수를 넘겨주는 방식으로 변경하였고, 상수를 설정하여 이용함
-
-시간이 0이 된다면 다시 start_timer가 실행되며 다른 시간 값을 넘겨주게 됨
-
-검증을 위해서 long_break_sec를 첫 휴식 때 설정, 이렇게 되면 1분의 타이머가 지난 뒤 20분의 휴식시간이 나와야됨
-
-![image.png](attachment:7712c032-e400-4841-a4bf-fd03550c6817:image.png)
-
-![image.png](attachment:8cf6eed3-5caa-4bbb-b183-9215c17c289d:image.png)
-
-![image.png](attachment:8c4229ad-5235-42c6-ba86-706ad0d0d38c:image.png)
-
-![image.png](attachment:258ccc44-bf7c-4a62-b38a-6cfa235fbdad:image.png)
-
-resp1 : 1분 확인O
-
-resp2 : 2분 확인O
-
-resp3 : 1분 확인O
-
-이렇게 검증을 통해 로직이 잘 돌아간다는 것을 확인했음
-
-강의에서는 해답으로 이런 방식을 활용함
-
-```python
-# ---------------------------- TIMER MECHANISM ------------------------------- # 
-def start_timer():
-    global resp
-    work_sec = WORK_MIN * 60
-    short_break_sec = SHORT_BREAK_MIN * 60
-    long_break_sec = LONG_BREAK_MIN * 60
-
-    resp += 1
-    if resp % 8 == 0:
-        count_down(long_break_sec)
-    elif resp % 2 == 0:
-        count_down(short_break_sec)
-    else:
-        count_down(work_sec)
-```
-
-이렇게 해주면 resp를 다시 0으로 안돌려도 되고, 코드의 가독성도 더 높아보임(조건문이 하나니까)
-
-```python
-# ---------------------------- TIMER MECHANISM ------------------------------- # 
-def start_timer():
-    global resp
-    work_sec = WORK_MIN * 60
-    short_break_sec = SHORT_BREAK_MIN * 60
-    long_break_sec = LONG_BREAK_MIN * 60
-
-    resp += 1
-    if resp % 8 == 0:
-        count_down(long_break_sec)
-        timer_label.config(text="Long Break Time", fg=RED)
-    elif resp % 2 == 0:
-        count_down(short_break_sec)
-        timer_label.config(text="Short Break Time", fg=PINK)
-    else:
-        count_down(work_sec)
-        timer_label.config(text="Work Time", fg=GREEN)
-```
-
-각각의 타이머별로 Text와 색상을 변경함
-
-### 체크 표시 추가하고 애플리케이션 리셋하기
-
-```python
-# ---------------------------- COUNTDOWN MECHANISM ------------------------------- # 
-def count_down(count):
-    mm = math.floor(count / 60)
-    ss = count % 60
-
-    # 검증을 위해서, 나중에 주석
-    if ss == 55:
-        count = 1
-
-    if mm < 10:
-        mm = f"0{mm}"
-    if ss < 10:
-        ss = f"0{ss}"
-    canvas.itemconfig(timer_text, text=f"{mm}:{ss}")
-    if count > 0:
-        window.after(1000, count_down, count-1)
-    elif count == 0:
-        if resp % 2 == 0:
-            mark = ""
-            for _ in range(math.floor(resp/2)):
-                mark += "✓"
-                check_label.config(text=mark)
-        start_timer()
-```
-
-처음에 check_label의 text를 없애주고, resp가 짝수인 경우에만 mark에 체크표시를 늘려가면서 check_label에 표시해준다.
-
-이렇게 되면 한번의 반복(일, 휴식)이 종료되면 체크표시가 한개씩 증가하게 된다.
-
-<img src = "attachment:357600a8-af24-4157-b000-eef8519b2f6a:image.png"
-
-<img src = "attachment:e16699bd-2e21-4857-9e09-f7f94c98b44e:image.png"
-
-### 타이머 리셋
-
-1. timer 멈추기
-    
-    `window.after(1000, count_down, count-1)` 타이머 기능인 옆의 함수를 멈춰야한다.
-    
-    멈추기 위해서는 window.after_cancel 메서드를 활용할 수 있으며 after_cancel을 사용하기 위해 window.after를 변수로 만들어야 함
-    
-    따라서 timer = None라는 전역변수를 하나 만든 후, 
-    
-    ```python
-    # 당연히 함수 내부 이므로 함수 상단에 global timer 설정
-     
-    canvas.itemconfig(timer_text, text=f"{mm}:{ss}")
-        if count > 0:
-            timer = window.after(1000, count_down, count-1)
-    ```
-    
-    본래 있던 코드에서 그냥 변수로 설정만 추가
-    
-    이제 새로운 함수인 reset_timer에서 after_cancel을 활용하여 타이머를 멈추면 된다.
-    
-    ```python
-    def reset_timer():
-        window.after_cancel(timer)
-    ```
-    
-    [20260205-0207-47.2794555.mp4](attachment:c82129da-588d-46a0-a94f-e274921c0e1d:20260205-0207-47.2794555.mp4)
-    
-    동영상을 확인하면 타이머가 정지하는 것을 볼 수 있다.
-    
-    이제 모든 것을 초기로 돌려보자
-    
-    ```python
-    # ---------------------------- TIMER RESET ------------------------------- # 
-    def reset_timer():
-        global resp
-        window.after_cancel(timer)
-        timer_label.config(text="Timer")
-        canvas.itemconfig(timer_text ,text="00:00")
-        check_label.config(text="")
-        resp = 0
-    ```
-    
-    이렇게 reset을 누르면 00:00이 되면서 resp, mark 등 모든 값이 초기로 돌아가게 된다.
-    
-    [20260205-0216-52.0310634.mp4](attachment:deaccbeb-c3af-465d-8735-62ee59d77f0f:20260205-0216-52.0310634.mp4)
-    
 
 끝!
