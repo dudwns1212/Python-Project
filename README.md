@@ -913,9 +913,10 @@ else:
 
 ⇒ 실제 콘솔 화면
 
-![image.png](attachment:d99d16f0-d91f-4b5c-aaf4-f72bbd989d43:image.png)
+<img width="1122" height="760" alt="image" src="https://github.com/user-attachments/assets/49c907e8-4eb7-4991-94cc-b758b56ece7f" />
 
-![image.png](attachment:40b7e722-6d97-4e09-a205-02d2c3b52b7d:image.png)
+<img width="1117" height="878" alt="image" src="https://github.com/user-attachments/assets/d576cdbd-f44c-4908-80d9-bcb3225a9bb2" />
+
 
 ## 5일차
 ## For Loops(반복문)
