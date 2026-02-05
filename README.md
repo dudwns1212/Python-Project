@@ -914,8 +914,8 @@ else:
 ⇒ 실제 콘솔 화면
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/49c907e8-4eb7-4991-94cc-b758b56ece7f" width="50%" />
-  <img src="https://github.com/user-attachments/assets/d576cdbd-f44c-4908-80d9-bcb3225a9bb2" width="50%" />
+  <img src="https://github.com/user-attachments/assets/49c907e8-4eb7-4991-94cc-b758b56ece7f" width="45%" />
+  <img src="https://github.com/user-attachments/assets/d576cdbd-f44c-4908-80d9-bcb3225a9bb2" width="45%" />
 </p>
 
 ## 5일차
@@ -1178,11 +1178,11 @@ hello()
 
 파이썬 함수 실습을 위해 Reeborg’s World 라는 웹페이지로 이동
 
-![image.png](attachment:dfe081b3-c28d-4b56-bf5c-7932f9e19a99:image.png)
+<img width="1948" height="1121" alt="스크린샷 2025-12-29 175346" src="https://github.com/user-attachments/assets/459099fe-082b-42c5-b641-cf2961bdff95" />
 
 move()를 호출하면 로봇의 방향으로 한칸 이동하는 것을 볼 수 있다
 
-![image.png](attachment:b0be2473-3775-4787-a9c8-e1f24383234a:image.png)
+<img width="1879" height="909" alt="스크린샷 2025-12-29 175443" src="https://github.com/user-attachments/assets/f2b8a5f3-f3fa-4fa3-a729-6a43c952f0df" />
 
 리보그의 키보드 라는 버튼을 클릭하면 리보그가 움직일 수 있는 함수들을 알려준다
 
