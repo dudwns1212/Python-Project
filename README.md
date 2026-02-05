@@ -914,8 +914,8 @@ else:
 ⇒ 실제 콘솔 화면
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/49c907e8-4eb7-4991-94cc-b758b56ece7f" width="45%" />
-  <img src="https://github.com/user-attachments/assets/d576cdbd-f44c-4908-80d9-bcb3225a9bb2" width="45%" />
+  <img src="https://github.com/user-attachments/assets/49c907e8-4eb7-4991-94cc-b758b56ece7f" width="50%" />
+  <img src="https://github.com/user-attachments/assets/d576cdbd-f44c-4908-80d9-bcb3225a9bb2" width="50%" />
 </p>
 
 ## 5일차
