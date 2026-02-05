@@ -9454,9 +9454,9 @@ def count_down(count):
 
 이렇게 되면 한번의 반복(일, 휴식)이 종료되면 체크표시가 한개씩 증가하게 된다.
 
-![image.png](attachment:357600a8-af24-4157-b000-eef8519b2f6a:image.png)
+<img src = "attachment:357600a8-af24-4157-b000-eef8519b2f6a:image.png"
 
-![image.png](attachment:e16699bd-2e21-4857-9e09-f7f94c98b44e:image.png)
+<img src = "attachment:e16699bd-2e21-4857-9e09-f7f94c98b44e:image.png"
 
 ### 타이머 리셋
 
