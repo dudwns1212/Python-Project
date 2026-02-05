@@ -1563,7 +1563,7 @@ while .. 실행
 
 완성 사진은 아래와 같다.
 
-![image.png](attachment:fb0df7c3-fe79-497e-8844-4a5cee891c48:image.png)
+<img width="1067" height="761" alt="image" src="https://github.com/user-attachments/assets/b0281b06-b2c5-41ea-b549-9d8b648c44ba" />
 
 ### 1단계
 
@@ -1858,7 +1858,7 @@ while not game_over:
     #  that corresponds to the current number of 'lives' the user has remaining.
 ```
 
-![image.png](attachment:3369c6c7-59b4-4a75-bc3f-c5282d17ddcc:image.png)
+<img width="1457" height="551" alt="스크린샷 2025-12-31 191008" src="https://github.com/user-attachments/assets/6b151107-1c8f-4f58-a9a8-1edc72577aed" />
 
 demo 버전과 동일하게 만들어 놓음
 
@@ -2580,7 +2580,7 @@ travel_log= {
 
 ## 블라인드 경매 프로젝트
 
-![image.png](attachment:fa704f8a-17a8-4859-95b7-0ff84246b983:image.png)
+<img width="1096" height="529" alt="image" src="https://github.com/user-attachments/assets/e5691540-aa60-42bb-a72a-730b1efc4f17" />
 
 블라인드 경매 프로그램으로 player1이 입력하면 콘솔에 전에 입력된 내용이 사라지고 다음 player2의 입력 창이 나옴, 마지막으로 player중에서 가장 높은 금액을 선정한 사람이 경매에 당첨됨
 
@@ -2810,7 +2810,7 @@ defmy_function(num):
 
 ## 계산기 프로젝트
 
-![image.png](attachment:a2accf66-cf38-46ec-a75d-74b9d2d0f5e9:image.png)
+<img width="1833" height="813" alt="스크린샷 2026-01-03 175720" src="https://github.com/user-attachments/assets/ce7e3cc6-b8a0-4d42-a348-d09fe27f2631" />
 
 ### 함수를 변수 값으로 저장하기
 
@@ -3033,7 +3033,7 @@ while is_continue:
         player_cards.append(random.choice(cards))
 ```
 
-![image.png](attachment:959e8386-a38d-4696-845c-4f281fb6a534:image.png)
+<img width="673" height="612" alt="image (1)" src="https://github.com/user-attachments/assets/dc7fb836-5889-4ee8-a418-d1836a6e1dfc" />
 
 위의 결과 외에도, 승리, 무승부, 패배 등의 경우도 모두 검증함
 
@@ -3488,7 +3488,7 @@ GOOGLE_URL="https://www.google.com"
 
 숫자 맞추기 게임을 만들어 보자
 
-![image.png](attachment:896f9ec9-2462-479d-abe8-0ec6627fa5b7:image.png)
+<img width="1203" height="846" alt="image (2)" src="https://github.com/user-attachments/assets/6160b583-73bf-42ed-a344-2c3f877f08a7" />
 
 1. print(logo)
 2. input(”~~~”) → game start, easy는 life가 10, hard는 life가 5
@@ -3769,11 +3769,11 @@ def mutate(a_list):
 mutate([1, 2, 3, 5, 8, 13])
 ```
 
-![image.png](attachment:16e88273-10d3-40e0-8e6a-3a983e35058e:image.png)
+<img width="657" height="392" alt="image (3)" src="https://github.com/user-attachments/assets/ec93299f-625c-484d-895d-a40a8b121709" />
 
 → b_list의 값이 빈 값으로 계속 진행되는 문제를 확인 후 오류 수정하고 다시 디버그
 
-![image.png](attachment:e0acbe70-7258-40bd-b8c4-893e6073416a:image.png)
+<img width="692" height="277" alt="image (4)" src="https://github.com/user-attachments/assets/57f9357b-8522-428a-8e4f-5b0aa987b653" />
 
 ```python
 import random
@@ -3801,16 +3801,16 @@ mutate([1, 2, 3, 5, 8, 13])
 
 1. 초기 화면
     
-    ![image.png](attachment:5b20c6b7-743a-40b0-b1ae-1b6f89f0c758:image.png)
-    
+    <img width="1877" height="1032" alt="스크린샷 2026-01-11 152531" src="https://github.com/user-attachments/assets/a2863253-e461-4b44-8afe-c323bfa292fd" />
+
 2. 실패
     
-    ![image.png](attachment:f64e3f57-7c6a-4d85-bc3f-b4432fcf25f6:image.png)
-    
+    <img width="1037" height="620" alt="스크린샷 2026-01-11 152603" src="https://github.com/user-attachments/assets/47ba5b7f-7c09-444b-891d-dd475cc8e25e" />
+
 3. 성공
     
-    ![image.png](attachment:a7e813b4-e61e-40e6-a055-5c31220311af:image.png)
-    
+    <img width="1832" height="1097" alt="스크린샷 2026-01-11 152643" src="https://github.com/user-attachments/assets/f99f78ed-d230-4b8e-89e9-8eb1b3344d23" />
+
 
 성공하면 점수가 계속 올라감(누적)
 
@@ -3881,15 +3881,15 @@ random.randint(len(game_data.data)) → 0~data의 길이 전까지의 랜덤 값
 
 ### 초기 화면
 
-![image.png](attachment:f9497370-11b4-40a2-9a8f-52139d47328b:image.png)
+<img width="1832" height="1097" alt="스크린샷 2026-01-11 152643" src="https://github.com/user-attachments/assets/5c5f742c-9390-49a5-8f5f-14d259afb376" />
 
 ### 실패 화면
 
-![image.png](attachment:98e3a09a-361f-4bdb-9ec2-60608fc93228:image.png)
+<img width="692" height="499" alt="스크린샷 2026-01-11 180942" src="https://github.com/user-attachments/assets/362503a2-2fd2-487f-9cc9-e1e7a7308cf8" />
 
 ### 성공 화면
 
-![image.png](attachment:077012cd-27f3-4226-9196-7c633d8d70ad:image.png)
+<img width="885" height="713" alt="스크린샷 2026-01-11 181014" src="https://github.com/user-attachments/assets/3c1d85b1-326a-40c1-beee-46418a50e75a" />
 
 이상 14일차 프로젝트 완료!
 
@@ -4248,7 +4248,7 @@ my_screen.exitonclick()
 
 파일이 하나 주어짐
 
-![image.png](attachment:e4cbc19d-5f72-4302-96f2-ee68f87622ee:image.png)
+<img width="694" height="365" alt="스크린샷 2026-01-14 190454" src="https://github.com/user-attachments/assets/7b878bc3-c6bf-4240-b676-bf54b0237aa8" />
 
 ```python
 class CoffeeMaker:
@@ -4398,9 +4398,9 @@ while True:
 
 ```
 
-1. Turn off the Coffee Machine by entering “off” to the prompt.
-a. For maintainers of the coffee machine, they can use “off” as the secret word to turn off the
-machine. Your code should end execution when this happens
+2. Turn off the Coffee Machine by entering “off” to the prompt.
+	a. For maintainers of the coffee machine, they can use “off” as the secret word to turn off the
+	machine. Your code should end execution when this happens
 
 off를 입력하면 종료한데요.
 
@@ -4411,7 +4411,7 @@ while True:
         break
 ```
 
-1. Print report()
+3. Print report()
     
     a. When the user enters “report” to the prompt, a report should be generated that shows the
     current resource values. e.g.
@@ -4430,9 +4430,9 @@ while True:
             MoneyMachine.report(MoneyMachine())
     ```
     
-    ![image.png](attachment:4f41427c-4870-4570-b9f6-27c94179ed72:image.png)
-    
-2. Check resources sufficient?
+    <img width="757" height="269" alt="스크린샷 2026-01-14 192545" src="https://github.com/user-attachments/assets/a3aebe21-e9b2-4b8a-a98b-bb58fe02cd16" />
+
+4. Check resources sufficient?
     
     a. When the user chooses a drink, the program should check if there are enough resources
     to make that drink.
@@ -4461,9 +4461,9 @@ while True:
         coffe_maker.is_resource_sufficient(drink)
 ```
 
-![image.png](attachment:4ba68f3a-7d69-4554-8da4-4a1387620480:image.png)
+<img width="922" height="231" alt="스크린샷 2026-01-14 195046" src="https://github.com/user-attachments/assets/7f97294b-1a4d-4d67-badc-4fc6d37843f7" />
 
-1. Process coins.
+5. Process coins.
     
     a. If there are sufficient resources to make the drink selected, then the program should
     prompt the user to insert coins.
@@ -4499,35 +4499,35 @@ while True:
             continue
 ```
 
-1. Check transaction successful?
-a. Check that the user has inserted enough money to purchase the drink they selected. E.g
-Latte cost $2.50, but they only inserted $0.52 then after counting the coins the program
-should say “Sorry that's not enough money. Money refunded.”.
-b. But if the user has inserted enough money, then the cost of the drink gets added to the
-machine as the profit and this will be reflected the next time “report” is triggered. E.g.
-Water: 100ml
-Milk: 50ml
-Coffee: 76g
-Money: $2.5
-c. If the user has inserted too much money, the machine should offer change.
-E.g. “Here is $2.45 dollars in change.” The change should be rounded to 2 decimal
-places
-2. Make Coffee.
-a. If the transaction is successful and there are enough resources to make the drink the user
-selected, then the ingredients to make the drink should be deducted from the coffee
-machine resources.
-E.g. report before purchasing latte:
-Water: 300ml
-Milk: 200ml
-Coffee: 100g
-Money: $0
-Report after purchasing latte:
-Water: 100ml
-Milk: 50ml
-Coffee: 76g
-Money: $2.5
-b. Once all resources have been deducted, tell the user “Here is your latte. Enjoy!”. If latte
-was their choice of drink.
+6. Check transaction successful?
+	a. Check that the user has inserted enough money to purchase the drink they selected. E.g
+	Latte cost $2.50, but they only inserted $0.52 then after counting the coins the program
+	should say “Sorry that's not enough money. Money refunded.”.
+	b. But if the user has inserted enough money, then the cost of the drink gets added to the
+	machine as the profit and this will be reflected the next time “report” is triggered. E.g.
+	Water: 100ml
+	Milk: 50ml
+	Coffee: 76g
+	Money: $2.5
+	c. If the user has inserted too much money, the machine should offer change.
+	E.g. “Here is $2.45 dollars in change.” The change should be rounded to 2 decimal
+	places
+7. Make Coffee.
+	a. If the transaction is successful and there are enough resources to make the drink the user
+	selected, then the ingredients to make the drink should be deducted from the coffee
+	machine resources.
+	E.g. report before purchasing latte:
+	Water: 300ml
+	Milk: 200ml
+	Coffee: 100g
+	Money: $0
+	Report after purchasing latte:
+	Water: 100ml
+	Milk: 50ml
+	Coffee: 76g
+	Money: $2.5
+	b. Once all resources have been deducted, tell the user “Here is your latte. Enjoy!”. If latte
+	was their choice of drink.
 
 ```python
 from menu import Menu, MenuItem
@@ -4561,7 +4561,7 @@ while True:
             continue
 ```
 
-![image.png](attachment:df434017-8ca5-4177-bdbb-32d99136ef9c:image.png)
+<img width="1279" height="1051" alt="스크린샷 2026-01-14 200826" src="https://github.com/user-attachments/assets/cf9f1a1b-b937-4aea-8e83-4797efe64479" />
 
 ### 중요한점
 
@@ -4645,7 +4645,7 @@ user_1 = User()
 user_2 = User()
 ```
 
-![image.png](attachment:546eb4f4-91da-4b04-8589-31c898ab8e5a:image.png)
+<img width="683" height="201" alt="스크린샷 2026-01-15 112017" src="https://github.com/user-attachments/assets/9db84390-7f59-4cb4-9662-79beb1ddad34" />
 
 user_1과 user_2라는 객체가 생성되며 생성될 때, print문이 작동하는 것을 볼 수 있음
 
@@ -4674,7 +4674,7 @@ user_1 = User("001", "angela" )
 user_2 = User("002", "jack")
 ```
 
-![image.png](attachment:ec5c4e8e-e33a-49a5-95f4-9e365a133d6e:image.png)
+<img width="797" height="237" alt="스크린샷 2026-01-15 112452" src="https://github.com/user-attachments/assets/97710356-f47a-400e-af8e-664c29a23be0" />
 
 이제 User라는 클래스에서 객체를 생성하려면 id와 name값을 넣어서 만들어야됨,
 
@@ -4693,7 +4693,7 @@ class User:
 
 이렇게 되면 객체가 생성될 때, 자동으로 팔로워가 0으로 값이 설정돼서 들어감
 
-![image.png](attachment:725db6b3-6c64-4093-9be7-7bc01a502b31:image.png)
+<img width="709" height="246" alt="스크린샷 2026-01-15 112911" src="https://github.com/user-attachments/assets/adf2dffc-f5ba-48ba-b09e-d9cab4dff6a1" />
 
 ## 클래스에 메소드 추가하기
 
@@ -4750,7 +4750,7 @@ print(f"user_1의 followers : {user_1.followers}, user_2의 followers : {user_2.
       f"user_1의 following : {user_1.following}, user_2의 following : {user_2.following}")
 ```
 
-![image.png](attachment:aadc0436-9f45-4bf0-9d19-052f518b81d8:image.png)
+<img width="987" height="318" alt="스크린샷 2026-01-15 113647" src="https://github.com/user-attachments/assets/c87e38d9-c4fe-4de0-b93c-a6fc2576b56f" />
 
 ## 퀴즈 프로젝트
 
@@ -4774,7 +4774,7 @@ class Question:
 
 우리는 1부에서 question_model.py에서 클래스를 생성했고, data.py에는 미리 만들어둔 questiondata가 dictionary 형태로 존재한다.
 
-![image.png](attachment:a311b10d-09af-4972-bc80-5908406fc5f5:image.png)
+<img width="1046" height="493" alt="스크린샷 2026-01-15 115534" src="https://github.com/user-attachments/assets/e75ea20c-1a78-4320-8be7-80bd55fa3353" />
 
 이 2 파일을 활용해서 main.py에 question_bank = [ Question(q1, a1), Question …. ] 형태의 리스트를 생성해야 한다.
 
@@ -4797,7 +4797,7 @@ for question in question_bank:
     print(question_bank[2].text)
 ```
 
-![image.png](attachment:3c6b98b7-40c9-4c81-b05b-5edcd66e0a3c:image.png)
+<img width="1145" height="656" alt="스크린샷 2026-01-15 120415" src="https://github.com/user-attachments/assets/a8c57ed8-c34b-4138-9969-9d938c775700" />
 
 생성자가 잘 작동해서 된 줄 알았는데 결국 리스트에는 하나의 값만 들어있음, 생성자마다 이름을 붙여서 다른 객체라는 것을 인지시켜야 될듯
 
@@ -4816,7 +4816,7 @@ print(question_bank[1].text)
 print(question_bank[2].text)
 ```
 
-![image.png](attachment:4b7da0ce-e563-4cc3-99cc-682bc81a3b6a:image.png)
+<img width="939" height="480" alt="스크린샷 2026-01-15 120702" src="https://github.com/user-attachments/assets/a68f1113-9bbb-41ff-946b-402cfe33e80b" />
 
 반복문은 생성자만 만들고 미리 만들어둔 빈 리스트에 append하여 다른 index로 추가함.
 
@@ -4871,7 +4871,7 @@ quiz_brain = QuizBrain(question_bank)
 quiz_brain.next_question()
 ```
 
-![image.png](attachment:14fb05f6-9421-4e24-a5ad-ea85f065cc49:image.png)
+<img width="638" height="162" alt="스크린샷 2026-01-15 122958" src="https://github.com/user-attachments/assets/98a01124-79a8-4982-8d73-89de3a41548b" />
 
 ### 4부 : 질문을 계속 보여주기
 
@@ -4898,7 +4898,7 @@ class QuizBrain:
 
 이렇게 만들고 main에서는 그대로 실행하면 
 
-![image.png](attachment:41b967c7-c70a-4d32-9b11-fd29e91d1b73:image.png)
+<img width="638" height="162" alt="스크린샷 2026-01-15 122958" src="https://github.com/user-attachments/assets/5eda2dbc-6a64-47e7-9f5a-4b03298989c9" />
 
 출력값을 보면 틀리거나 Off를 입력하면 멈추지만, 맞추면 계속 진행됨
 
@@ -4976,7 +4976,7 @@ while quiz_brain.still_has_questions():
 
 메인의 while 구문은 한줄로 끝남
 
-![image.png](attachment:64d6be85-ebd8-465f-a795-e389887842f6:image.png)
+<img width="1348" height="602" alt="스크린샷 2026-01-15 130801" src="https://github.com/user-attachments/assets/4efd2b36-30a4-43a0-8528-2a169e0c1457" />
 
 ### Open Trivia DB 활용
 
@@ -4984,7 +4984,7 @@ https://opentdb.com/api_config.php
 
 해당 url로 이동 (회원가입 해야됨) → API 클릭
 
-![image.png](attachment:18c4a4b3-a283-4c18-8a9e-f4d0722e02ac:image.png)
+<img width="1516" height="874" alt="스크린샷 2026-01-15 131646" src="https://github.com/user-attachments/assets/f10f25ed-9175-4c14-9055-ab23e1a30e88" />
 
 작성 후 URL 얻기 버튼을 누르면 상단에 URL 링크가 뜨고 해당 주소로 들어가면
 
@@ -5015,7 +5015,7 @@ question":"Linus Torvalds created Linux and Git.","correct_answer":"True","incor
 
 이런 JSON 형태의 코드를 받을 수 있음
 
-![image.png](attachment:5235b979-ae58-494c-ba16-e260f6e7b6ea:image.png)
+<img width="972" height="269" alt="스크린샷 2026-01-15 132705" src="https://github.com/user-attachments/assets/38dd3368-f50a-43af-92dd-aa97c5afa831" />
 
 data.py에 복사해서 형태를 보면, question과 correct_answer 로 이루어진 것을 볼 수 있음,
 
@@ -5029,7 +5029,7 @@ for question in question_data:
 
 메인으로 돌아와서 for문에서 아까는 text와 answer였으므로 수정
 
-![image.png](attachment:02517555-7462-4316-837f-7b9ba998623e:image.png)
+<img width="1125" height="691" alt="스크린샷 2026-01-15 132832" src="https://github.com/user-attachments/assets/a592e77e-0e7e-4e0b-adcd-bf82da4f2ad6" />
 
 실행하면 정상적으로 코드가 돌아가는걸 확인할 수 있음
 
@@ -5059,7 +5059,7 @@ turtle_study.forward(100)
 screen_study.exitonclick()
 ```
 
-![image.png](attachment:c9662828-3c50-4705-bdd2-4c59ef778280:image.png)
+<img width="666" height="504" alt="스크린샷 2026-01-18 205254" src="https://github.com/user-attachments/assets/3725a312-984b-47fe-8e6c-37d2a3af37c5" />
 
 ### 모듈 임포트
 
@@ -5084,15 +5084,15 @@ tim = t.Turtle()
 
 ### 설치 모듈
 
-![image.png](attachment:caf9ed76-d36e-4c85-9b6a-7476011c051c:image.png)
+<img width="671" height="161" alt="스크린샷 2026-01-18 205934" src="https://github.com/user-attachments/assets/96d3b1b3-32b8-4577-8593-71c92de33c09" />
 
 heros 모듈을 import하려고 했지만 파이썬 라이브러리에 없어서 import가 안됨
 
 그때 저 패키지 설치를 눌러서 파이썬 라이브러리에 heros 모듈을 설치할 수 있음
 
-![image.png](attachment:d0d6cace-d8fa-41c0-8fba-9605c1df8a14:image.png)
+<img width="846" height="78" alt="스크린샷 2026-01-18 210040" src="https://github.com/user-attachments/assets/1a9b9478-c686-418f-a5fb-9013c92bed97" />
 
-![image.png](attachment:8f463279-20f1-4215-b45f-d2e940fcdab1:image.png)
+<img width="1308" height="308" alt="스크린샷 2026-01-18 210219" src="https://github.com/user-attachments/assets/25a4edc5-253b-4d68-b159-ad338e37ec8c" />
 
 설치가 완료되면 사진처럼 heroes 패키지를 사용할 수 있음
 
@@ -5100,7 +5100,7 @@ heros 모듈을 import하려고 했지만 파이썬 라이브러리에 없어서
 
 turtle패키지를 활용해 점선 사각형을 그리기
 
-![image.png](attachment:4a13db89-4926-41c1-a193-63d86076d858:image.png)
+<img width="501" height="379" alt="스크린샷 2026-01-18 210544" src="https://github.com/user-attachments/assets/54fb34df-6eea-4e9c-a166-9c3e499257d8" />
 
 pendown, penup 메소드를 활용할 수 있음
 
@@ -5123,7 +5123,7 @@ for _ in range(4):
 screen_study.exitonclick()
 ```
 
-![image.png](attachment:4955f16e-8019-437b-877d-e0d938370bc0:image.png)
+<img width="308" height="239" alt="스크린샷 2026-01-18 210850" src="https://github.com/user-attachments/assets/eb2e807d-3fa6-4ed3-8eb4-2e3263a54e19" />
 
 ### 다양한 도형 그리기
 
@@ -5159,7 +5159,7 @@ for _ in range(200):
 
 ## 파이썬 튜플
 
-![image.png](attachment:aea29379-97ce-49de-8be5-abc61cd470b7:image.png)
+<img width="749" height="314" alt="스크린샷 2026-01-18 214241" src="https://github.com/user-attachments/assets/d6b81b18-c014-4be6-b6b7-3ad67af0f7ee" />
 
 파이썬 튜플은 () → 소괄호로 이루어진 리스트이며
 
@@ -5191,7 +5191,7 @@ for _ in range(100):
     tim.right(random.choice(directions))
 ```
 
-![image.png](attachment:0ac875ca-4477-46e6-ae46-dd76e654aa33:image.png)
+<img width="361" height="388" alt="스크린샷 2026-01-18 215220" src="https://github.com/user-attachments/assets/44282b67-f112-4b21-9c05-a9e1393a7dda" />
 
 ### 스피로 그래프 그리기
 
@@ -5219,7 +5219,7 @@ screen = t.Screen()
 screen.exitonclick()
 ```
 
-![image.png](attachment:8bd11788-5a7b-44b4-907d-d344100b4ed5:image.png)
+<img width="1146" height="747" alt="스크린샷 2026-01-18 215526" src="https://github.com/user-attachments/assets/7f86132f-3982-4832-8ffb-1e80322b6319" />
 
 1. 방향 바꾸기
 
@@ -5230,7 +5230,7 @@ tim.color(random_color())
 tim.circle(100)
 ```
 
-![image.png](attachment:70dacff1-e25c-4097-9fae-cd9d09e86d77:image.png)
+<img width="1192" height="715" alt="스크린샷 2026-01-18 215823" src="https://github.com/user-attachments/assets/8ed6f694-b3ea-4bb4-879b-52e1387c797a" />
 
 1. 반복문 생성
 
@@ -5260,7 +5260,7 @@ screen = t.Screen()
 screen.exitonclick()
 ```
 
-![image.png](attachment:854dc665-c74a-44f8-a987-c60724503429:image.png)
+<img width="1148" height="1118" alt="스크린샷 2026-01-18 215954" src="https://github.com/user-attachments/assets/902965dc-2bbb-4d3d-9699-9803491979b8" />
 
 ## 프로젝트 1. 이미지에서 rgb값 추출
 
@@ -5272,7 +5272,7 @@ colorgram이라는 패키지를 활용해서 extract 메소드를 활용
 
 → 
 
-![image.png](attachment:1d24231a-9c3e-4125-a379-ebacd7bc08c0:image.png)
+<img width="1148" height="1118" alt="스크린샷 2026-01-18 215954" src="https://github.com/user-attachments/assets/9335cba6-b6d5-4328-a09a-460b16ef882d" />
 
 처음에는 이러한 값들을 얻게 됨
 
@@ -5294,7 +5294,7 @@ print(rgb_colors)
 
 → 
 
-![image.png](attachment:ee2a1064-e80b-4ba3-a9e4-ff3d44976993:image.png)
+<img width="1561" height="92" alt="스크린샷 2026-01-18 225808" src="https://github.com/user-attachments/assets/1bb53f2a-fbfc-45bd-8863-92389f20a46b" />
 
 이제 마지막으로 튜플 형태의 rgb 값들을 가져와야 하기 때문에 아래의 코드를 적용해 값을 얻음
 
@@ -5315,7 +5315,7 @@ print(rgb_colors)
 
 → 
 
-![image.png](attachment:203bb319-200e-44e6-aa7d-46135ecae7eb:image.png)
+<img width="1894" height="150" alt="스크린샷 2026-01-18 225907" src="https://github.com/user-attachments/assets/d845e6cb-08e9-45c7-8396-e96f42d45a2c" />
 
 마지막으로 main.py에 해당 리스트를 등록
 
@@ -5383,14 +5383,14 @@ screen.exitonclick()
 
 함수를 10번 실행해 10x10 형태로 만들어줌
 
-![image.png](attachment:fc4b0017-0282-438d-a625-af06ea458d81:image.png)
+<img width="449" height="456" alt="스크린샷 2026-01-18 232922" src="https://github.com/user-attachments/assets/a30d4219-f4e7-4a3e-8228-dc0ca8ef05c3" />
 
 ## 19일차
 ## 파이썬 고차함수 및 이벤트리스너
 
 ### 터틀 이벤트리스너
 
-![image.png](attachment:82cf090c-4abc-463c-8e6a-e65634ab41de:image.png)
+<img width="478" height="313" alt="image (5)" src="https://github.com/user-attachments/assets/a3f89b09-116d-4fc9-9a09-055fa78ce92b" />
 
 ```python
 from turtle import Turtle, Screen
@@ -5415,7 +5415,7 @@ key → 값을 누르면 → fun → 함수를 실행, 즉 이벤트(스페이�
 
 현재 함수는 앞으로 10 이동
 
-![image.png](attachment:d79d181d-6885-4db2-aa9d-dbd1a1f175e6:image.png)
+<img width="1175" height="1121" alt="image (6)" src="https://github.com/user-attachments/assets/5c1b1c45-2e8d-40b9-b99d-0b44a9820d0c" />
 
 누를 때마다 10 이동하는 것을 볼 수 있음
 
@@ -5450,9 +5450,9 @@ d - clockwise
 
 c - clear-drawing
 
-![image.png](attachment:1f19e3fb-60f6-43fe-b34b-4dee235a0c4d:image.png)
+<img width="1272" height="896" alt="image (7)" src="https://github.com/user-attachments/assets/43d2fe2a-864b-4c62-a1a9-241a2338a813" />
 
-![image.png](attachment:a337bce5-1f41-4f56-b6fc-f05b05f52e62:image.png)
+<img width="1228" height="293" alt="image (8)" src="https://github.com/user-attachments/assets/45df6f33-3f04-4cf2-8f26-729b023a50e8" />
 
 다음의 함수들을 활용해서 과제를 진행
 
@@ -5491,7 +5491,7 @@ screen.onkey(c_clear_drawing, "c")
 screen.exitonclick()
 ```
 
-![image.png](attachment:51e064b9-1301-46cb-9761-aa5945a86242:image.png)
+<img width="1195" height="1140" alt="image (9)" src="https://github.com/user-attachments/assets/01c85f8a-a4b4-4c69-a40c-fe4b1c39afcc" />
 
 ## 객체의 상태 및 인스턴스
 
@@ -5520,9 +5520,9 @@ screen.exitonclick()
 
 먼저 스크린의 크기를 지정해주며, textinput 함수를 사용해 팝업창을 띄워서 사용자에게 배팅을 고를 수 있게 해준다.
 
-![image.png](attachment:8bbcaa8d-764d-47d8-a1d2-c9aa70d27504:image.png)
+<img width="792" height="687" alt="image (10)" src="https://github.com/user-attachments/assets/986adda7-f1be-473b-acfb-282feda641d1" />
 
-![image.png](attachment:76f1b20a-cda1-4ca0-b559-699043f3346e:image.png)
+<img width="512" height="237" alt="image (11)" src="https://github.com/user-attachments/assets/3a7dd52a-1263-4643-a3dd-345277860924" />
 
 이렇게 팝업 텍스트 창이 뜨면서 red를 입력하면 user_bet에 red가 저장되는 것을 볼 수 있다
 
@@ -5545,7 +5545,7 @@ screen.exitonclick()
 
 250을 지정했는데 화면에 객체가 안보여서 240으로 조정했다.
 
-![image.png](attachment:71da0219-d63d-48a0-8703-f5f116991945:image.png)
+<img width="835" height="693" alt="image (12)" src="https://github.com/user-attachments/assets/dd1a443b-572b-4234-91a2-ffbe56d2ca1f" />
 
 이렇게 penup과 goto 함수를 활용하면 선을 그리지 않고 x와 y좌표를 선택하여 이동할 수 있다
 
@@ -5560,7 +5560,7 @@ tim.goto(x=-240,y=-100)
 screen.exitonclick()
 ```
 
-![image.png](attachment:d52134be-89ea-4b84-9f0c-35a6694d933c:image.png)
+<img width="826" height="705" alt="image (13)" src="https://github.com/user-attachments/assets/1c7da9d3-921d-41a0-acc5-33da985c97bc" />
 
 이제 여러 개의 turtle 객체를 생성해주며 색상 리스트도 만들어준다
 
@@ -5602,7 +5602,7 @@ purple.color("purple")
 purple.goto(x=-240,y=100)
 ```
 
-![image.png](attachment:105d23f5-2e61-4dd6-baee-1f43f81bd3e7:image.png)
+<img width="807" height="680" alt="image (14)" src="https://github.com/user-attachments/assets/d4cedfd2-1aa9-4962-be15-d47a704bc2f7" />
 
 반복문을 활용하면 코드를 하나하나 작성하지 않아도 여러 개의 객체를 생성할 수 있다.
 
@@ -5624,7 +5624,7 @@ for turtle_index in range(0,6):
 screen.exitonclick()
 ```
 
-![image.png](attachment:71c91b05-ee75-42a3-b972-74b10ef241de:image.png)
+<img width="786" height="671" alt="image (15)" src="https://github.com/user-attachments/assets/49989c94-c6f9-4c2a-9009-0f761b7a7d93" />
 
 ## 레이싱 프로젝트
 
@@ -5717,7 +5717,7 @@ while is_race_on:
         turtle.forward(rand_distance)
 ```
 
-![image.png](attachment:df340f38-d9ec-4309-94b8-e77c17eebfac:image.png)
+<img width="1411" height="721" alt="image (16)" src="https://github.com/user-attachments/assets/94713fa7-5cc6-431e-9db2-9450b71e1ee0" />
 
 이렇게 레이스가 종료되면 콘솔창에 결과를 말해주고 while문이 종료됨
 
@@ -5756,7 +5756,7 @@ segment_3.goto(-40,0)
 
 즉, 코드를 작성하면 goto함수를 활용해서 위의 코드를 작성할 수 있음
 
-![image.png](attachment:d4084836-71bf-440b-bbec-f8cc04163c82:image.png)
+<img width="934" height="968" alt="image (17)" src="https://github.com/user-attachments/assets/fb19ef69-90ce-429a-816a-3de8dbbabf01" />
 
 이 객체를 일일이 만드는 것이 아니라 반복문을 활용해서 만들면
 
@@ -5798,7 +5798,7 @@ update 함수를 활용해 tracer 함수로 움직이지 않던 객체를 애니
 
 초기설정에서 screen.tracer(0) 으로 애니메이션을 끔
 
-![image.png](attachment:1f45b46c-6a21-476c-9bec-77619005e147:image.png)
+<img width="926" height="961" alt="image (18)" src="https://github.com/user-attachments/assets/67b73a28-1552-480f-9633-621dad0e8ad7" />
 
 객체 생성 또한 애니메이션이라서 생성되지 않음
 
@@ -6081,7 +6081,7 @@ print(nemo.num_eyes)
 
 ⇒
 
-![image.png](attachment:7c572691-1d95-4dc3-996c-27161ce13243:image.png)
+<img width="283" height="171" alt="스크린샷 2026-01-21 185645" src="https://github.com/user-attachments/assets/46ed4d47-44f6-4713-a386-e2194535d0a4" />
 
 이런식으로 Fish 클래스에서 Animal클래스의 메소드를 사용하며
 
@@ -6142,7 +6142,7 @@ class Food(Turtle):
 
 이제 food객체를 main.py에서 만들어주면
 
-![image.png](attachment:d59ef1b8-bb88-4083-b194-f9047a188fce:image.png)
+<img width="613" height="872" alt="스크린샷 2026-01-21 191243" src="https://github.com/user-attachments/assets/20fad9a2-df55-4a59-8a4e-e8780dbc6f6a" />
 
 이렇게 screen에 먹이가 뿅하고 나타남
 
@@ -6160,7 +6160,7 @@ distance(x, y) → 괄호안의 좌표와 비교함, 여기서 x값만 넣을 �
         print("냠냠냠")
 ```
 
-![image.png](attachment:e9ca0902-8e50-4474-9a86-2d9766098234:image.png)
+<img width="1220" height="554" alt="스크린샷 2026-01-21 192812" src="https://github.com/user-attachments/assets/4fa6e3b4-4bd4-4ebc-b7cf-f0ed871da1ef" />
 
 이렇게 먹이가 가까우면 냠냠냠을 출력함
 
@@ -6224,7 +6224,7 @@ class Scoreboard(Turtle):
 
 스코어보드 클래스를 하나 만들어주고 똑같이 main.py에 import해서 객체를 만들어줌
 
-![image.png](attachment:88131435-0294-48aa-97e3-a3dd732bc8ad:image.png)
+<img width="979" height="1032" alt="스크린샷 2026-01-21 194828" src="https://github.com/user-attachments/assets/1ab20145-0ab5-4e8d-b4ce-2fb1c3d3b5dd" />
 
 write함수를 써도 turtle객체의 초반 모양인 화살표는 그대로 남아있게 되는데,
 
@@ -6246,7 +6246,7 @@ class Scoreboard(Turtle):
 
 write를 하기전에 goto메소드로 객체의 위치를 옮기고 write를 하게되면 해당 위치에 글자를 쓰게됨
 
-![image.png](attachment:b6a51912-78cd-4307-80c7-88c7021118fb:image.png)
+<img width="946" height="985" alt="스크린샷 2026-01-21 195138" src="https://github.com/user-attachments/assets/8d923a90-2d92-432e-9beb-d12815faf91a" />
 
 ### 점수 기록하기
 
@@ -6269,7 +6269,7 @@ scoreboard 클래스에 해당 메소드를 만들어줌, score를 1올리고 �
         scoreboard.increase_score()
 ```
 
-![image.png](attachment:d7eac61d-3872-46f4-b773-04a69c0f420b:image.png)
+<img width="946" height="993" alt="스크린샷 2026-01-21 195406" src="https://github.com/user-attachments/assets/f402d098-ee53-41ed-ba76-2d7efc8a806d" />
 
 이렇게 하면 전에 쓴 write가 안지워지고 겹쳐버림
 
@@ -6297,7 +6297,7 @@ class Scoreboard(Turtle):
 
 이렇게 update_score메소드를 하나 생성하고, 생성자와 increase_score에서는 해당 업데이트 메소드를 활용함, 또한 increase에서는 self.clear()를 통해 이전 wirte를 지움
 
-![image.png](attachment:ca9a1e6f-7669-451b-96aa-682276cd36b0:image.png)
+<img width="961" height="999" alt="스크린샷 2026-01-21 195659" src="https://github.com/user-attachments/assets/03c58779-f249-47e5-b1c2-654273173d03" />
 
 ## Game Over
 
@@ -6313,7 +6313,7 @@ class Scoreboard(Turtle):
         game_is_on = False
 ```
 
-![image.png](attachment:52a4821e-c020-4d62-b81b-2d9229d1ce24:image.png)
+<img width="934" height="998" alt="스크린샷 2026-01-21 200244" src="https://github.com/user-attachments/assets/fbc318e7-cbcf-449e-84dd-8bdd7241fb58" />
 
 이렇게 벽에 부딫히면 멈춤
 
@@ -6325,7 +6325,7 @@ class Scoreboard(Turtle):
         self.write(f"GAME OVER", align=ALIGNMENT, font=FONT)
 ```
 
-![image.png](attachment:ecbcde14-f4a5-4f4f-b5ee-c1be16745398:image.png)
+<img width="934" height="987" alt="스크린샷 2026-01-21 200628" src="https://github.com/user-attachments/assets/d5f3eb82-2ded-4099-9e9e-7b083bc08c6b" />
 
 점수와 게임오버가 같이 보이게 화면 정 중앙에 옮김
 
