@@ -913,9 +913,7 @@ else:
 
 ⇒ 실제 콘솔 화면
 
-<img width="1122" height="760" alt="image" src="https://github.com/user-attachments/assets/49c907e8-4eb7-4991-94cc-b758b56ece7f" />
-
-<img width="1117" height="878" alt="image" src="https://github.com/user-attachments/assets/d576cdbd-f44c-4908-80d9-bcb3225a9bb2" />
+| ![](https://github.com/user-attachments/assets/49c907e8-4eb7-4991-94cc-b758b56ece7f) | ![](https://github.com/user-attachments/assets/d576cdbd-f44c-4908-80d9-bcb3225a9bb2) |
 
 
 ## 5일차
