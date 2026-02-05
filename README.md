@@ -1186,7 +1186,8 @@ move()를 호출하면 로봇의 방향으로 한칸 이동하는 것을 볼 수
 
 리보그의 키보드 라는 버튼을 클릭하면 리보그가 움직일 수 있는 함수들을 알려준다
 
-![image.png](attachment:d5f2098a-fa37-4dd8-94f1-1bfe9d02b218:image.png)
+<img width="1148" height="637" alt="스크린샷 2025-12-29 175652" src="https://github.com/user-attachments/assets/3541fc7c-2bd4-452b-9b01-1ac2a32ca7f8" />
+
 
 ### 실습- turn around, turn right를 만들어보기
 
@@ -1194,15 +1195,14 @@ move()를 호출하면 로봇의 방향으로 한칸 이동하는 것을 볼 수
 
 이를 함수로 쉽게 만들어보자
 
- 
 
-![image.png](attachment:7c4a5e92-4d68-47de-b5cb-d2ca8422b09f:image.png)
+<img width="1497" height="880" alt="스크린샷 2025-12-29 180237" src="https://github.com/user-attachments/assets/ae6bbbcc-1f98-4cca-8256-cbbb1b937fad" />
 
 위와 같이 turn_right, turn_around() 함수를 만들어서 동네를 한바퀴 돌아보는 프로그램을 실행
 
 ## 과제-여러 장애물을 넘어, 목적지에 도착하
 
-![image.png](attachment:7ed03a17-6a51-4bfb-bf49-f8d52a871374:image.png)
+<img width="1900" height="1011" alt="스크린샷 2025-12-29 180356" src="https://github.com/user-attachments/assets/f7a45156-2814-4791-8b1b-8a74b6c97e47" />
 
 → move() → turn_left() → move() → turn_right → move() → turn_right() → move()→ turn_left() 
 
@@ -1227,7 +1227,7 @@ for huddle in range(0,6):
     turn_left()
 ```
 
-![image.png](attachment:8a310432-c6f5-43c1-a2e1-9a7271880e8f:image.png)
+<img width="1913" height="1017" alt="스크린샷 2025-12-29 181208" src="https://github.com/user-attachments/assets/9a5941a9-247b-4f21-ae07-a0e00672c434" />
 
 추가로 반복문 안에 들어가는 저 구문도 함수로 만들어서 넣을 수 있다. (코드가 더 깔끔해보임)
 
@@ -1235,7 +1235,7 @@ for huddle in range(0,6):
 
 ## 들여쓰기
 
-![image.png](attachment:6bbb34c4-54ac-4f49-a55f-f1c9c7acb714:image.png)
+<img width="655" height="335" alt="스크린샷 2025-12-29 181623" src="https://github.com/user-attachments/assets/ca0e2f3d-11c9-4ab0-9a6c-da6bfdf33a8d" />
 
 항상 저 사각형의 구역을 생각하고, 함수 내에 코드가 존재하는지, 어디까지 이 함수의 코드인지 생각해야 함
 
@@ -1245,13 +1245,13 @@ for huddle in range(0,6):
 
 하지만 아래와 같이 한번만 공백을 해도, 코드는 실행됨
 
-![image.png](attachment:bf71a8db-acd4-48ee-8a80-ef1db66525c7:image.png)
+<img width="622" height="250" alt="스크린샷 2025-12-29 182138" src="https://github.com/user-attachments/assets/6c75f85b-c008-459f-86d5-a43c1a2e6f4b" />
 
 취향 차이, 뭘 선택하든 똑같긴함
 
 ### While(반복문)
 
-![image.png](attachment:453dae42-d165-47f5-b100-4e3b656ecb7a:image.png)
+<img width="1627" height="843" alt="스크린샷 2025-12-29 182528" src="https://github.com/user-attachments/assets/d64380cf-5378-49d2-b972-010912536cc5" />
 
 간단하게 For의 경우는 범위를 정해놓고 시작함, 해당 범위동안 사이클을 돌며 함수를 반복 실행
 
@@ -1280,19 +1280,19 @@ while number_of_huddle > 0:
     print(number_of_huddle)
 ```
 
-![image.png](attachment:51aa85b2-e61f-415d-aa5b-c5b857ff3b73:image.png)
+<img width="1866" height="1008" alt="스크린샷 2025-12-29 200622" src="https://github.com/user-attachments/assets/49701838-8516-4018-8e51-8064a80c8e60" />
 
 위의 코드를 작성 후 실행시킨 모습, 출력문을 보면 6번을 반복하고, 0이 되었을 때, 반복문이 종료된 것을 볼 수 있다.
 
 ### huddle2 → at_goal()이 참일 경우 while 실행
 
-![image.png](attachment:32736ce1-f5bc-4d5f-a1bc-56f39de6ee6d:image.png)
+<img width="1255" height="945" alt="스크린샷 2025-12-29 200921" src="https://github.com/user-attachments/assets/8a7516ed-4b7a-49d9-8c56-e56d35e405d9" />
 
 허들의 구조는 huddle1과 동일하지만, 마지막이 골인 지점이 아니다. 
 
 6개의 지점은 at_goal()이 참일수도 거짓일수도 있다.
 
-![image.png](attachment:85ce40e9-9283-4b61-81ee-e9319fce76f5:image.png)
+<img width="901" height="175" alt="스크린샷 2025-12-29 201007" src="https://github.com/user-attachments/assets/cd2b0763-a4f3-4895-91eb-206e5aa2331b" />
 
 while의 조건에 not at_goal()을 넣으면 될 것 같다
 
@@ -1318,17 +1318,17 @@ while not at_goal():
     jump()
 ```
 
-![image.png](attachment:db3e3975-f948-4266-93aa-a576ef687765:image.png)
+<img width="1888" height="874" alt="스크린샷 2025-12-29 201335" src="https://github.com/user-attachments/assets/16041a21-1d0b-4619-a382-807c55820ee1" />
 
 실행을 시키면 위와 같이 잘 작동하는 것을 볼 수 있다.
 
 ## huddle3-조건을 설정한 반복문
 
-![image.png](attachment:7f75a7d0-2715-49d8-a1f1-cb991ccc3ccc:image.png)
+<img width="976" height="545" alt="스크린샷 2025-12-29 201609" src="https://github.com/user-attachments/assets/9ba3e515-29e1-4da8-ad58-98a092ebcaca" />
 
 허들3의 경우는 벽이 제 각각 존재한다, 즉 범위만 정해서 일정한 반복문을 실행하는건 맞지 않다.
 
-![image.png](attachment:3bdb309e-118b-4919-8295-d26f67f61a85:image.png)
+<img width="1106" height="277" alt="스크린샷 2025-12-29 201701" src="https://github.com/user-attachments/assets/4423955d-8934-42ec-8b71-20871d6b1cf4" />
 
 front_is_clear() : 앞이 비어있는가, wall_in_front() : 앞에 벽이 있는가, at_goal() : 목표 지점인가 를 활용하여 문제를 해결해야 한다.
 
@@ -1361,11 +1361,11 @@ while not at_goal():
 
 위와 같이 코드를 작성했고, 실행하니 잘 되는 것을 확인했다, 다른 모양의 허들에서도 동일하게 잘 작동된다.
 
-![image.png](attachment:f1840bd9-15d3-4bed-9471-e05583498d3e:image.png)
+<img width="1875" height="896" alt="스크린샷 2025-12-29 202503" src="https://github.com/user-attachments/assets/ef241a2f-3ac2-4dbb-bb0d-2caf4bc9bcbb" />
 
 ## huddle4-높이가 다른 장애물
 
-![image.png](attachment:538e5128-9f25-4755-907c-3101bc7cf69a:image.png)
+<img width="966" height="551" alt="스크린샷 2025-12-29 202804" src="https://github.com/user-attachments/assets/2bc8e74b-4825-49ce-bdcb-210ae82d8249" />
 
 마지막 허들이다. 사진과 같이 높이가 다른 장애물을 고려해 로직을 작성해야 한다.
 
@@ -1409,7 +1409,7 @@ while not at_goal():
 
 처음에는 위와 같이 로직을 작성 후 실행 
 
-![image.png](attachment:a34d7530-3440-4840-a6c7-210dee71f807:image.png)
+<img width="965" height="483" alt="스크린샷 2025-12-29 203910" src="https://github.com/user-attachments/assets/370f0134-78b4-48f4-8061-7833a48bfa05" />
 
 → 잘 되는가 싶었는데 실패했다, 다시 로직을 살펴보니 walls를 초기화해주는 로직이 없었다.
 
@@ -1446,23 +1446,23 @@ while not at_goal():
 				    walls = 0
 ```
 
-![image.png](attachment:c6973c72-519b-486c-b439-3a8723eb8a3b:image.png)
+<img width="1885" height="907" alt="스크린샷 2025-12-29 204402" src="https://github.com/user-attachments/assets/c2a660f7-6e11-4677-bc80-8ab1b39f5197" />
 
 잘 동작하는 것을 볼 수 있다.
 
 강의에서는 아래와 같은 코드로 작성하여 실행하였다.
 
-![image.png](attachment:5bd8cc88-5eb4-40a1-bd21-5aa20656061c:image.png)
+<img width="735" height="677" alt="스크린샷 2025-12-29 204602" src="https://github.com/user-attachments/assets/c5889acf-5f2f-45eb-afb6-58e4f2958f16" />
 
 내가 작성한 코드와 다른 점은, 강사님은 하나의 함수로 안에 로직을 작성하였다, 나는 down이라는 함수를 만들고 walls라는 변수를 만들어 벽의 개수만큼 내려오는 반복문을 실행했다면 wall_on_right() 라는 함수를 활용, 나는 이걸 확인 못했는데 라이브러리에 함수가 있었다.
 
-![image.png](attachment:98de8969-2e27-4614-9a58-49f86fa690d4:image.png)
+<img width="1133" height="608" alt="스크린샷 2025-12-29 204929" src="https://github.com/user-attachments/assets/5bfe50e7-d33a-4b32-b5eb-dad819d0f021" />
 
 조금 어렵게 푼 감이 없지 않아 있지만 잘 작동하니 해결!
 
 ## 6일차 프로젝트 - 미로탈출
 
-[20251229-1152-43.5126257.mp4](attachment:95313d8b-62aa-4e3a-85ca-d5d011878303:20251229-1152-43.5126257.mp4)
+
 
 위의 동영상과 같이 로봇은 계속 움직인다.
 
@@ -1494,7 +1494,7 @@ while not at_goal():
 
 1차로 코드를 작성 후 테스트
 
-![image.png](attachment:54304ccf-890a-4fb9-ad6a-ff9b52172407:image.png)
+<img width="478" height="466" alt="스크린샷 2025-12-29 213446" src="https://github.com/user-attachments/assets/683f56ec-25c7-4f7d-9822-918ded30c0cb" />
 
 대부분의 상황에서는 잘 작동하는데, 어떤 상황에서는 이렇게 루프를 돌면서 코드가 반복됨
 
@@ -1528,9 +1528,9 @@ while not at_goal():
 
 이렇게 코드를 작성하고 실행하니 아주 잘됨
 
-![image.png](attachment:55722339-6d31-463b-ae7b-00cfeb5621b5:image.png)
+<img width="1878" height="916" alt="스크린샷 2025-12-29 215001" src="https://github.com/user-attachments/assets/e25160fc-f688-48aa-8a59-73ece38cf48b" />
 
-![image.png](attachment:27b92a49-10db-4692-a0eb-d48cb14a5db4:image.png)
+<img width="650" height="574" alt="스크린샷 2025-12-29 214911" src="https://github.com/user-attachments/assets/e91a4ccd-4a58-49d2-b47c-a570e432f51f" />
 
 강의에서는 위와 같은 코드를 작성함, right_is_clear() 라는 함수가 있었나봄;;
 
@@ -1538,7 +1538,7 @@ while not at_goal():
 
 강의에서는 변수를 만들어서 해결하는게 아니라
 
-![image.png](attachment:bd5b8c0c-6e0e-4349-9381-f034bfdfea40:image.png)
+<img width="450" height="419" alt="스크린샷 2025-12-29 215627" src="https://github.com/user-attachments/assets/a5bee2c5-0e7e-431f-84dc-1e01e0abbb48" />
 
 이렇게 사진과 같이 처음부터 오른쪽 벽을 만들어 준 후에 본 while 로직을 실행함
 
