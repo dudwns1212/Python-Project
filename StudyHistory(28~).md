@@ -486,8 +486,8 @@ def count_down(count):
         window.after_cancel(timer)
     ```
     
-    [20260205-0207-47.2794555.mp4](attachment:c82129da-588d-46a0-a94f-e274921c0e1d:20260205-0207-47.2794555.mp4)
-    
+    ![화면 녹화 중 2026-02-05 110756](https://github.com/user-attachments/assets/1a047602-711f-41f2-8f3b-9d881e0e2654)
+
     동영상을 확인하면 타이머가 정지하는 것을 볼 수 있다.
     
     이제 모든 것을 초기로 돌려보자
@@ -505,8 +505,8 @@ def count_down(count):
     
     이렇게 reset을 누르면 00:00이 되면서 resp, mark 등 모든 값이 초기로 돌아가게 된다.
     
-    [20260205-0216-52.0310634.mp4](attachment:deaccbeb-c3af-465d-8735-62ee59d77f0f:20260205-0216-52.0310634.mp4)
-    
+    ![화면 녹화 중 2026-02-05 111701](https://github.com/user-attachments/assets/eba41c3f-087a-4302-af00-19f1203bf757)
+
 
 끝!
 
