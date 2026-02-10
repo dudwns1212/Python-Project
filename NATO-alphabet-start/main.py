@@ -20,16 +20,18 @@ import pandas
 # Keyword Method with iterrows()
 # {new_key:new_value for (index, row) in df.iterrows()}
 
-#TODO 1. Create a dictionary in this format:
 nato_data_frame = pandas.read_csv("nato_phonetic_alphabet.csv")
 nato_key = {row.letter:row.code for (index, row) in nato_data_frame.iterrows()}
 print(nato_key)
-#TODO 2. Create a list of the phonetic code words from a word that the user inputs.
-user_input = input("단어를 입력하세요 : ").upper()
-user_input_list = [word.upper() for word in user_input]
-nato_list = [nato_key[key] for key in user_input_list]
-print(nato_list)
 
-# 해설
-output_list = [nato_key[key] for key in user_input]
-print(output_list)
+def generate_phonetic():
+    user_input = input("단어를 입력하세요 : ").upper()
+    try:
+        output_list = [nato_key[key] for key in user_input]
+    except KeyError:
+        print("Sorry, only letters in the alphabet please")
+        generate_phonetic()
+    else:
+        print(output_list)
+
+generate_phonetic()
