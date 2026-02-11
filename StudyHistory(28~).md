@@ -877,3 +877,469 @@ pyperclip.copy(encrypt_password)
 ```
 
 ![화면 녹화 중 2026-02-07 214431](https://github.com/user-attachments/assets/9dcd3856-a233-431e-80c6-6b78ca97a72c)
+
+## 30 일차
+## 예외처리 및 JSON 데이터 형태
+
+### 다양한 오류들
+
+```java
+#FileNotFound
+with open("a_file.txt") as file:
+    file.read()
+
+#KeyError
+a_dictionary = {"key":"value"}
+value = a_dictionary["non_existent_key"]
+
+#IndexError
+fruit_list = ['apple', 'bananan', 'orange']
+fruit = fruit_list[3]
+
+#TypeError
+my_snak = "Jelly"
+print(my_snak + 5)
+```
+
+### Catching Exceptions
+
+try, exception, else, finally 이렇게 4가지 단계로 구분됨
+
+```java
+try:
+    file = open("a_file.txt")
+except:
+    print("There was an Error")
+```
+
+![image.png](attachment:7f0667df-129e-43fc-987d-164706b9427f:image.png)
+
+가장 기본적인 구조이며, 오류가 발생하면 except절을 실행한다.
+
+```java
+try:
+    file = open("a_file.txt")
+except:
+    file = open("a_file.txt", mode="w")
+```
+
+이렇게 작성하면 오류 없이 정상적으로 open 키워드를 활용할 수 있음
+
+![image.png](attachment:551ba609-9604-4427-b997-36f7bf793b89:image.png)
+
+실제로 실행하면 오류 없이 파일이 생성되는 것을 볼 수 있음
+
+```java
+try:
+    file = open("a_file.txt")
+    a_dictionary = {"key", "value"}
+    print(a_dictionary["asdfasdf"])
+except FileNotFoundError:
+    file = open("a_file.txt", mode="w")
+```
+
+위의 코드처럼 오류를 지정해서 해당 오류가 발생하는 코드만 예외처리를 할 수 있음
+
+![image.png](attachment:06dc7dee-48c5-40a6-8b91-a21a620ecc9f:image.png)
+
+실행을 하게 되면, FileNotFoundError은 처리가 됐지만, KeyError은 예외처리하지 못함
+
+```java
+try:
+    file = open("a_file.txt")
+    a_dictionary = {"key": "value"}
+    print(a_dictionary["asdfasdf"])
+except FileNotFoundError:
+    file = open("a_file.txt", mode="w")
+except KeyError:
+    print("That key does not exist")
+```
+
+이렇게 다중 except로 해결할 수 있음
+
+![image.png](attachment:71181ed1-4cb9-47b9-8296-af81109d7532:image.png)
+
+else와 finally도 말해두자면 finally는 오류가 나든 안나든 마지막에 꼭 실행해주는 구문임
+
+else는 코드 블록에서 발생한 에러가 없다면 발생되는 블록임
+
+```java
+try:
+    file = open("a_file.txt")
+except FileNotFoundError:
+    file = open("a_file.txt", mode="w")
+    file.write("Chihiro")
+except KeyError:
+    print("That key does not exist")
+else:
+    content = file.read()
+    print(content)
+finally:
+    print("이건 꼭 해야돼")
+```
+
+![image.png](attachment:64756b1b-c895-4398-a925-9c4d3519e4a2:image.png)
+
+### 나만의 예외 생성하기
+
+```java
+try:
+    file = open("a_file.txt")
+except FileNotFoundError:
+    file = open("a_file.txt", mode="w")
+    file.write("Chihiro")
+except KeyError:
+    print("That key does not exist")
+else:
+    content = file.read()
+    print(content)
+finally:
+    print("이건 꼭 해야돼")
+    raise KeyError
+```
+
+마지막에 들어간 raise라는 함수는 오류를 반드시 발생시키는 함수임.
+
+![image.png](attachment:24830710-88dd-4ada-a38c-4a820e357770:image.png)
+
+```java
+raise KeyError("This is my Error, I made it")
+```
+
+![image.png](attachment:44d6c1b4-8a7c-4098-b2d0-fff0b97a53e0:image.png)
+
+이렇게 나만의 에러 구문을 지정해서 만들 수도 있다.
+
+```java
+height = float(input("Height: "))
+weight = int(input("Weight: "))
+
+if height > 3:
+    raise ValueError("Human Height should not be over 3 meter")
+
+bmi = weight / height ** 2
+print(bmi)
+```
+
+![image.png](attachment:3e18f94e-8712-4006-adfa-d3b4c4607eae:image.png)
+
+이렇게 나만의 오류를 작성해 사용됨
+
+**IndexError 처리**
+
+문제
+
+버그가 있는 코드가 있습니다. 코드를 실행해보세요. 코드는 충돌이 발생하고 `IndexError`가 발생할 것입니다.
+
+이것은 우리가 `fruits` 목록을 범위를 벗어난 인덱스로 찾고 있기 때문에 발생합니다.
+
+목표
+
+프로그램이 충돌하지 않도록 **예외** 처리에 대해 배운 내용을 사용하세요. 사용자가 범위를 벗어난 값을 입력하면 `"Fruit pie"`라는 기본 출력을 출력하세요.
+
+중요: 예외 처리는 각 과일이 예외가 발생할 때 출력되지 않아야 합니다. 즉, 예외가 발생하면 "Fruit pie"만 출력되어야 합니다. 예를 들어 Apple pie, Pear pie, Orange pie를 인쇄해서는 안 되며 예외가 있을 때는 "Fruit pie"만 인쇄해야 합니다.
+
+```java
+fruits = ["Apple", "Pear", "Orange"]
+
+# Catch the exception and make sure the code runs without crashing.
+def make_pie(index):
+    try:
+        fruit = fruits[index]
+    except:
+        print("Fruit pie")
+    else:
+        print(fruit + " pie")
+
+make_pie(4)
+
+```
+
+**KeyError 처리**
+
+버그가 있는 코드가 있습니다. 코드를 실행해보세요. 코드는 충돌이 발생하고 **KeyError**가 발생할 것입니다.
+
+이것은 `facebook_posts`의 일부 게시물에 "좋아요"가 없기 때문입니다.
+
+목표
+
+프로그램이 충돌하지 **않도록** 예외 처리에 대해 배운 내용을 사용하세요.
+
+```java
+facebook_posts = [
+    {'Likes': 21, 'Comments': 2},
+    {'Likes': 13, 'Comments': 2, 'Shares': 1},
+    {'Likes': 33, 'Comments': 8, 'Shares': 3},
+    {'Comments': 4, 'Shares': 2},
+    {'Comments': 1, 'Shares': 1},
+    {'Likes': 19, 'Comments': 3}
+]
+
+def count_likes(posts):
+
+    total_likes = 0
+    for post in posts:
+        try:
+            total_likes = total_likes + post['Likes']
+        except:
+            print("No Likes")
+            total_likes += 0
+        
+    return total_likes
+
+count_likes(facebook_posts)
+```
+
+![image.png](attachment:dbf03dbb-3b0e-4793-b484-18bf72b03102:image.png)
+
+### Nato 알파벳 프로젝트 예외처리
+
+![image.png](attachment:b42a471e-48f3-41ce-bcaf-f65af8fbd0c9:image.png)
+
+![image.png](attachment:a069be60-d760-47ba-bec0-fcd3073e6472:image.png)
+
+```java
+is_key_error = True
+
+nato_data_frame = pandas.read_csv("nato_phonetic_alphabet.csv")
+nato_key = {row.letter:row.code for (index, row) in nato_data_frame.iterrows()}
+print(nato_key)
+while is_key_error:
+    try:
+        user_input = input("단어를 입력하세요 : ").upper()
+        user_input_list = [word.upper() for word in user_input]
+        nato_list = [nato_key[key] for key in user_input_list]
+    except KeyError:
+        print("is KeyError, please input string")
+    else:
+        is_key_error = False
+
+print(nato_list)
+```
+
+![image.png](attachment:4678fa64-f1a7-44e7-a0b6-613866870fd6:image.png)
+
+반복문을 만들어주고, 오류가 나는 코드를 예외처리 함으로써 해결
+
+```java
+def generate_phonetic():
+    user_input = input("단어를 입력하세요 : ").upper()
+    try:
+        output_list = [nato_key[key] for key in user_input]
+    except KeyError:
+        print("Sorry, only letters in the alphabet please")
+        generate_phonetic()
+    else:
+        print(output_list)
+
+generate_phonetic()
+```
+
+강의에서 해설로는 이런 방식을 활용함, 깔끔하다잉
+
+### Password Manager 프로젝트 예외처리하기
+
+Json을 배울 것임, 데이터(비밀번호 이메일)를 Json으로 파일에 저장하여 불러오기 좋게 만들기
+
+![image.png](attachment:417b5fa7-21c8-4452-805b-463c0d5b01de:image.png)
+
+Json은 위의 사진과 같은 데이터 구조를 가진다.
+
+![image.png](attachment:283022ee-25ab-4390-9ca9-c10ece6996cc:image.png)
+
+본래 프로젝트에서 쓰이던 코드이다. 
+
+해당 프로젝트에서는 이메일, 웹사이트, 비밀번호를 data.txt에 저장했는데 이거를 txt가 아닌 Json으로 저장한다.
+
+```java
+with open("data.json", mode="w") as data:
+    data.write(f"{website} | {email} | {password}\n")
+```
+
+실제로 json을 쓰기 위해서는 몇가지 선행작업이 필요하다
+
+```python
+import json
+
+new_data = {
+    website: {
+        "email":email,
+        "password": password,
+    }
+}
+
+with open("data.json", mode="w") as data:
+    json.dump(new_data, data)
+```
+
+1. Json 라이브러리 가져오기
+2. 파일에 넣을 데이터 정의
+3. 파일을 정해서 데이터 넣기
+
+실행을 누르게 되면
+
+![image.png](attachment:f597f81c-7481-459f-9b97-7023151e6073:image.png)
+
+이렇게 입력한 데이터가 Json 형태로 저장된 것을 확인할 수 있다
+
+```python
+json.dump(new_data, data, indent=4)
+```
+
+dump에는 indent라는 파라미터가 있는데, 이건 json 파일의 공백을 보기 좋게 해주는 역할을 해준다
+
+![image.png](attachment:4e71f0b5-5053-4056-bec6-211acd20c882:image.png)
+
+### Json파일에서 데이터를 로딩하고 읽는법
+
+json.load()
+
+```python
+with open("data.json", mode="r") as data:
+    # json.dump(new_data, data, indent=4)
+    data = json.load(data)
+    print(data)
+    website_entry.delete(0, last=END)
+    password_entry.delete(0, last=END)
+```
+
+위의 코드를 작성하면 모드를 r로 바꿔서 데이터를 쓰는게 아닌 읽게 됨, 해당 데이터를 print
+
+![image.png](attachment:09b51955-fd04-4a12-afe3-37a178db3748:image.png)
+
+### 데이터를 업데이트 하는 방법
+
+json.update()
+
+```python
+with open("data.json", mode="w") as data:
+    data = json.load(data)
+    data.update(new_data)
+    json.dump(new_data, data, indent=4)
+```
+
+새로운 데이터를 로딩하고 new_data에 update하여 갱신해주고, 파일에 쓰면 새롭게 업데이트됨
+
+![image.png](attachment:e60da622-db40-41da-b459-4051b82a3f78:image.png)
+
+실행하면 오류가 뜨는것이 확인
+
+```python
+with open("data.json", mode="w") as data_file:
+    # 1. 데이터를 읽음
+    data = json.load(data_file)
+    # 2. 데이터를 새롭게 업데이트
+    data.update(new_data)
+    # 3. 새롭게 업데이트 된 데이터를 파일에 저장
+    json.dump(data, data_file, indent=4)
+```
+
+새롭게 수정, new_data ⇒ 실행되고 내가 쓴 데이터들이 Json 형태로 저장된 변수
+
+data ⇒ 현재 파일의 데이터를 읽은 후 new_data로 업데이트(최신화)
+
+dump ⇒ dump를 통해서 data(업데이트 된 데이터)를 data_file(파일)에 저장
+
+이렇게 수정 후 실행해도 똑같이 오류가 남
+
+→ mode = w에서 load를 할 수 없음,
+
+```python
+with open("data.json", mode="r") as data_file:
+    # 1. 데이터를 읽음
+    data = json.load(data_file)
+    # 2. 데이터를 새롭게 업데이트
+    data.update(new_data)
+
+with open("data.json", mode="r") as data_file:
+    # 3. 새롭게 업데이트 된 데이터를 파일에 저장
+    json.dump(data, data_file, indent=4)
+```
+
+이렇게 수정 후 실행해도 똑같이 오류가 남
+
+→ 현재 data_file에는 아무것도 적혀있지 않음
+
+![image.png](attachment:ec3141bd-7551-4323-bc84-a3eeceeeb176:image.png)
+
+따라서 읽을 데이터가 없어서 load에서 오류가 발생했던 거였음, 파일이 없어도 마찬가지
+
+try catch로 예외처리
+
+1. 데이터가 없다면(파일이 없다면) 파일 및 데이터를 새로 생성하여 씀
+2. 데이터가 있고 파일이 있다면 그대로 업데이트
+3. 오류가 나든 말든 일단 입력한 값들은 삭제되어야 함
+
+```python
+    if is_full:
+        user_select = messagebox.askokcancel(title="save", message="정보를 파일에 저장하시겠습니까?")
+        print(user_select)
+        if user_select:
+            try:
+                with open("data.json", mode="r") as data_file:
+                    # 1. 데이터를 읽음
+                    data = json.load(data_file)
+            except FileNotFoundError:
+                with open("data.json", mode="w") as data_file:
+                    # 2. 파일이 없다면 데이터를 새로 씀
+                    json.dump(new_data, data_file, indent=4)
+            else:
+                # 3. 오류가 나지 않는다면 데이터를 업데이트
+                data.update(new_data)
+
+                with open("data.json", mode="w") as data_file:
+                    # 업데이트 된 데이터를 파일에 업데이트
+                    json.dump(data, data_file, indent=4)
+            finally:
+                website_entry.delete(0, last=END)
+                password_entry.delete(0, last=END)
+```
+
+![image.png](attachment:296b8d41-c164-407b-a060-80a6c92e4f83:image.png)
+
+실행하면 파일이 없어도 오류 없이 잘 저장되는 것을 볼 수 있으며
+
+업데이트 또한 문제없이 실행된다.
+
+![image.png](attachment:599393b1-182b-4bad-b153-b23d75858494:image.png)
+
+![image.png](attachment:330f417a-ddc2-4dcd-920a-e35dd102c5d6:image.png)
+
+### 패스워드 메니저에서 웹사이트 검색하기
+
+검색기능으로 website 줄에 searcher 버튼을 만들어서 해당 웹사이트를 쓰고 searcher를 누르면, data.json에 있는 파일을 읽어서 이메일과 비밀번호를 알려주는 기능
+
+1. search 버튼 생성
+    
+    ```python
+    search_button = Button(text="Search")
+    search_button.grid(row=1, column=2)
+    ```
+    
+    ![image.png](attachment:d88bd72a-bdb9-4fdd-ab08-87db77a191b1:image.png)
+    
+    모양이 좀 이상하긴 한데, 나중에 잡도록 하겠음
+    
+2. command를 통해 버튼을 누르면 실행되는 함수를 생성
+    
+    search 함수가 실행되며 json파일에서 해당 웹사이트에 해당하는 이메일과 비밀번호를 알려줌
+    
+    ```python
+    def search():
+        website = website_entry.get().strip()
+        try:
+            with open("data.json", mode="r") as data_file:
+                data = json.load(data_file)
+                email = data[website]["email"]
+                password = data[website]["password"]
+                messagebox.showinfo(title="User Info", message=f"email: {email}\npassword: {password}")
+        except KeyError:
+            messagebox.showerror(title="Key Error", message="해당 웹사이트가 없음")
+    ```
+    
+
+![image.png](attachment:c0fef4f9-fc6f-4a56-83c0-225a5a4da053:image.png)
+
+![image.png](attachment:de81823e-52ac-4c21-9b6a-24bde77e057c:image.png)
+
+이렇게 과제를 수행함
